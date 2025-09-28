@@ -32,7 +32,7 @@ public class UserService {
      * Record representing a test user with basic information.
      * Used for demonstration and testing purposes.
      */
-    public record TestUser(Long id, String email, String name) {
+    public record TestUser(Long id, String email, String alias) {
         // Record body is intentionally empty as all functionality
         // is provided by the record's automatic implementation
     }
@@ -43,7 +43,7 @@ public class UserService {
      */
     public record CreateUserReq(
             @Email String email,
-            @NotBlank String name
+            @NotBlank String alias
             ) {
         // Record body is intentionally empty as all functionality
         // is provided by the record's automatic implementation
@@ -66,11 +66,18 @@ public class UserService {
         return new TestUser(id, "user" + id + "@acme.com", "User " + id);
     }
 
+        @BrokerOperation("login")
+    public TestUser login(@BrokerParam("alias") String alias, @BrokerParam("password") String password) {
+     log.info("Login user {}", alias);
+        // pretend lookup
+        return new TestUser(0L, alias + "@acme.com", "alias");
+    }
+
     @BrokerOperation("create")
     public Map<String, Object> create(@Valid @BrokerParam("user") CreateUserReq req) {
         log.info("Create user {}", req.email);
         // pretend persistence:
-        TestUser created = new TestUser(1001L, req.email(), req.name());
+        TestUser created = new TestUser(1001L, req.email(), req.alias());
         return Map.of("created", created);
     }
 
