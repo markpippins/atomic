@@ -61,3 +61,8 @@ user-service/target/maven-status/maven-compiler-plugin/testCompile/default-testC
 user-service/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
 broker-service/target/classes/com/angrysurfer/broker/web/BrokerService.java.changed
 .gitignore
+vaadin-nucleus-client/.mvn/wrapper/maven-wrapper.properties
+.gitignore
+vaadin-nucleus-client/mvnw
+vaadin-nucleus-client/mvnw.cmd
+vaadin-nucleus-client/.gitattributes

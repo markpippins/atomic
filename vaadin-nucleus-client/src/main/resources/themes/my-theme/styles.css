@@ -1,0 +1,213 @@
+/* Nucleus Client Custom Styles */
+
+/* Global styling improvements */
+vaadin-app-layout[theme~="my-theme"] {
+    --lumo-primary-color: #2563eb;
+    --lumo-primary-color-50pct: rgba(37, 99, 235, 0.5);
+    --lumo-primary-color-10pct: rgba(37, 99, 235, 0.1);
+    --lumo-primary-text-color: #2563eb;
+    
+    --lumo-success-color: #10b981;
+    --lumo-success-color-50pct: rgba(16, 185, 129, 0.5);
+    --lumo-success-color-10pct: rgba(16, 185, 129, 0.1);
+    
+    --lumo-error-color: #ef4444;
+    --lumo-error-color-50pct: rgba(239, 68, 68, 0.5);
+    --lumo-error-color-10pct: rgba(239, 68, 68, 0.1);
+}
+
+/* Header styling */
+.nucleus-header {
+    background: linear-gradient(135deg, var(--lumo-primary-color), var(--lumo-primary-color-50pct));
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nucleus-header h1 {
+    color: white;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation drawer styling */
+vaadin-side-nav {
+    background: var(--lumo-contrast-5pct);
+    border-right: 1px solid var(--lumo-contrast-10pct);
+}
+
+vaadin-side-nav-item {
+    border-radius: var(--lumo-border-radius-m);
+    margin: 0 var(--lumo-space-xs);
+}
+
+vaadin-side-nav-item:hover {
+    background: var(--lumo-primary-color-10pct);
+    color: var(--lumo-primary-text-color);
+}
+
+/* Form styling improvements */
+.nucleus-form {
+    background: white;
+    border-radius: var(--lumo-border-radius-l);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: var(--lumo-space-xl);
+    border: 1px solid var(--lumo-contrast-10pct);
+}
+
+.nucleus-form h2 {
+    margin-bottom: var(--lumo-space-m);
+    text-align: center;
+}
+
+/* Card styling */
+.nucleus-card {
+    background: white;
+    border-radius: var(--lumo-border-radius-l);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--lumo-contrast-10pct);
+    transition: box-shadow 0.2s ease;
+}
+
+.nucleus-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Button enhancements */
+vaadin-button[theme~="primary"] {
+    background: linear-gradient(135deg, var(--lumo-primary-color), var(--lumo-primary-color-50pct));
+    border: none;
+    font-weight: 500;
+    transition: transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+vaadin-button[theme~="primary"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+vaadin-button[theme~="primary"]:active {
+    transform: translateY(0);
+}
+
+/* Upload component styling */
+vaadin-upload {
+    border: 2px dashed var(--lumo-contrast-20pct);
+    border-radius: var(--lumo-border-radius-l);
+    background: linear-gradient(135deg, var(--lumo-contrast-5pct), white);
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+vaadin-upload:hover {
+    border-color: var(--lumo-primary-color);
+    background: var(--lumo-primary-color-10pct);
+}
+
+vaadin-upload[dragover] {
+    border-color: var(--lumo-primary-color);
+    background: var(--lumo-primary-color-10pct);
+    transform: scale(1.02);
+}
+
+/* Progress bar styling */
+vaadin-progress-bar {
+    --lumo-primary-color: #2563eb;
+    border-radius: var(--lumo-border-radius-s);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Avatar enhancements */
+vaadin-avatar {
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Notification styling */
+vaadin-notification-card[theme~="success"] {
+    background: linear-gradient(135deg, var(--lumo-success-color), var(--lumo-success-color-50pct));
+    color: white;
+}
+
+vaadin-notification-card[theme~="error"] {
+    background: linear-gradient(135deg, var(--lumo-error-color), var(--lumo-error-color-50pct));
+    color: white;
+}
+
+/* Dialog improvements */
+vaadin-dialog-overlay {
+    backdrop-filter: blur(4px);
+}
+
+vaadin-dialog-overlay [part="overlay"] {
+    border-radius: var(--lumo-border-radius-l);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--lumo-contrast-10pct);
+}
+
+/* Text field enhancements */
+vaadin-text-field, vaadin-email-field, vaadin-password-field {
+    --lumo-text-field-size: var(--lumo-size-m);
+}
+
+vaadin-text-field::part(input-field), 
+vaadin-email-field::part(input-field), 
+vaadin-password-field::part(input-field) {
+    border-radius: var(--lumo-border-radius-m);
+    background: white;
+    border: 1px solid var(--lumo-contrast-20pct);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+vaadin-text-field:focus-within::part(input-field),
+vaadin-email-field:focus-within::part(input-field),
+vaadin-password-field:focus-within::part(input-field) {
+    border-color: var(--lumo-primary-color);
+    box-shadow: 0 0 0 2px var(--lumo-primary-color-10pct);
+}
+
+/* Success and error message styling */
+.success-message {
+    background: linear-gradient(135deg, var(--lumo-success-color-10pct), white);
+    border: 1px solid var(--lumo-success-color-50pct);
+    border-radius: var(--lumo-border-radius-m);
+    color: var(--lumo-success-color);
+    padding: var(--lumo-space-m);
+    margin: var(--lumo-space-s) 0;
+}
+
+.error-message {
+    background: linear-gradient(135deg, var(--lumo-error-color-10pct), white);
+    border: 1px solid var(--lumo-error-color-50pct);
+    border-radius: var(--lumo-border-radius-m);
+    color: var(--lumo-error-color);
+    padding: var(--lumo-space-m);
+    margin: var(--lumo-space-s) 0;
+}
+
+/* Mobile responsive improvements */
+@media (max-width: 768px) {
+    .nucleus-form {
+        margin: 0 var(--lumo-space-m);
+        padding: var(--lumo-space-l);
+    }
+    
+    vaadin-app-layout[theme~="my-theme"] {
+        --lumo-space-l: 1rem;
+        --lumo-space-xl: 1.5rem;
+    }
+}
+
+/* Loading animation */
+@keyframes nucleus-pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.nucleus-loading {
+    animation: nucleus-pulse 1.5s ease-in-out infinite;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}

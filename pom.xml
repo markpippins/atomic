@@ -18,6 +18,7 @@
         <module>user-api</module>
         <module>user-service</module>
         <module>upload-service</module>
+        <module>vaadin-nucleus-client</module>
     </modules>
     
     <properties>
@@ -36,6 +37,22 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- Internal project modules -->
+            <dependency>
+                <groupId>com.angrysurfer.atomic</groupId>
+                <artifactId>broker-service-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.angrysurfer.atomic</groupId>
+                <artifactId>broker-service-spi</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.angrysurfer.atomic</groupId>
+                <artifactId>user-api</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -56,6 +73,7 @@
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

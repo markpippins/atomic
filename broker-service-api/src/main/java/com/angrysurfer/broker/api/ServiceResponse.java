@@ -36,6 +36,22 @@ public class ServiceResponse<T> {
         return ok;
     }
 
+    public void setOk(boolean ok) {
+        this.ok = ok;
+    }
+    public void setData(T data) {
+        this.data = data;
+    }
+    public void setErrors(List<Map<String, Object>> errors) {
+        this.errors = errors;
+    }
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+    public void setTs(Instant ts) {
+        this.ts = ts;
+    }
+
     public T getData() {
         return data;
     }
