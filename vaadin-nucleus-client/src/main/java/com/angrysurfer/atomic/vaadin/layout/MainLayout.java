@@ -1,10 +1,13 @@
 package com.angrysurfer.atomic.vaadin.layout;
 
-import com.angrysurfer.user.dto.UserDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.angrysurfer.atomic.vaadin.service.UserServiceClient;
 import com.angrysurfer.atomic.vaadin.views.FileUploadView;
 import com.angrysurfer.atomic.vaadin.views.HomeView;
 import com.angrysurfer.atomic.vaadin.views.ProfileView;
+import com.angrysurfer.user.dto.UserDTO;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.avatar.Avatar;
@@ -26,10 +29,13 @@ import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 public class MainLayout extends AppLayout {
 
+    private static final Logger log = LoggerFactory.getLogger(MainLayout.class);
+    
     private final UserServiceClient userService;
     private HorizontalLayout toolbar;
     private Button loginButton;
@@ -94,6 +100,7 @@ public class MainLayout extends AppLayout {
     }
 
     private void showLoginDialog() {
+        log.info("Showing login dialog");
         Dialog loginDialog = new Dialog();
         loginDialog.setHeaderTitle("Login");
         loginDialog.setWidth("400px");
