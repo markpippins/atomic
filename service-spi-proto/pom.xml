@@ -10,14 +10,6 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>service-api</artifactId>
+    <artifactId>service-spi-proto</artifactId>
     <packaging>jar</packaging>
-
-    <dependencies>
-        <!-- Add Jackson if DTOs need serialization -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-        </dependency>
-    </dependencies>
 </project>
