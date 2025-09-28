@@ -1,7 +1,9 @@
 package com.angrysurfer.broker.exception;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -19,8 +21,14 @@ public class BrokerExceptionAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> onInvalid(MethodArgumentNotValidException e) {
         List<Map<String, Object>> errs = e.getBindingResult().getFieldErrors().stream()
-                .map(fe -> Map.<String, Object>of("code", "invalid", "field", fe.getField(), "message", fe.getDefaultMessage()))
-                .toList();
+                .map(fe -> {
+                    Map<String, Object> errorMap = new HashMap<>();
+                    errorMap.put("code", "invalid");
+                    errorMap.put("field", fe.getField());
+                    errorMap.put("message", fe.getDefaultMessage());
+                    return errorMap;
+                })
+                .collect(Collectors.toList());
         return ResponseEntity.badRequest().body(ServiceResponse.error(errs, null));
     }
 

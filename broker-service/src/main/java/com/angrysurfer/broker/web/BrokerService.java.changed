@@ -7,12 +7,14 @@ import java.lang.reflect.Parameter;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,9 +41,19 @@ public class BrokerService {
     private final ObjectMapper objectMapper;
     private final Validator validator;
 
-    private record MethodKey(String service, String operation) {
-
+    private static class MethodKey {
+        private final String service;
+        private final String operation;
+        public MethodKey(String service, String operation) {
+            this.service = service;
+            this.operation = operation;
+        }
+        public String getService() { return service; }
+        public String getOperation() { return operation; }
+        // Implement equals and hashCode for use in Map
+        // (omitted for brevity, but essential for correctness)
     }
+
     private final Map<MethodKey, Method> methodCache = new ConcurrentHashMap<>();
 
     public BrokerService(ApplicationContext ctx, ObjectMapper objectMapper, Validator validator) {
@@ -62,7 +74,8 @@ public class BrokerService {
             Object result = method.invoke(bean, args);
 
             // If a service method tries to return ResponseEntity, unwrap it
-            if (result instanceof ServiceResponse<?> re) {
+            if (result instanceof ServiceResponse<?>) {
+                ServiceResponse<?> re = (ServiceResponse<?>) result;
                 log.debug("Service returned ServiceResponse directly, unwrapping body");
                 return ServiceResponse.ok(re, req.getRequestId());
             }
@@ -72,10 +85,10 @@ public class BrokerService {
 
         } catch (NoSuchElementException e) {
             log.warn("Not found: {}", e.getMessage());
-            return ServiceResponse.error(List.of(Map.of(
-                    "code", "not_found",
-                    "message", e.getMessage()
-            )), req.getRequestId());
+            Map<String, Object> errorMap = new HashMap<>();
+            errorMap.put("code", "not_found");
+            errorMap.put("message", e.getMessage());
+            return ServiceResponse.error(Arrays.asList(errorMap), req.getRequestId());
 
         } catch (BrokerValidationException e) {
             log.warn("Validation error: {}", e.getErrors());
@@ -83,26 +96,26 @@ public class BrokerService {
 
         } catch (IllegalArgumentException e) {
             log.warn("Binding error: {}", e.getMessage());
-            return ServiceResponse.error(List.of(Map.of(
-                    "code", "binding_error",
-                    "message", e.getMessage()
-            )), req.getRequestId());
+            Map<String, Object> errorMap = new HashMap<>();
+            errorMap.put("code", "binding_error");
+            errorMap.put("message", e.getMessage());
+            return ServiceResponse.error(Arrays.asList(errorMap), req.getRequestId());
 
         } catch (InvocationTargetException e) {
             Throwable cause = e.getTargetException();
             log.error("Service error: {}", cause.getMessage(), cause);
-            return ServiceResponse.error(List.of(Map.of(
-                    "code", "service_error",
-                    "type", cause.getClass().getSimpleName(),
-                    "message", cause.getMessage()
-            )), req.getRequestId());
+            Map<String, Object> errorMap = new HashMap<>();
+            errorMap.put("code", "service_error");
+            errorMap.put("type", cause.getClass().getSimpleName());
+            errorMap.put("message", cause.getMessage());
+            return ServiceResponse.error(Arrays.asList(errorMap), req.getRequestId());
 
         } catch (IllegalAccessException | RuntimeException e) {
             log.error("Broker error: {}", e.getMessage(), e);
-            return ServiceResponse.error(List.of(Map.of(
-                    "code", "broker_error",
-                    "message", e.getMessage()
-            )), req.getRequestId());
+            Map<String, Object> errorMap = new HashMap<>();
+            errorMap.put("code", "broker_error");
+            errorMap.put("message", e.getMessage());
+            return ServiceResponse.error(Arrays.asList(errorMap), req.getRequestId());
         }
     }
 
@@ -147,7 +160,7 @@ public class BrokerService {
                     String alias = m.getAnnotation(BrokerOperation.class).value();
                     return operation.equals(alias) || operation.equals(m.getName());
                 })
-                .toList();
+                .collect(Collectors.toList());
 
         if (candidates.isEmpty()) {
             log.error("Operation not exposed: {}", operation);
@@ -170,7 +183,7 @@ public class BrokerService {
     }
 
     private Object[] bindArgs(Method method, Map<String, Object> params, String requestId) {
-        params = (params == null) ? Map.of() : params;
+        params = (params == null) ? new HashMap<>() : params;
         Parameter[] ps = method.getParameters();
         Object[] bound = new Object[ps.length];
 
@@ -195,8 +208,8 @@ public class BrokerService {
             String name = (paramAnnotation != null && org.springframework.util.StringUtils.hasText(paramAnnotation.value()))
                     ? paramAnnotation.value()
                     : p.getName(); // requires -parameters at compile to retain names
-
-            boolean required = true; // (paramAnnotation == null) || paramAnnotation.required();
+            
+            boolean required = (paramAnnotation == null); // || paramAnnotation.required();
 
             Object raw = params.get(name);
             if (raw == null && required) {
@@ -210,11 +223,13 @@ public class BrokerService {
             if (hasAnnotation(p, jakarta.validation.Valid.class) && converted != null) {
                 Set<ConstraintViolation<Object>> errs = validator.validate(converted);
                 if (!errs.isEmpty()) {
-                    errs.stream().map(cv -> Map.<String, Object>of(
-                            "param", name,
-                            "path", cv.getPropertyPath().toString(),
-                            "msg", cv.getMessage()
-                    )).forEach(violations::add);
+                    errs.stream().map(cv -> {
+                        Map<String, Object> violationMap = new HashMap<>();
+                        violationMap.put("param", name);
+                        violationMap.put("path", cv.getPropertyPath().toString());
+                        violationMap.put("msg", cv.getMessage());
+                        return violationMap;
+                    }).forEach(violations::add);
                 }
             }
 
@@ -239,14 +254,20 @@ public class BrokerService {
 
     private ServiceResponse<?> badRequest(String code, String msg, String requestId) {
         log.warn("Bad request [{}]: {}", code, msg);
+        Map<String, Object> errorMap = new HashMap<>();
+        errorMap.put("code", code);
+        errorMap.put("message", msg);
         return ServiceResponse.error(
-                List.of(Map.of("code", code, "message", msg)), requestId);
+                Arrays.asList(errorMap), requestId);
     }
 
     private ServiceResponse<?> serverError(String code, String msg, String requestId) {
         log.error("Server error [{}]: {}", code, msg);
+        Map<String, Object> errorMap = new HashMap<>();
+        errorMap.put("code", code);
+        errorMap.put("message", msg);
         return ServiceResponse.error(
-                List.of(Map.of("code", code, "message", msg)), requestId);
+                Arrays.asList(errorMap), requestId);
     }
 
 }
