@@ -59,3 +59,5 @@ user-service/target/maven-status/maven-compiler-plugin/compile/default-compile/c
 user-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 user-service/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
 user-service/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+broker-service/target/classes/com/angrysurfer/broker/web/BrokerService.java.changed
+.gitignore
