@@ -35,6 +35,8 @@ public class MainLayout extends AppLayout {
     private HorizontalLayout toolbar;
     private Button loginButton;
     private HorizontalLayout userSection;
+    private SideNavItem profileItem;
+    private SideNavItem filesItem;
 
     public MainLayout(UserServiceClient userService) {
         this.userService = userService;
@@ -83,9 +85,8 @@ public class MainLayout extends AppLayout {
         
         nav.addItem(new SideNavItem("Home", HomeView.class, VaadinIcon.HOME.create()));
         
-        // These will be shown/hidden based on login status
-        SideNavItem profileItem = new SideNavItem("Profile", ProfileView.class, VaadinIcon.USER.create());
-        SideNavItem filesItem = new SideNavItem("File Upload", FileUploadView.class, VaadinIcon.UPLOAD.create());
+        profileItem = new SideNavItem("Profile", ProfileView.class, VaadinIcon.USER.create());
+        filesItem = new SideNavItem("File Upload", FileUploadView.class, VaadinIcon.UPLOAD.create());
         
         nav.addItem(profileItem);
         nav.addItem(filesItem);
@@ -132,10 +133,15 @@ public class MainLayout extends AppLayout {
     }
 
     private void updateUserSection() {
-        if (userService.isLoggedIn()) {
+        boolean isLoggedIn = userService.isLoggedIn();
+        
+        loginButton.setVisible(!isLoggedIn);
+        userSection.setVisible(isLoggedIn);
+        profileItem.setVisible(isLoggedIn);
+        filesItem.setVisible(isLoggedIn);
+
+        if (isLoggedIn) {
             UserDTO user = userService.getCurrentUser();
-            
-            loginButton.setVisible(false);
             
             // Create user avatar and name
             Avatar avatar = new Avatar(user.getAlias());
@@ -157,10 +163,6 @@ public class MainLayout extends AppLayout {
 
             userSection.removeAll();
             userSection.add(avatar, userName, logoutBtn);
-            userSection.setVisible(true);
-        } else {
-            loginButton.setVisible(true);
-            userSection.setVisible(false);
         }
     }
 
