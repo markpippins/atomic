@@ -67,3 +67,4 @@ vaadin-nucleus-client/mvnw
 vaadin-nucleus-client/mvnw.cmd
 vaadin-nucleus-client/.gitattributes
 user-api/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+.vscode/launch.json

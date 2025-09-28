@@ -14,10 +14,6 @@
     <packaging>jar</packaging>
     
     <dependencies>
-        <!-- Add Jackson if DTOs need serialization -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-        </dependency>
+
     </dependencies>
 </project>
