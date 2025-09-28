@@ -26,9 +26,8 @@ import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+
 public class MainLayout extends AppLayout {
 
     private final UserServiceClient userService;

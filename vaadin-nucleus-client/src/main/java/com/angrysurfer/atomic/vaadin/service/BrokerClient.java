@@ -18,8 +18,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.angrysurfer.broker.api.ServiceRequest;
 import com.angrysurfer.broker.api.ServiceResponse;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.core.ParameterizedTypeReference;
+
 
 
 @Service
@@ -31,16 +31,15 @@ public class BrokerClient {
     private String brokerUrl;
 
     private final RestTemplate restTemplate;
-    private final ObjectMapper objectMapper;
+    
     private final String clientId;
 
     public BrokerClient() {
         this.restTemplate = new RestTemplate();
-        this.objectMapper = new ObjectMapper();
         this.clientId = "vaadin-client";
     }
 
-    public <T> ServiceResponse<T> submitRequest(String service, String operation, Map<String, Object> params, TypeReference<ServiceResponse<T>> responseType) {
+    public <T> ServiceResponse<T> submitRequest(String service, String operation, Map<String, Object> params, ParameterizedTypeReference<ServiceResponse<T>> responseType) {
         try {
             ServiceRequest request = new ServiceRequest(
                     service,
@@ -54,14 +53,14 @@ public class BrokerClient {
 
             HttpEntity<ServiceRequest> entity = new HttpEntity<>(request, headers);
 
-            ResponseEntity<String> response = restTemplate.exchange(
+            ResponseEntity<ServiceResponse<T>> response = restTemplate.exchange(
                     brokerUrl + "/submitRequest",
                     HttpMethod.POST,
                     entity,
-                    String.class
+                    responseType
             );
 
-            return objectMapper.readValue(response.getBody(), responseType);
+            return response.getBody();
         } catch (Exception e) {
             log.error("Broker request failed", e);
             return createErrorResponse(e.getMessage());
@@ -70,7 +69,7 @@ public class BrokerClient {
 
     public <T> ServiceResponse<T> submitRequestWithFile(String service, String operation, Map<String, Object> params,
             byte[] fileContent, String fileName, String contentType,
-            TypeReference<ServiceResponse<T>> responseType) {
+            ParameterizedTypeReference<ServiceResponse<T>> responseType) {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -78,7 +77,7 @@ public class BrokerClient {
             MultiValueMap<String, Object> form = new LinkedMultiValueMap<>();
             form.add("service", service);
             form.add("operation", operation);
-            form.add("params", objectMapper.writeValueAsString(params));
+            form.add("params", params);
             form.add("requestId", clientId + "-" + System.currentTimeMillis());
 
             ByteArrayResource fileResource = new ByteArrayResource(fileContent) {
@@ -91,14 +90,14 @@ public class BrokerClient {
 
             HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(form, headers);
 
-            ResponseEntity<String> response = restTemplate.exchange(
+            ResponseEntity<ServiceResponse<T>> response = restTemplate.exchange(
                     brokerUrl + "/submitRequestWithFile",
                     HttpMethod.POST,
                     entity,
-                    String.class
+                    responseType
             );
 
-            return objectMapper.readValue(response.getBody(), responseType);
+            return response.getBody();
         } catch (Exception e) {
             log.error("Broker file request failed", e);
             return createErrorResponse(e.getMessage());

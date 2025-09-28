@@ -11,7 +11,8 @@ import com.angrysurfer.broker.api.ServiceResponse;
 import com.angrysurfer.atomic.vaadin.layout.MainLayout;
 import com.angrysurfer.atomic.vaadin.service.BrokerClient;
 import com.angrysurfer.atomic.vaadin.service.UserServiceClient;
-import com.fasterxml.jackson.core.type.TypeReference;
+import org.springframework.core.ParameterizedTypeReference;
+
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Paragraph;
@@ -27,7 +28,7 @@ import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
-import lombok.extern.slf4j.Slf4j;
+
 
 @Route(value = "upload", layout = MainLayout.class)
 public class FileUploadView extends VerticalLayout implements BeforeEnterObserver {
@@ -149,7 +150,7 @@ public class FileUploadView extends VerticalLayout implements BeforeEnterObserve
                     bytes,
                     fileName,
                     "application/octet-stream",
-                    new TypeReference<ServiceResponse<String>>() {
+                    new ParameterizedTypeReference<ServiceResponse<String>>() {
             }
             );
 

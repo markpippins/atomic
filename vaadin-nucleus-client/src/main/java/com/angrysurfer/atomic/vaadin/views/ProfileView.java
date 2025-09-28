@@ -20,11 +20,10 @@ import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
-import lombok.extern.slf4j.Slf4j;
+
 
 
 @Route(value = "profile", layout = MainLayout.class)
-@Slf4j
 public class ProfileView extends VerticalLayout implements BeforeEnterObserver {
 
     private final UserServiceClient userService;

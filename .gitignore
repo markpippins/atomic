@@ -66,3 +66,4 @@ vaadin-nucleus-client/.mvn/wrapper/maven-wrapper.properties
 vaadin-nucleus-client/mvnw
 vaadin-nucleus-client/mvnw.cmd
 vaadin-nucleus-client/.gitattributes
+user-api/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst

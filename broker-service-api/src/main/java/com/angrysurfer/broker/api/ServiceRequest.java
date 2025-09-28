@@ -2,7 +2,11 @@ package com.angrysurfer.broker.api;
 
 import java.util.Map;
 
-public class ServiceRequest {
+import java.io.Serializable;
+
+public class ServiceRequest implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private String service;
     private String operation;
     private Map<String, Object> params;

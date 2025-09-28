@@ -6,15 +6,13 @@ import org.springframework.stereotype.Service;
 
 import com.angrysurfer.broker.api.*;
 import com.angrysurfer.user.dto.UserDTO;
-import com.fasterxml.jackson.core.type.TypeReference;
+import org.springframework.core.ParameterizedTypeReference;
+
 import com.vaadin.flow.server.VaadinSession;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+
 
 @Service
-@RequiredArgsConstructor
-@Slf4j
 public class UserServiceClient {
 
     private BrokerClient brokerClient;
@@ -36,7 +34,7 @@ public class UserServiceClient {
             "userService",
             "login",
             params,
-            new TypeReference<ServiceResponse<UserDTO>>() {}
+            new ParameterizedTypeReference<ServiceResponse<UserDTO>>() {}
         );
 
         if (!response.isOk() || response.getData() == null) {
@@ -64,7 +62,7 @@ public class UserServiceClient {
             "userService",
             "create",
             params,
-            new TypeReference<ServiceResponse<UserDTO>>() {}
+            new ParameterizedTypeReference<ServiceResponse<UserDTO>>() {}
         );
 
         if (!response.isOk() || response.getData() == null) {
@@ -84,7 +82,7 @@ public class UserServiceClient {
             "userService",
             "getUserByAlias",
             params,
-            new TypeReference<ServiceResponse<UserDTO>>() {}
+            new ParameterizedTypeReference<ServiceResponse<UserDTO>>() {}
         );
 
         if (!response.isOk() || response.getData() == null) {

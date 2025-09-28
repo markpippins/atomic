@@ -5,7 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class ServiceResponse<T> {
+import java.io.Serializable;
+
+public class ServiceResponse<T> implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private boolean ok;
     private T data;
