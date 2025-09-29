@@ -1,9 +1,11 @@
 package com.angrysurfer.user.model;
 
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import com.angrysurfer.user.dto.UserDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,67 +18,70 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 
-import java.util.stream.Collectors;
-
-import com.angrysurfer.user.dto.UserDTO;
-
 @Entity(name = "User")
 public class User implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2747813660378401172L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2747813660378401172L;
 
-	@Id
-	@SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
-	@Column(name = "id", updatable = false, nullable = false, unique = true)
-	private Long id;
+    @Id
+    @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
+    @Column(name = "id", updatable = false, nullable = false, unique = true)
+    private Long id;
 
-	private String alias;
+    private String identifier;
 
+    private String alias;
 
-	private String email;
+    private String email;
 
-	@Lob
-	private String avatarUrl = "https://picsum.photos/50/50";
+    @Lob
+    private String avatarUrl = "https://picsum.photos/50/50";
 
-	@OneToOne
-	private Profile profile;
+    @OneToOne
+    private Profile profile;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	private Set<User> followers = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<User> followers = new HashSet<>();
 
-	@OneToMany(fetch = FetchType.EAGER)
-	private Set<User> following = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<User> following = new HashSet<>();
 
-	@OneToMany(fetch = FetchType.EAGER)
-	private Set<User> friends = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<User> friends = new HashSet<>();
 
-	public UserDTO toDTO() {
-		UserDTO dto = new UserDTO();
-		dto.setId(getId());
-		dto.setAlias(getAlias());
-		dto.setEmail(getEmail());
-		dto.setAvatarUrl(getAvatarUrl());
-		dto.setFollowers(getFollowers().stream().map(f -> f.getAlias()).collect(Collectors.toSet()));
-		dto.setFollowing(getFollowing().stream().map(f -> f.getAlias()).collect(Collectors.toSet()));
-		dto.setFriends(getFriends().stream().map(f -> f.getAlias()).collect(Collectors.toSet()));
-		return dto;
-	}
+    public UserDTO toDTO() {
+        UserDTO dto = new UserDTO();
+        dto.setId(getId());
+        dto.setAlias(getAlias());
+        dto.setEmail(getEmail());
+        dto.setIdentifier(getIdentifier());
+        dto.setAvatarUrl(getAvatarUrl());
+        dto.setFollowers(getFollowers().stream().map(f -> f.getAlias()).collect(Collectors.toSet()));
+        dto.setFollowing(getFollowing().stream().map(f -> f.getAlias()).collect(Collectors.toSet()));
+        dto.setFriends(getFriends().stream().map(f -> f.getAlias()).collect(Collectors.toSet()));
+        return dto;
+    }
 
-	public User() {
+    public User() {
 
-	}
+    }
 
-	public User(String alias, String email, String avatarUrl) {
-		setAlias(alias);
-		setEmail(email);
-		setAvatarUrl(avatarUrl);
-	}
+    public User(String alias, String email, String avatarUrl) {
+        setAlias(alias);
+        setEmail(email);
+        setAvatarUrl(avatarUrl);
+    }
 
-
+    public User(String alias, String email, String avatarUrl, String identifier) {
+        setAlias(alias);
+        setEmail(email);
+        setAvatarUrl(avatarUrl);
+        setIdentifier(identifier);
+    }
 
     public Long getId() {
         return id;
@@ -140,6 +145,14 @@ public class User implements Serializable {
 
     public void setFriends(Set<User> friends) {
         this.friends = friends;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
 }

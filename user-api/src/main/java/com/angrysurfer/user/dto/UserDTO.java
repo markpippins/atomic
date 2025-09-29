@@ -10,6 +10,8 @@ public class UserDTO {
 
     private String alias;
 
+    private String identifier;
+
     private String email;
 
     private String avatarUrl;
@@ -87,6 +89,14 @@ public class UserDTO {
 
     public void setFriends(Set<String> friends) {
         this.friends = friends;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
 }

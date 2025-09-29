@@ -1,6 +1,5 @@
 package com.angrysurfer.user.service;
 
-
 import com.angrysurfer.broker.spi.BrokerOperation;
 import com.angrysurfer.broker.spi.BrokerParam;
 import com.angrysurfer.user.ResourceNotFoundException;
@@ -29,22 +28,24 @@ public class UserService {
     private static final Logger log = LoggerFactory.getLogger(UserService.class);
 
     /**
-     * Record representing a test user with basic information.
-     * Used for demonstration and testing purposes.
+     * Record representing a test user with basic information. Used for
+     * demonstration and testing purposes.
      */
     public record TestUser(Long id, String email, String alias) {
+
         // Record body is intentionally empty as all functionality
         // is provided by the record's automatic implementation
     }
 
     /**
-     * Record representing a user creation request.
-     * Contains validation annotations for input validation.
+     * Record representing a user creation request. Contains validation
+     * annotations for input validation.
      */
     public record CreateUserReq(
             @Email String email,
             @NotBlank String alias
             ) {
+
         // Record body is intentionally empty as all functionality
         // is provided by the record's automatic implementation
     }
@@ -66,11 +67,17 @@ public class UserService {
         return new TestUser(id, "user" + id + "@acme.com", "User " + id);
     }
 
-        @BrokerOperation("login")
-    public TestUser login(@BrokerParam("alias") String alias, @BrokerParam("password") String password) {
-     log.info("Login user {}", alias);
-        // pretend lookup
-        return new TestUser(0L, alias + "@acme.com", alias);
+    @BrokerOperation("login")
+    public UserDTO login(@BrokerParam("alias") String alias, @BrokerParam("identifier") String password) {
+        
+        log.info("Login user {}", alias);
+        User user = userRepository.findByAlias(alias).orElse(null);
+        
+        if (user == null) {
+            return null;
+        }
+
+        return user.toDTO();
     }
 
     @BrokerOperation("create")
@@ -79,6 +86,20 @@ public class UserService {
         // pretend persistence:
         TestUser created = new TestUser(1001L, req.email(), req.alias());
         return Map.of("created", created);
+    }
+
+    @BrokerOperation("createUser")
+    public UserDTO createUser(@BrokerParam("email") String email,
+            @BrokerParam("alias") String alias,
+            @BrokerParam("identifier") String password) {
+
+        log.info("Create user {}", email);
+
+        User user = new User(alias, email, null);
+        user.setIdentifier(password);
+
+        userRepository.save(user);
+        return user.toDTO();
     }
 
     public void delete(Long userId) {
@@ -167,6 +188,7 @@ public class UserService {
      * Record representing an application with name and ID.
      */
     public record Application(String name, String id) {
+
         // Record body is intentionally empty as all functionality
         // is provided by the record's automatic implementation
     }
@@ -191,16 +213,17 @@ public class UserService {
         return findAll();
     }
 
-    @BrokerOperation("getChoices")
-    public List<Choice> getChoices() {
-        return List.of(new Choice("Choice 1", "1"), new Choice("Choice 2", "2"));
-    }
+    // @BrokerOperation("getChoices")
+    // public List<Choice> getChoices() {
+    //     return List.of(new Choice("Choice 1", "1"), new Choice("Choice 2", "2"));
+    // }
 
-    /**
-     * Record representing a choice with label and value.
-     */
-    public record Choice(String label, String value) {
-        // Record body is intentionally empty as all functionality
-        // is provided by the record's automatic implementation
-    }
+    // /**
+    //  * Record representing a choice with label and value.
+    //  */
+    // public record Choice(String label, String value) {
+
+    //     // Record body is intentionally empty as all functionality
+    //     // is provided by the record's automatic implementation
+    // }
 }
