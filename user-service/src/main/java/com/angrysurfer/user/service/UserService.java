@@ -70,7 +70,7 @@ public class UserService {
     public TestUser login(@BrokerParam("alias") String alias, @BrokerParam("password") String password) {
      log.info("Login user {}", alias);
         // pretend lookup
-        return new TestUser(0L, alias + "@acme.com", "alias");
+        return new TestUser(0L, alias + "@acme.com", alias);
     }
 
     @BrokerOperation("create")
