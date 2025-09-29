@@ -60,12 +60,12 @@ public class UserService {
         log.info("UserService initialized");
     }
 
-    @BrokerOperation("getById")
-    public TestUser getById(@BrokerParam("id") Long id) {
-        log.info("Get by id {}", id);
-        // pretend lookup
-        return new TestUser(id, "user" + id + "@acme.com", "User " + id);
-    }
+    // @BrokerOperation("getById")
+    // public TestUser getById(@BrokerParam("id") Long id) {
+    //     log.info("Get by id {}", id);
+    //     // pretend lookup
+    //     return new TestUser(id, "user" + id + "@acme.com", "User " + id);
+    // }
 
     @BrokerOperation("login")
     public UserDTO login(@BrokerParam("alias") String alias, @BrokerParam("identifier") String password) {
@@ -73,20 +73,20 @@ public class UserService {
         log.info("Login user {}", alias);
         User user = userRepository.findByAlias(alias).orElse(null);
         
-        if (user == null) {
+        if (user == null || !user.getIdentifier().equals(password)) {
             return null;
         }
 
         return user.toDTO();
     }
 
-    @BrokerOperation("create")
-    public Map<String, Object> create(@Valid @BrokerParam("user") CreateUserReq req) {
-        log.info("Create user {}", req.email);
-        // pretend persistence:
-        TestUser created = new TestUser(1001L, req.email(), req.alias());
-        return Map.of("created", created);
-    }
+    // @BrokerOperation("create")
+    // public Map<String, Object> create(@Valid @BrokerParam("user") CreateUserReq req) {
+    //     log.info("Create user {}", req.email);
+    //     // pretend persistence:
+    //     TestUser created = new TestUser(1001L, req.email(), req.alias());
+    //     return Map.of("created", created);
+    // }
 
     @BrokerOperation("createUser")
     public UserDTO createUser(@BrokerParam("email") String email,
@@ -107,6 +107,7 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
+    @BrokerOperation("findAll")
     public Set<UserDTO> findAll() {
         log.info("Find all users");
         HashSet<User> result = new HashSet<>();
@@ -132,6 +133,7 @@ public class UserService {
         if (user.isPresent()) {
             Optional<Profile> profile = profileRepository.findByUserId(user.get().getId());
             if (profile.isPresent()) {
+                user.get().setProfile(profile.get());
                 result = user.get().toDTO();
                 result.setProfileImageUrl(profile.get().getProfileImageUrl());
             } else {
