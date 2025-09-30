@@ -102,7 +102,8 @@ public class UserService {
         return user.toDTO();
     }
 
-    public void delete(Long userId) {
+    @BrokerOperation("delete")
+    public void delete(@BrokerParam("userId") Long userId) {
         log.info("Delete user id {}", userId);
         userRepository.deleteById(userId);
     }
@@ -115,7 +116,8 @@ public class UserService {
         return result.stream().map(user -> user.toDTO()).collect(Collectors.toSet());
     }
 
-    public UserDTO findById(Long userId) throws ResourceNotFoundException {
+    @BrokerOperation("findById")
+    public UserDTO findById(@BrokerParam("userId") Long userId) throws ResourceNotFoundException {
         log.info("Find user by id {}", userId);
         Optional<User> result = userRepository.findById(userId);
         if (result.isPresent()) {
@@ -125,7 +127,8 @@ public class UserService {
         throw new ResourceNotFoundException("User ".concat(Long.toString(userId).concat(" not found.")));
     }
 
-    public UserDTO findByAlias(String alias) throws ResourceNotFoundException {
+    @BrokerOperation("findByAlias")
+    public UserDTO findByAlias(@BrokerParam("alias") String alias) throws ResourceNotFoundException {
         log.info("Find user by alias {}", alias);
         UserDTO result;
 
@@ -135,7 +138,6 @@ public class UserService {
             if (profile.isPresent()) {
                 user.get().setProfile(profile.get());
                 result = user.get().toDTO();
-                result.setProfileImageUrl(profile.get().getProfileImageUrl());
             } else {
                 result = user.get().toDTO();
             }
@@ -146,7 +148,8 @@ public class UserService {
         throw new ResourceNotFoundException("User ".concat(alias).concat(" not found."));
     }
 
-    public UserDTO findByEmail(String email) throws ResourceNotFoundException {
+    @BrokerOperation("findByEmail")
+    public UserDTO findByEmail(@BrokerParam("email") String email) throws ResourceNotFoundException {
         log.info("Find user by email {}", email);
         UserDTO result;
 
@@ -155,7 +158,6 @@ public class UserService {
             Optional<Profile> profile = profileRepository.findByUserId(user.get().getId());
             if (profile.isPresent()) {
                 result = user.get().toDTO();
-                result.setProfileImageUrl(profile.get().getProfileImageUrl());
             } else {
                 result = user.get().toDTO();
             }
@@ -165,18 +167,33 @@ public class UserService {
         throw new ResourceNotFoundException("User ".concat(email).concat(" not found."));
     }
 
+    @BrokerOperation("addUser")
+    public UserDTO addUser(@BrokerParam("user") UserDTO newUser) {
+        log.info("Adding user {}", newUser.getAlias());
+        User user = new User(newUser.getAlias(), newUser.getEmail(), newUser.getAvatarUrl());
+        if (newUser.getIdentifier() != null) {
+            user.setIdentifier(newUser.getIdentifier());
+        }
+        return userRepository.save(user).toDTO();
+    }
+
     public UserDTO save(@BrokerParam("alias") String alias, @BrokerParam("email") String email, @BrokerParam("password") String initialPassword) {
         log.info("Save user {}", alias);
         return userRepository.save(new User(alias, email, null)).toDTO();
     }
 
+    @BrokerOperation("save")
     public UserDTO save(UserDTO newUser) {
         log.info("Save user {}", newUser.getAlias());
         User user = new User(newUser.getAlias(), newUser.getEmail(), newUser.getAvatarUrl());
+        if (newUser.getIdentifier() != null) {
+            user.setIdentifier(newUser.getIdentifier());
+        }
         return userRepository.save(user).toDTO();
     }
 
-    public UserDTO update(User user) {
+    @BrokerOperation("update")
+    public UserDTO update(@BrokerParam("user") User user) {
         log.info("Update user {}", user.getAlias());
         return userRepository.save(user).toDTO();
     }

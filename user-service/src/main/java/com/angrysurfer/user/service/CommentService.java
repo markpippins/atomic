@@ -1,6 +1,6 @@
 package com.angrysurfer.user.service;
 
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -20,6 +20,9 @@ import com.angrysurfer.user.repository.CommentRepository;
 import com.angrysurfer.user.repository.PostRepository;
 import com.angrysurfer.user.repository.ReactionRepository;
 import com.angrysurfer.user.repository.UserRepository;
+import com.angrysurfer.broker.spi.BrokerOperation;
+import com.angrysurfer.broker.spi.BrokerParam;
+import com.angrysurfer.broker.api.ServiceResponse;
 
 @Service
 public class CommentService {
@@ -38,25 +41,57 @@ public class CommentService {
 		log.info("CommentService initialized");
     }
 
-    public String delete(Long commentId) {
+    @BrokerOperation("delete")
+    public ServiceResponse<String> delete(@BrokerParam("commentId") Long commentId) {
         log.info("Deleting comment id {}", commentId);
-        commentRepository.deleteById(commentId);
-        return "redirect:/Comment/all";
-    }
-
-    public CommentDTO findById(Long commentId) throws ResourceNotFoundException {
-        log.info("Find comment by id {}", commentId);
-        Optional<Comment> comment = commentRepository.findById(commentId);
-        if (comment.isPresent()) {
-            return comment.get().toDTO();
+        try {
+            commentRepository.deleteById(commentId);
+            return ServiceResponse.ok("Comment deleted successfully", "delete-" + System.currentTimeMillis());
+        } catch (Exception e) {
+            log.error("Error deleting comment: {}", e.getMessage());
+            return (ServiceResponse<String>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to delete comment: " + e.getMessage())),
+                "delete-" + System.currentTimeMillis()
+            );
         }
-
-        throw new ResourceNotFoundException(" comment ".concat(commentId.toString()).concat(" not found."));
     }
 
-    public Iterable<CommentDTO> findAll() {
+    @BrokerOperation("findById")
+    public ServiceResponse<CommentDTO> findById(@BrokerParam("commentId") Long commentId) {
+        log.info("Find comment by id {}", commentId);
+        try {
+            Optional<Comment> comment = commentRepository.findById(commentId);
+            if (comment.isPresent()) {
+                return ServiceResponse.ok(comment.get().toDTO(), "findById-" + System.currentTimeMillis());
+            }
+            return (ServiceResponse<CommentDTO>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Comment " + commentId + " not found")),
+                "findById-" + System.currentTimeMillis()
+            );
+        } catch (Exception e) {
+            log.error("Error finding comment: {}", e.getMessage());
+            return (ServiceResponse<CommentDTO>) ServiceResponse.error(
+                List.of(java.util.Map.of("message", "Failed to find comment: " + e.getMessage())),
+                "findById-" + System.currentTimeMillis()
+            );
+        }
+    }
+
+    @BrokerOperation("findAll")
+    public ServiceResponse<Iterable<CommentDTO>> findAll() {
         log.info("Find all comments");
-        return commentRepository.findAll().stream().map(c -> c.toDTO()).collect(Collectors.toSet());
+        try {
+            Iterable<CommentDTO> comments = commentRepository.findAll().stream()
+                .map(c -> c.toDTO())
+                .collect(Collectors.toSet());
+            return ServiceResponse.ok(comments, "findAll-" + System.currentTimeMillis());
+        } catch (Exception e) {
+            log.error("Error finding all comments: {}", e.getMessage());
+            return (ServiceResponse<Iterable<CommentDTO>>) ServiceResponse.error(
+                List.of(java.util.Map.of("message", "Failed to find comments: " + e.getMessage())),
+                "findAll-" + System.currentTimeMillis()
+            );
+        }
     }
 
     public CommentDTO save(Comment n) {
@@ -69,28 +104,53 @@ public class CommentService {
         return commentRepository.save(new Comment(postedBy, text)).toDTO();
     }
 
-    public Iterable<Comment> findCommentsForPost(Long postId) {
+    @BrokerOperation("findCommentsForPost")
+    public ServiceResponse<Iterable<Comment>> findCommentsForPost(@BrokerParam("postId") Long postId) {
         log.info("Find comments for post id {}", postId);
-        return commentRepository.findByPostId(postId);
+        try {
+            Iterable<Comment> comments = commentRepository.findByPostId(postId);
+            return ServiceResponse.ok(comments, "findCommentsForPost-" + System.currentTimeMillis());
+        } catch (Exception e) {
+            log.error("Error finding comments for post: {}", e.getMessage());
+            return (ServiceResponse<Iterable<Comment>>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to find comments for post: " + e.getMessage())),
+                "findCommentsForPost-" + System.currentTimeMillis()
+            );
+        }
     }
 
-    public CommentDTO addComment(CommentDTO data) {
+    @BrokerOperation("addComment")
+    public ServiceResponse<CommentDTO> addComment(@BrokerParam("data") CommentDTO data) {
         log.info("Adding comment by user {}", data.getPostedBy());
-        Optional<User> user;
-
         try {
-            user = userRepository.findByAlias(data.getPostedBy());
+            Optional<User> user = userRepository.findByAlias(data.getPostedBy());
+            
+            if (user.isEmpty()) {
+                return (ServiceResponse<CommentDTO>) ServiceResponse.error(
+                    java.util.List.of(java.util.Map.of("message", "User not found: " + data.getPostedBy())),
+                    "addComment-" + System.currentTimeMillis()
+                );
+            }
+
+            if (data.getPostId() != null && data.getParentId() == null) {
+                CommentDTO result = addCommentToPost(user.get(), data);
+                return ServiceResponse.ok(result, "addComment-" + System.currentTimeMillis());
+            } else if (data.getPostId() == null && data.getParentId() != null) {
+                CommentDTO result = addReplyToComment(user.get(), data);
+                return ServiceResponse.ok(result, "addComment-" + System.currentTimeMillis());
+            }
+
+            return (ServiceResponse<CommentDTO>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Invalid comment data - must specify either postId or parentId")),
+                "addComment-" + System.currentTimeMillis()
+            );
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
+            log.error("Error adding comment: {}", e.getMessage());
+            return (ServiceResponse<CommentDTO>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to add comment: " + e.getMessage())),
+                "addComment-" + System.currentTimeMillis()
+            );
         }
-
-        if (user.isPresent() && data.getPostId() != null && data.getParentId() == null) {
-            return addCommentToPost(user.get(), data);
-        } else if (user.isPresent() && data.getPostId() == null && data.getParentId() != null) {
-            return addReplyToComment(user.get(), data);
-        }
-
-        throw new IllegalArgumentException();
     }
 
     private CommentDTO addCommentToPost(User user, CommentDTO data) throws IllegalArgumentException {
@@ -131,36 +191,82 @@ public class CommentService {
 
 
 
-    public ReactionDTO addReaction(Long commentId, ReactionDTO reactionDTO) {
+    @BrokerOperation("addReaction")
+    public ServiceResponse<ReactionDTO> addReaction(@BrokerParam("commentId") Long commentId, @BrokerParam("reactionDTO") ReactionDTO reactionDTO) {
         log.info("Adding reaction to comment id {}", commentId);
-        Reaction.ReactionType type = Reaction.ReactionType.valueOf(reactionDTO.getType().toUpperCase());
+        try {
+            Reaction.ReactionType type = Reaction.ReactionType.valueOf(reactionDTO.getType().toUpperCase());
 
-        Optional<User> userOpt = this.userRepository.findByAlias(reactionDTO.getAlias());
-        Optional<Comment> commentOpt = commentRepository.findById(commentId);
+            Optional<User> userOpt = this.userRepository.findByAlias(reactionDTO.getAlias());
+            Optional<Comment> commentOpt = commentRepository.findById(commentId);
 
-        Comment comment = commentOpt.get();
-        User user = userOpt.get();
+            if (userOpt.isEmpty()) {
+                return (ServiceResponse<ReactionDTO>) ServiceResponse.error(
+                    java.util.List.of(java.util.Map.of("message", "User not found: " + reactionDTO.getAlias())),
+                    "addReaction-" + System.currentTimeMillis()
+                );
+            }
 
-        Reaction reaction = reactionRepository.save(new Reaction(user, type));
+            if (commentOpt.isEmpty()) {
+                return (ServiceResponse<ReactionDTO>) ServiceResponse.error(
+                    java.util.List.of(java.util.Map.of("message", "Comment not found: " + commentId)),
+                    "addReaction-" + System.currentTimeMillis()
+                );
+            }
 
-        comment.getReactions().add(reaction);
-        commentRepository.save(comment);
+            Comment comment = commentOpt.get();
+            User user = userOpt.get();
 
-        return reaction.toDTO();
+            Reaction reaction = reactionRepository.save(new Reaction(user, type));
+
+            comment.getReactions().add(reaction);
+            commentRepository.save(comment);
+
+            return ServiceResponse.ok(reaction.toDTO(), "addReaction-" + System.currentTimeMillis());
+        } catch (Exception e) {
+            log.error("Error adding reaction: {}", e.getMessage());
+            return (ServiceResponse<ReactionDTO>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to add reaction: " + e.getMessage())),
+                "addReaction-" + System.currentTimeMillis()
+            );
+        }
     }
 
-    public void removeReaction(Long commentId, ReactionDTO reactionDTO) {
+    @BrokerOperation("removeReaction")
+    public ServiceResponse<String> removeReaction(@BrokerParam("commentId") Long commentId, @BrokerParam("reactionDTO") ReactionDTO reactionDTO) {
         log.info("Removing reaction from comment id {}", commentId);
-        Optional<Reaction> reactionOpt = this.reactionRepository.findById(reactionDTO.getId());
-        Optional<Comment> commentOpt = commentRepository.findById(commentId);
+        try {
+            Optional<Reaction> reactionOpt = this.reactionRepository.findById(reactionDTO.getId());
+            Optional<Comment> commentOpt = commentRepository.findById(commentId);
 
-        if (commentOpt.isPresent() && reactionOpt.isPresent()) {
+            if (commentOpt.isEmpty()) {
+                return (ServiceResponse<String>) ServiceResponse.error(
+                    java.util.List.of(java.util.Map.of("message", "Comment not found: " + commentId)),
+                    "removeReaction-" + System.currentTimeMillis()
+                );
+            }
+
+            if (reactionOpt.isEmpty()) {
+                return (ServiceResponse<String>) ServiceResponse.error(
+                    java.util.List.of(java.util.Map.of("message", "Reaction not found: " + reactionDTO.getId())),
+                    "removeReaction-" + System.currentTimeMillis()
+                );
+            }
+
             Comment comment = commentOpt.get();
             Reaction reaction = reactionOpt.get();
 
             comment.getReactions().remove(reaction);
             reactionRepository.delete(reaction);
             commentRepository.save(comment);
+
+            return ServiceResponse.ok("Reaction removed successfully", "removeReaction-" + System.currentTimeMillis());
+        } catch (Exception e) {
+            log.error("Error removing reaction: {}", e.getMessage());
+            return (ServiceResponse<String>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to remove reaction: " + e.getMessage())),
+                "removeReaction-" + System.currentTimeMillis()
+            );
         }
     }
 }

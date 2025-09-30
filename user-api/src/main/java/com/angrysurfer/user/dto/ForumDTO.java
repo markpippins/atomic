@@ -11,7 +11,7 @@ public class ForumDTO implements Serializable {
     /**
      *
      */
-    private static final long serialVersionUID = -5881692384954888978L;
+    private static final long serialVersionUID = 1l;
 
     private Long id;
 

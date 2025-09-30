@@ -1,19 +1,24 @@
 package com.angrysurfer.user.dto;
 
+
 public class PostDTO extends AbstractContentDTO {
 
-    private Long forumId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private Long forumId;
+	
+	public PostDTO() {
+		super();
+	}
 
-    public PostDTO() {
+	public Long getForumId() {
+		return forumId;
+	}
 
-    }
-
-    public Long getForumId() {
-        return forumId;
-    }
-
-    public void setForumId(Long forumId) {
-        this.forumId = forumId;
-    }
-
+	public void setForumId(Long forumId) {
+		this.forumId = forumId;
+	}
 }

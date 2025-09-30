@@ -2,11 +2,18 @@ package com.angrysurfer.user.dto;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 public class UserDTO {
 
-    private Long id;
+    private static final long serialVersionUID = 1L;
+
+    private static final String TYPE = "user";
+
+	private Long id;
 
     private String alias;
 
@@ -16,87 +23,154 @@ public class UserDTO {
 
     private String avatarUrl;
 
-    private String profileImageUrl;
-
     private Set<String> followers = new HashSet<>();
 
     private Set<String> following = new HashSet<>();
 
     private Set<String> friends = new HashSet<>();
 
-    public UserDTO() {
-    }
+    private Set<String> groups = new HashSet<>();
 
+    private Set<String> interests = new HashSet<>();
+
+    private Set<String> organizations = new HashSet<>();
+
+    private Set<String> projects = new HashSet<>();
+
+    private Set<String> roles = new HashSet<>();
+
+    private Set<String> teams = new HashSet<>();
+
+    private Set<String> tags = new HashSet<>();
+    
     public Long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getAlias() {
-        return alias;
-    }
+	public String getAlias() {
+		return alias;
+	}
 
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getIdentifier() {
+		return identifier;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
 
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getProfileImageUrl() {
-        return profileImageUrl;
-    }
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
 
-    public void setProfileImageUrl(String profileImageUrl) {
-        this.profileImageUrl = profileImageUrl;
-    }
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
 
-    public Set<String> getFollowers() {
-        return followers;
-    }
+	public Set<String> getFollowers() {
+		return followers;
+	}
 
-    public void setFollowers(Set<String> followers) {
-        this.followers = followers;
-    }
+	public void setFollowers(Set<String> followers) {
+		this.followers = followers;
+	}
 
-    public Set<String> getFollowing() {
-        return following;
-    }
+	public Set<String> getFollowing() {
+		return following;
+	}
 
-    public void setFollowing(Set<String> following) {
-        this.following = following;
-    }
+	public void setFollowing(Set<String> following) {
+		this.following = following;
+	}
 
-    public Set<String> getFriends() {
-        return friends;
-    }
+	public Set<String> getFriends() {
+		return friends;
+	}
 
-    public void setFriends(Set<String> friends) {
-        this.friends = friends;
-    }
+	public void setFriends(Set<String> friends) {
+		this.friends = friends;
+	}
 
-    public String getIdentifier() {
-        return identifier;
-    }
+	public Set<String> getGroups() {
+		return groups;
+	}
 
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
+	public void setGroups(Set<String> groups) {
+		this.groups = groups;
+	}
+
+	public Set<String> getInterests() {
+		return interests;
+	}
+
+	public void setInterests(Set<String> interests) {
+		this.interests = interests;
+	}
+
+	public Set<String> getOrganizations() {
+		return organizations;
+	}
+
+	public void setOrganizations(Set<String> organizations) {
+		this.organizations = organizations;
+	}
+
+	public Set<String> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(Set<String> projects) {
+		this.projects = projects;
+	}
+
+	public Set<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<String> roles) {
+		this.roles = roles;
+	}
+
+	public Set<String> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(Set<String> teams) {
+		this.teams = teams;
+	}
+
+	public Set<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(Set<String> tags) {
+		this.tags = tags;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public static String getType() {
+		return TYPE;
+	}
+
+
 
 }

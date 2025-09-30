@@ -19,6 +19,7 @@
 *.tar.gz
 *.rar
 
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
@@ -113,3 +114,11 @@ user-service/.factorypath
 user-service/.project
 user-service/.classpath
 .gitignore
+broker-gateway/.settings/org.eclipse.m2e.core.prefs
+broker-service/.settings/org.eclipse.m2e.core.prefs
+broker-service-api/.settings/org.eclipse.m2e.core.prefs
+broker-service-spi/.settings/org.eclipse.m2e.core.prefs
+upload-service/.settings/org.eclipse.m2e.core.prefs
+user-service/.settings/org.eclipse.m2e.core.prefs
+user-api/.settings/org.eclipse.m2e.core.prefs
+broker-service/.classpath
