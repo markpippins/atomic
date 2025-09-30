@@ -122,3 +122,13 @@ upload-service/.settings/org.eclipse.m2e.core.prefs
 user-service/.settings/org.eclipse.m2e.core.prefs
 user-api/.settings/org.eclipse.m2e.core.prefs
 broker-service/.classpath
+file-api/.classpath
+file-api/.factorypath
+file-api/.settings/org.eclipse.jdt.apt.core.prefs
+file-api/.settings/org.eclipse.jdt.core.prefs
+file-api/.settings/org.eclipse.m2e.core.prefs
+file-api/target/maven-archiver/pom.properties
+file-api/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+file-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+file-api/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+file-api/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
