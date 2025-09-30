@@ -22,6 +22,9 @@ import com.angrysurfer.user.repository.EditRepository;
 import com.angrysurfer.user.repository.PostRepository;
 import com.angrysurfer.user.repository.ReactionRepository;
 import com.angrysurfer.user.repository.UserRepository;
+import com.angrysurfer.broker.spi.BrokerOperation;
+import com.angrysurfer.broker.spi.BrokerParam;
+import com.angrysurfer.broker.api.ServiceResponse;
 
 @Service
 public class PostService {
@@ -47,19 +50,40 @@ public class PostService {
         log.info("PostService initialized");
     }
 
-    public String delete(Long postId) {
+    @BrokerOperation("delete")
+    public ServiceResponse<String> delete(@BrokerParam("postId") Long postId) {
         log.info("Delete post id {}", postId);
-        postRepository.deleteById(postId);
-        return "redirect:/entries/all";
+        try {
+            postRepository.deleteById(postId);
+            return ServiceResponse.ok("Post deleted successfully", "delete-" + System.currentTimeMillis());
+        } catch (Exception e) {
+            log.error("Error deleting post: {}", e.getMessage());
+            return (ServiceResponse<String>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to delete post: " + e.getMessage())),
+                "delete-" + System.currentTimeMillis()
+            );
+        }
     }
 
-    public PostDTO findById(Long postId) throws ResourceNotFoundException {
+    @BrokerOperation("findById")
+    public ServiceResponse<PostDTO> findById(@BrokerParam("postId") Long postId) {
         log.info("Find post by id {}", postId);
-        Optional<Post> result = postRepository.findById(postId);
-        if (result.isPresent())
-            return result.get().toDTO();
-
-        throw new ResourceNotFoundException(POST.concat(Long.toString(postId).concat(NOT_FOUND)));
+        try {
+            Optional<Post> result = postRepository.findById(postId);
+            if (result.isPresent()) {
+                return ServiceResponse.ok(result.get().toDTO(), "findById-" + System.currentTimeMillis());
+            }
+            return (ServiceResponse<PostDTO>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Post " + postId + " not found")),
+                "findById-" + System.currentTimeMillis()
+            );
+        } catch (Exception e) {
+            log.error("Error finding post by id: {}", e.getMessage());
+            return (ServiceResponse<PostDTO>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to find post: " + e.getMessage())),
+                "findById-" + System.currentTimeMillis()
+            );
+        }
     }
 
     public Page<Post> findByForumId(Long forumId, Pageable pageable) {
@@ -67,9 +91,21 @@ public class PostService {
         return postRepository.findByForumId(forumId, pageable);
     }
 
-    public Set<PostDTO> findAll() {
+    @BrokerOperation("findAll")
+    public ServiceResponse<Set<PostDTO>> findAll() {
         log.info("Find all posts");
-        return postRepository.findAll().stream().map(p -> p.toDTO()).collect(Collectors.toSet());
+        try {
+            Set<PostDTO> posts = postRepository.findAll().stream()
+                .map(p -> p.toDTO())
+                .collect(Collectors.toSet());
+            return ServiceResponse.ok(posts, "findAll-" + System.currentTimeMillis());
+        } catch (Exception e) {
+            log.error("Error finding all posts: {}", e.getMessage());
+            return (ServiceResponse<Set<PostDTO>>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to find posts: " + e.getMessage())),
+                "findAll-" + System.currentTimeMillis()
+            );
+        }
     }
 
     public PostDTO save(User postedBy, String text) {
@@ -96,37 +132,73 @@ public class PostService {
         return postRepository.save(post).toDTO();
     }
 
-    public PostDTO save(PostDTO post) {
+    @BrokerOperation("save")
+    public ServiceResponse<PostDTO> save(@BrokerParam("post") PostDTO post) {
         log.info("Save post {}", post.getText());
-        Optional<User> postedBy;
-        postedBy = userRepository.findByAlias(post.getPostedBy());
+        try {
+            Optional<User> postedBy = userRepository.findByAlias(post.getPostedBy());
 
-        // handle forum post
-        if (post.getForumId() != null && postedBy.isPresent())
-            return save(postedBy.get(), post.getForumId(), post.getText());
+            if (postedBy.isEmpty()) {
+                return (ServiceResponse<PostDTO>) ServiceResponse.error(
+                    java.util.List.of(java.util.Map.of("message", "User not found: " + post.getPostedBy())),
+                    "save-" + System.currentTimeMillis()
+                );
+            }
 
-        // handle post where post.getPostedTo is null
-        if (postedBy.isPresent() && post.getPostedTo() == null)
-            return save(postedBy.get(), post.getText());
+            // handle forum post
+            if (post.getForumId() != null) {
+                PostDTO result = save(postedBy.get(), post.getForumId(), post.getText());
+                return ServiceResponse.ok(result, "save-" + System.currentTimeMillis());
+            }
 
-        // handle post where post.getPostedTo is not null
-        Optional<User> postedTo = userRepository.findByAlias(post.getPostedTo());
-        if (postedBy.isPresent() && postedTo.isPresent())
-            return save(postedBy.get(), postedTo.get(), post.getText());
+            // handle post where post.getPostedTo is null
+            if (post.getPostedTo() == null) {
+                PostDTO result = save(postedBy.get(), post.getText());
+                return ServiceResponse.ok(result, "save-" + System.currentTimeMillis());
+            }
 
-        throw new IllegalArgumentException();
+            // handle post where post.getPostedTo is not null
+            Optional<User> postedTo = userRepository.findByAlias(post.getPostedTo());
+            if (postedTo.isPresent()) {
+                PostDTO result = save(postedBy.get(), postedTo.get(), post.getText());
+                return ServiceResponse.ok(result, "save-" + System.currentTimeMillis());
+            }
+
+            return (ServiceResponse<PostDTO>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Invalid post data or user not found")),
+                "save-" + System.currentTimeMillis()
+            );
+        } catch (Exception e) {
+            log.error("Error saving post: {}", e.getMessage());
+            return (ServiceResponse<PostDTO>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to save post: " + e.getMessage())),
+                "save-" + System.currentTimeMillis()
+            );
+        }
     }
 
-    public PostDTO addPostToForum(Long forumId, PostDTO post) {
+    @BrokerOperation("addPostToForum")
+    public ServiceResponse<PostDTO> addPostToForum(@BrokerParam("forumId") Long forumId, @BrokerParam("post") PostDTO post) {
         log.info("Add post {} to forum {}", post.getText(), forumId);
-        Optional<User> postedBy;
-        postedBy = userRepository.findByAlias(post.getPostedBy());
+        try {
+            Optional<User> postedBy = userRepository.findByAlias(post.getPostedBy());
 
-        // handle forum post
-        if (postedBy.isPresent())
-            return save(postedBy.get(), forumId, post.getText());
+            if (postedBy.isEmpty()) {
+                return (ServiceResponse<PostDTO>) ServiceResponse.error(
+                    java.util.List.of(java.util.Map.of("message", "User not found: " + post.getPostedBy())),
+                    "addPostToForum-" + System.currentTimeMillis()
+                );
+            }
 
-        throw new IllegalArgumentException();
+            PostDTO result = save(postedBy.get(), forumId, post.getText());
+            return ServiceResponse.ok(result, "addPostToForum-" + System.currentTimeMillis());
+        } catch (Exception e) {
+            log.error("Error adding post to forum: {}", e.getMessage());
+            return (ServiceResponse<PostDTO>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to add post to forum: " + e.getMessage())),
+                "addPostToForum-" + System.currentTimeMillis()
+            );
+        }
     }
 
     public PostDTO save(Post post) {
@@ -145,67 +217,150 @@ public class PostService {
         return postRepository.save(post).toDTO();
     }
 
-    public PostStatDTO incrementRating(Long postId) throws ResourceNotFoundException {
+    @BrokerOperation("incrementRating")
+    public ServiceResponse<PostStatDTO> incrementRating(@BrokerParam("postId") Long postId) {
         log.info("Increment rating for post id {}", postId);
-        Optional<Post> postOpt = postRepository.findById(postId);
-        if (postOpt.isPresent()) {
-            Post post = postOpt.get();
-            post.setRating(post.getRating() + 1);
-            postRepository.save(post);
-
-            return post.toStatDTO();
+        try {
+            Optional<Post> postOpt = postRepository.findById(postId);
+            if (postOpt.isPresent()) {
+                Post post = postOpt.get();
+                post.setRating(post.getRating() + 1);
+                postRepository.save(post);
+                return ServiceResponse.ok(post.toStatDTO(), "incrementRating-" + System.currentTimeMillis());
+            }
+            return (ServiceResponse<PostStatDTO>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Post " + postId + " not found")),
+                "incrementRating-" + System.currentTimeMillis()
+            );
+        } catch (Exception e) {
+            log.error("Error incrementing rating: {}", e.getMessage());
+            return (ServiceResponse<PostStatDTO>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to increment rating: " + e.getMessage())),
+                "incrementRating-" + System.currentTimeMillis()
+            );
         }
-
-        throw new ResourceNotFoundException(POST.concat(Long.toString(postId).concat(NOT_FOUND)));
     }
 
-    public PostStatDTO decrementRating(Long postId) throws ResourceNotFoundException {
+    @BrokerOperation("decrementRating")
+    public ServiceResponse<PostStatDTO> decrementRating(@BrokerParam("postId") Long postId) {
         log.info("Decrement rating for post id {}", postId);
-        Optional<Post> postOpt = postRepository.findById(postId);
-        if (postOpt.isPresent()) {
-            Post post = postOpt.get();
-            post.setRating(post.getRating() - 1);
-            postRepository.save(post);
-
-            return post.toStatDTO();
+        try {
+            Optional<Post> postOpt = postRepository.findById(postId);
+            if (postOpt.isPresent()) {
+                Post post = postOpt.get();
+                post.setRating(post.getRating() - 1);
+                postRepository.save(post);
+                return ServiceResponse.ok(post.toStatDTO(), "decrementRating-" + System.currentTimeMillis());
+            }
+            return (ServiceResponse<PostStatDTO>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Post " + postId + " not found")),
+                "decrementRating-" + System.currentTimeMillis()
+            );
+        } catch (Exception e) {
+            log.error("Error decrementing rating: {}", e.getMessage());
+            return (ServiceResponse<PostStatDTO>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to decrement rating: " + e.getMessage())),
+                "decrementRating-" + System.currentTimeMillis()
+            );
         }
-
-        throw new ResourceNotFoundException(POST.concat(Long.toString(postId).concat(NOT_FOUND)));
     }
 
-    public ReactionDTO addReaction(Long postId, ReactionDTO reactionDTO) throws ResourceNotFoundException {
+    @BrokerOperation("addReaction")
+    public ServiceResponse<ReactionDTO> addReaction(@BrokerParam("postId") Long postId, @BrokerParam("reactionDTO") ReactionDTO reactionDTO) {
         log.info("Add reaction to post id {}", postId);
-        Reaction.ReactionType type = Reaction.ReactionType.valueOf(reactionDTO.getType().toUpperCase());
-        Optional<User> userOpt = this.userRepository.findByAlias(reactionDTO.getAlias());
-        Optional<Post> postOpt = postRepository.findById(postId);
+        try {
+            Reaction.ReactionType type = Reaction.ReactionType.valueOf(reactionDTO.getType().toUpperCase());
+            Optional<User> userOpt = this.userRepository.findByAlias(reactionDTO.getAlias());
+            Optional<Post> postOpt = postRepository.findById(postId);
 
-        if (postOpt.isPresent() && userOpt.isPresent()) {
+            if (userOpt.isEmpty()) {
+                return (ServiceResponse<ReactionDTO>) ServiceResponse.error(
+                    java.util.List.of(java.util.Map.of("message", "User not found: " + reactionDTO.getAlias())),
+                    "addReaction-" + System.currentTimeMillis()
+                );
+            }
+
+            if (postOpt.isEmpty()) {
+                return (ServiceResponse<ReactionDTO>) ServiceResponse.error(
+                    java.util.List.of(java.util.Map.of("message", "Post " + postId + " not found")),
+                    "addReaction-" + System.currentTimeMillis()
+                );
+            }
+
             Post post = postOpt.get();
             User user = userOpt.get();
 
             Reaction reaction = reactionRepository.save(new Reaction(user, type));
-
             post.getReactions().add(reaction);
             postRepository.save(post);
 
-            return reaction.toDTO();
+            return ServiceResponse.ok(reaction.toDTO(), "addReaction-" + System.currentTimeMillis());
+        } catch (Exception e) {
+            log.error("Error adding reaction: {}", e.getMessage());
+            return (ServiceResponse<ReactionDTO>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to add reaction: " + e.getMessage())),
+                "addReaction-" + System.currentTimeMillis()
+            );
         }
-
-        throw new ResourceNotFoundException(POST.concat(Long.toString(postId).concat(NOT_FOUND)));
     }
 
-    public void removeReaction(Long postId, ReactionDTO reactionDTO) {
+    @BrokerOperation("removeReaction")
+    public ServiceResponse<String> removeReaction(@BrokerParam("postId") Long postId, @BrokerParam("reactionDTO") ReactionDTO reactionDTO) {
         log.info("Remove reaction from post id {}", postId);
-        Optional<Reaction> reactionOpt = this.reactionRepository.findById(reactionDTO.getId());
-        Optional<Post> postOpt = postRepository.findById(postId);
+        try {
+            Optional<Reaction> reactionOpt = this.reactionRepository.findById(reactionDTO.getId());
+            Optional<Post> postOpt = postRepository.findById(postId);
 
-        if (postOpt.isPresent() && reactionOpt.isPresent()) {
+            if (postOpt.isEmpty()) {
+                return (ServiceResponse<String>) ServiceResponse.error(
+                    java.util.List.of(java.util.Map.of("message", "Post " + postId + " not found")),
+                    "removeReaction-" + System.currentTimeMillis()
+                );
+            }
+
+            if (reactionOpt.isEmpty()) {
+                return (ServiceResponse<String>) ServiceResponse.error(
+                    java.util.List.of(java.util.Map.of("message", "Reaction " + reactionDTO.getId() + " not found")),
+                    "removeReaction-" + System.currentTimeMillis()
+                );
+            }
+
             Post post = postOpt.get();
             Reaction reaction = reactionOpt.get();
 
             post.getReactions().remove(reaction);
             reactionRepository.delete(reaction);
             postRepository.save(post);
+
+            return ServiceResponse.ok("Reaction removed successfully", "removeReaction-" + System.currentTimeMillis());
+        } catch (Exception e) {
+            log.error("Error removing reaction: {}", e.getMessage());
+            return (ServiceResponse<String>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to remove reaction: " + e.getMessage())),
+                "removeReaction-" + System.currentTimeMillis()
+            );
+        }
+    }
+
+    @BrokerOperation("getRepliesForPost")
+    public ServiceResponse<java.util.Set<com.angrysurfer.user.dto.CommentDTO>> getRepliesForPost(@BrokerParam("postId") Long postId) {
+        log.info("Get replies for post id {}", postId);
+        try {
+            Optional<Post> result = postRepository.findById(postId);
+            if (result.isPresent()) {
+                java.util.Set<com.angrysurfer.user.dto.CommentDTO> replies = result.get().toDTO().getReplies();
+                return ServiceResponse.ok(replies, "getRepliesForPost-" + System.currentTimeMillis());
+            }
+            return (ServiceResponse<java.util.Set<com.angrysurfer.user.dto.CommentDTO>>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Post " + postId + " not found")),
+                "getRepliesForPost-" + System.currentTimeMillis()
+            );
+        } catch (Exception e) {
+            log.error("Error getting replies for post: {}", e.getMessage());
+            return (ServiceResponse<java.util.Set<com.angrysurfer.user.dto.CommentDTO>>) ServiceResponse.error(
+                java.util.List.of(java.util.Map.of("message", "Failed to get replies: " + e.getMessage())),
+                "getRepliesForPost-" + System.currentTimeMillis()
+            );
         }
     }
 
