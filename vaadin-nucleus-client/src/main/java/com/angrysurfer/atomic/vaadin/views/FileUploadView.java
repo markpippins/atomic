@@ -4,14 +4,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
 
-import com.angrysurfer.broker.api.ServiceResponse;
+import com.angrysurfer.atomic.broker.api.ServiceResponse;
 import com.angrysurfer.atomic.vaadin.layout.MainLayout;
 import com.angrysurfer.atomic.vaadin.service.BrokerClient;
 import com.angrysurfer.atomic.vaadin.service.UserServiceClient;
-import org.springframework.core.ParameterizedTypeReference;
-
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Paragraph;
@@ -27,14 +25,11 @@ import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 @Route(value = "upload", layout = MainLayout.class)
 @Slf4j
 public class FileUploadView extends VerticalLayout implements BeforeEnterObserver {
-
-    private static final Logger log = LoggerFactory.getLogger(FileUploadView.class);
 
     private static final long serialVersionUID = 1L;
 

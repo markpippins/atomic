@@ -1,6 +1,6 @@
 package com.angrysurfer.atomic.vaadin.views;
 
-import com.angrysurfer.user.dto.UserDTO;
+import com.angrysurfer.atomic.user.UserDTO;
 import com.angrysurfer.atomic.vaadin.layout.MainLayout;
 import com.angrysurfer.atomic.vaadin.service.UserServiceClient;
 import com.vaadin.flow.component.avatar.Avatar;

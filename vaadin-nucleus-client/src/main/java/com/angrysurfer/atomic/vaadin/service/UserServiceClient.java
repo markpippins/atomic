@@ -2,24 +2,18 @@ package com.angrysurfer.atomic.vaadin.service;
 
 import java.util.Map;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 
-import com.angrysurfer.broker.api.*;
-import com.angrysurfer.user.dto.UserDTO;
-import org.springframework.core.ParameterizedTypeReference;
-
+import com.angrysurfer.atomic.broker.api.ServiceResponse;
+import com.angrysurfer.atomic.user.UserDTO;
 import com.vaadin.flow.server.VaadinSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
 public class UserServiceClient {
-
-    private static final Logger log = LoggerFactory.getLogger(UserServiceClient.class);
 
     private BrokerClient brokerClient;
     private static final String SESSION_USER_KEY = "currentUser";

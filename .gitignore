@@ -69,7 +69,6 @@ vaadin-nucleus-client/mvnw.cmd
 vaadin-nucleus-client/.gitattributes
 user-api/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
 .vscode/launch.json
-broker-service-api/pom.xml
 broker-service-spi/.settings/org.eclipse.jdt.apt.core.prefs
 broker-service-spi/.settings/org.eclipse.jdt.core.prefs
 broker-service-api/.settings/org.eclipse.jdt.apt.core.prefs
@@ -132,3 +131,8 @@ file-api/target/maven-status/maven-compiler-plugin/compile/default-compile/creat
 file-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 file-api/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
 file-api/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+login-service/target/maven-archiver/pom.properties
+login-service/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+login-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+login-service/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+login-service/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
