@@ -17,6 +17,7 @@
         <module>broker-gateway</module>
         <module>file-service-api</module>
         <module>file-service</module>
+        <module>export-service</module>
         <module>login-service</module>
         <module>user-api</module>
         <module>user-service</module>
@@ -61,6 +62,11 @@
         <dependency>
             <groupId>com.angrysurfer.atomic</groupId>
             <artifactId>file-service</artifactId>
+                <version>${project.version}</version>
+        </dependency>
+                <dependency>
+            <groupId>com.angrysurfer.atomic</groupId>
+            <artifactId>export-service</artifactId>
                 <version>${project.version}</version>
         </dependency>
             <dependency>
