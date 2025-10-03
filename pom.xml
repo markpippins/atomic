@@ -15,6 +15,8 @@
         <module>broker-service-spi</module>
         <module>broker-service</module>
         <module>broker-gateway</module>
+        <module>file-service-api</module>
+        <module>file-service</module>
         <module>login-service</module>
         <module>user-api</module>
         <module>user-service</module>
@@ -27,7 +29,7 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <spring.boot.version>3.3.5</spring.boot.version>
-        <lombok.version>1.18.36</lombok.version>
+        <lombok.version>1.18.38</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -51,6 +53,16 @@
                 <artifactId>broker-service-spi</artifactId>
                 <version>${project.version}</version>
             </dependency>
+                    <dependency>
+            <groupId>com.angrysurfer.atomic</groupId>
+            <artifactId>file-service-api</artifactId>
+                <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.angrysurfer.atomic</groupId>
+            <artifactId>file-service</artifactId>
+                <version>${project.version}</version>
+        </dependency>
             <dependency>
                 <groupId>com.angrysurfer.atomic</groupId>
                 <artifactId>user-api</artifactId>
