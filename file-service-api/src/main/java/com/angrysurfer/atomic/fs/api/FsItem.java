@@ -1,20 +1,19 @@
-package com.angrysurfer.file;
+package com.angrysurfer.atomic.fs.api;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
-public class FileDescriptor {
-
+@Data
+@NoArgsConstructor
+public class FsItem {
 
     private String name;
-    private String path;
     private String type;
-    private String size;
-    private String lastModified;
+    private long size;
+    private double lastModified;
     private String lastModifiedDate;
     private String url;
     private String thumbnailUrl;
     private String deleteUrl;
     private String deleteType;
-    
-
 }
