@@ -15,6 +15,9 @@ public class FileStorageProperties {
     @Value("${file.log-dir}")
     private String logDir;
 
+    @Value("${file.temp-dir}")
+    private String tempDir;
+
     public String getIncomingDir() {
         return incomingDir;
     }
@@ -25,5 +28,9 @@ public class FileStorageProperties {
 
     public String getLogDir() {
         return logDir;
+    }
+
+    public String getTempDir() {
+        return tempDir;
     }
 }

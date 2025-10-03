@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.angrysurfer.atomic.broker.BrokerService;
+import com.angrysurfer.atomic.broker.Broker;
 import com.angrysurfer.atomic.broker.api.ServiceRequest;
 import com.angrysurfer.atomic.broker.api.ServiceResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,9 +27,9 @@ public class UploadController {
     private static final Logger log = LoggerFactory.getLogger(UploadController.class);
 
     private final UploadService uploadService;
-    private final BrokerService broker;
+    private final Broker broker;
 
-    public UploadController(UploadService uploadService, BrokerService broker) {
+    public UploadController(UploadService uploadService, Broker broker) {
         this.uploadService = uploadService;
         this.broker = broker;
         log.info("UploadController initialized");
