@@ -1,24 +1,18 @@
 package com.angrysurfer.atomic.user;
 
+import lombok.Data;
 
+@Data
 public class PostDTO extends AbstractContentDTO {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	private Long forumId;
-	
-	public PostDTO() {
-		super();
-	}
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	public Long getForumId() {
-		return forumId;
-	}
+    private Long forumId;
 
-	public void setForumId(Long forumId) {
-		this.forumId = forumId;
-	}
+    public PostDTO() {
+        super();
+    }
 }

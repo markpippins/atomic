@@ -3,85 +3,17 @@ package com.angrysurfer.atomic.user;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
 public abstract class AbstractContentDTO implements Serializable {
 
     /**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getPostedBy() {
-		return postedBy;
-	}
-
-	public void setPostedBy(String postedBy) {
-		this.postedBy = postedBy;
-	}
-
-	public String getPostedTo() {
-		return postedTo;
-	}
-
-	public void setPostedTo(String postedTo) {
-		this.postedTo = postedTo;
-	}
-
-	public String getPostedDate() {
-		return postedDate;
-	}
-
-	public void setPostedDate(String postedDate) {
-		this.postedDate = postedDate;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public Long getRating() {
-		return rating;
-	}
-
-	public void setRating(Long rating) {
-		this.rating = rating;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public Set<CommentDTO> getReplies() {
-		return replies;
-	}
-
-	public void setReplies(Set<CommentDTO> replies) {
-		this.replies = replies;
-	}
-
-	public Set<ReactionDTO> getReactions() {
-		return reactions;
-	}
-
-	public void setReactions(Set<ReactionDTO> reactions) {
-		this.reactions = reactions;
-	}
 
 	private Long id;
 
