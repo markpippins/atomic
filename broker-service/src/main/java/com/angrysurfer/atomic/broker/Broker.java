@@ -30,9 +30,9 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 
 @Component
-public class BrokerService {
+public class Broker {
 
-    private static final Logger log = LoggerFactory.getLogger(BrokerService.class);
+    private static final Logger log = LoggerFactory.getLogger(Broker.class);
 
     private final ApplicationContext ctx;
     private final ObjectMapper objectMapper;
@@ -44,7 +44,7 @@ public class BrokerService {
 
     private final Map<MethodKey, Method> methodCache = new ConcurrentHashMap<>();
 
-    public BrokerService(ApplicationContext ctx, ObjectMapper objectMapper, Validator validator) {
+    public Broker(ApplicationContext ctx, ObjectMapper objectMapper, Validator validator) {
         this.ctx = ctx;
         this.objectMapper = objectMapper;
         this.validator = validator;

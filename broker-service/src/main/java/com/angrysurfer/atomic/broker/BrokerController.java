@@ -20,10 +20,10 @@ public class BrokerController {
 
     private static final Logger log = LoggerFactory.getLogger(BrokerController.class);
 
-    private final BrokerService service;
+    private final Broker broker;
 
-    public BrokerController(BrokerService service) {
-        this.service = service;
+    public BrokerController(Broker broker) {
+        this.broker = broker;
         log.info("BrokerController initialized");
     }
 
@@ -34,7 +34,7 @@ public class BrokerController {
         ServiceRequest request = new ServiceRequest("testBroker", "test",
                 Collections.emptyMap(), "test-request");
 
-        ServiceResponse<?> response = service.submit(request);
+        ServiceResponse<?> response = broker.submit(request);
 
         if (response.isOk()) {
             return ResponseEntity.ok(response);
@@ -49,7 +49,7 @@ public class BrokerController {
     public ResponseEntity<?> submitRequest(@RequestBody ServiceRequest request) {
         log.debug("Received request: {}", request);
 
-        ServiceResponse<?> response = service.submit(request);
+        ServiceResponse<?> response = broker.submit(request);
 
         if (response.isOk()) {
             return ResponseEntity.ok(response);
