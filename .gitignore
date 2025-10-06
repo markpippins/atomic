@@ -158,3 +158,4 @@ file-service-api/target/maven-status/maven-compiler-plugin/testCompile/default-t
 file-service-api/.factorypath
 file-service-api/.classpath
 file-service/.classpath
+broker-gateway/target/broker-gateway-1.0.0-SNAPSHOT.jar.original
