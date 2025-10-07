@@ -1,32 +1,32 @@
 package com.angrysurfer.shrapnel.service;
 
-import com.angrysurfer.shrapnel.service.model.export.DBDataSource;
-import com.angrysurfer.shrapnel.service.model.export.DBExport;
-import com.angrysurfer.shrapnel.service.model.export.DBField;
-import com.angrysurfer.shrapnel.service.model.export.DBFieldType;
-import com.angrysurfer.shrapnel.service.model.sqlgen.Query;
-import com.angrysurfer.shrapnel.service.model.style.StyleType;
-import com.angrysurfer.shrapnel.service.model.style.StyleTypeEnum;
-import com.angrysurfer.shrapnel.service.repository.sqlgen.*;
-import com.angrysurfer.shrapnel.service.repository.style.StyleTypeRepository;
-import com.angrysurfer.shrapnel.field.FieldTypeEnum;
-import com.angrysurfer.shrapnel.service.model.sqlgen.JoinTypeEnum;
-import com.angrysurfer.shrapnel.service.model.sqlgen.JoinType;
-import com.angrysurfer.shrapnel.service.repository.export.DataSourceRepository;
-import com.angrysurfer.shrapnel.service.repository.export.ExportRepository;
-import com.angrysurfer.shrapnel.service.repository.export.FieldRepository;
-import com.angrysurfer.shrapnel.service.repository.export.FieldTypeRepository;
-import com.angrysurfer.shrapnel.service.repository.sqlgen.*;
-import com.angrysurfer.shrapnel.service.repository.style.PdfPageSizeRepository;
-import org.springframework.stereotype.Service;
-
-import jakarta.annotation.Resource;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.angrysurfer.shrapnel.field.FieldTypeEnum;
+import com.angrysurfer.shrapnel.model.DBExport;
+import com.angrysurfer.shrapnel.model.db.DBDataSource;
+import com.angrysurfer.shrapnel.model.db.DBField;
+import com.angrysurfer.shrapnel.model.db.DBFieldType;
+import com.angrysurfer.shrapnel.model.sqlgen.JoinType;
+import com.angrysurfer.shrapnel.model.sqlgen.JoinTypeEnum;
+import com.angrysurfer.shrapnel.model.sqlgen.Query;
+import com.angrysurfer.shrapnel.model.style.StyleType;
+import com.angrysurfer.shrapnel.model.style.StyleTypeEnum;
+import com.angrysurfer.shrapnel.repository.ExportRepository;
+import com.angrysurfer.shrapnel.repository.db.DataSourceRepository;
+import com.angrysurfer.shrapnel.repository.db.FieldRepository;
+import com.angrysurfer.shrapnel.repository.db.FieldTypeRepository;
+import com.angrysurfer.shrapnel.repository.sqlgen.ColumnRepository;
+import com.angrysurfer.shrapnel.repository.sqlgen.JoinRepository;
+import com.angrysurfer.shrapnel.repository.sqlgen.JoinTypeRepository;
+import com.angrysurfer.shrapnel.repository.sqlgen.QueryRepository;
+import com.angrysurfer.shrapnel.repository.sqlgen.TableRepository;
+import com.angrysurfer.shrapnel.repository.style.PdfPageSizeRepository;
+import com.angrysurfer.shrapnel.repository.style.StyleTypeRepository;
 
 @Service
 public class ComponentsService {

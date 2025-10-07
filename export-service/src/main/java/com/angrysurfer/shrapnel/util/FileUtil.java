@@ -1,13 +1,5 @@
 package com.angrysurfer.shrapnel.util;
 
-import com.angrysurfer.shrapnel.PropertyConfig;
-import com.angrysurfer.shrapnel.IExport;
-import com.angrysurfer.shrapnel.component.writer.CsvDataWriter;
-import com.angrysurfer.shrapnel.factory.IExportFactory;
-import com.angrysurfer.shrapnel.exception.ShrapnelException;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.ByteArrayResource;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,6 +13,16 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Properties;
+
+import org.springframework.core.io.ByteArrayResource;
+
+import com.angrysurfer.shrapnel.IExport;
+import com.angrysurfer.shrapnel.PropertyConfig;
+import com.angrysurfer.shrapnel.component.writer.CsvDataWriter;
+import com.angrysurfer.shrapnel.exception.ShrapnelException;
+import com.angrysurfer.shrapnel.factory.IExportFactory;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class FileUtil {

@@ -1,4 +1,4 @@
-package com.angrysurfer.shrapnel.export;
+package com.angrysurfer.shrapnel;
 
 import java.util.List;
 import java.util.Map;

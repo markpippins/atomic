@@ -1,38 +1,22 @@
 package com.angrysurfer.shrapnel;
 
-import com.angrysurfer.shrapnel.service.model.sqlgen.Column;
-import com.angrysurfer.shrapnel.service.model.sqlgen.Join;
-import com.angrysurfer.shrapnel.service.model.sqlgen.Query;
-import com.angrysurfer.shrapnel.service.model.sqlgen.Table;
-import com.angrysurfer.shrapnel.service.model.style.Style;
-import com.angrysurfer.shrapnel.service.model.style.StyleTypeEnum;
-import com.angrysurfer.shrapnel.service.repository.sqlgen.ColumnRepository;
-import com.angrysurfer.shrapnel.service.repository.sqlgen.JoinRepository;
-import com.angrysurfer.shrapnel.service.repository.sqlgen.QueryRepository;
-import com.angrysurfer.shrapnel.service.repository.sqlgen.TableRepository;
-import com.angrysurfer.shrapnel.service.repository.style.StyleRepository;
-import com.angrysurfer.shrapnel.service.repository.style.StyleTypeRepository;
-import com.angrysurfer.shrapnel.field.FieldTypeEnum;
-import com.angrysurfer.shrapnel.service.ComponentsService;
-import com.angrysurfer.shrapnel.service.model.export.DBDataSource;
-import com.angrysurfer.shrapnel.service.model.export.DBExport;
-import com.angrysurfer.shrapnel.service.model.export.DBField;
-import com.angrysurfer.shrapnel.service.model.sqlgen.JoinTypeEnum;
-import com.angrysurfer.shrapnel.service.model.style.PdfPageSize;
-import com.angrysurfer.shrapnel.service.repository.export.DataSourceRepository;
-import com.angrysurfer.shrapnel.service.repository.export.ExportRepository;
-import com.angrysurfer.shrapnel.service.repository.export.FieldRepository;
-import com.angrysurfer.shrapnel.service.repository.export.FieldTypeRepository;
-import com.angrysurfer.shrapnel.service.repository.style.PdfPageSizeRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import jakarta.annotation.Resource;
-import java.util.Arrays;
+import com.angrysurfer.shrapnel.repository.ExportRepository;
+import com.angrysurfer.shrapnel.repository.db.DataSourceRepository;
+import com.angrysurfer.shrapnel.repository.db.FieldRepository;
+import com.angrysurfer.shrapnel.repository.db.FieldTypeRepository;
+import com.angrysurfer.shrapnel.repository.sqlgen.ColumnRepository;
+import com.angrysurfer.shrapnel.repository.sqlgen.JoinRepository;
+import com.angrysurfer.shrapnel.repository.sqlgen.QueryRepository;
+import com.angrysurfer.shrapnel.repository.sqlgen.TableRepository;
+import com.angrysurfer.shrapnel.repository.style.PdfPageSizeRepository;
+import com.angrysurfer.shrapnel.repository.style.StyleRepository;
+import com.angrysurfer.shrapnel.repository.style.StyleTypeRepository;
+import com.angrysurfer.shrapnel.service.ComponentsService;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component

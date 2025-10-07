@@ -1,13 +1,14 @@
 package com.angrysurfer.shrapnel.service;
 
-import com.angrysurfer.shrapnel.service.validation.IRequestValidation;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.angrysurfer.shrapnel.validation.IRequestValidation;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import java.util.HashMap;
-import java.util.Map;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter

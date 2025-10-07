@@ -4,12 +4,12 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import com.angrysurfer.shrapnel.field.IField;
-import com.angrysurfer.shrapnel.property.PropertyMapAccessor;
 import com.angrysurfer.shrapnel.Export;
 import com.angrysurfer.shrapnel.IExport;
+import com.angrysurfer.shrapnel.field.IField;
+import com.angrysurfer.shrapnel.model.DBExport;
+import com.angrysurfer.shrapnel.property.PropertyMapAccessor;
 import com.angrysurfer.shrapnel.service.Request;
-import com.angrysurfer.shrapnel.service.model.export.DBExport;
 import com.itextpdf.kernel.geom.PageSize;
 
 import lombok.Getter;

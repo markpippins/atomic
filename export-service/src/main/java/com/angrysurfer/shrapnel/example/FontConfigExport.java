@@ -1,5 +1,7 @@
 package com.angrysurfer.shrapnel.example;
 
+import static com.angrysurfer.shrapnel.component.writer.DataWriter.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +15,12 @@ import java.util.stream.Collectors;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.springframework.stereotype.Component;
 
+import com.angrysurfer.shrapnel.Export;
 import com.angrysurfer.shrapnel.PropertyConfig;
+import com.angrysurfer.shrapnel.component.writer.style.FontSource;
+import com.angrysurfer.shrapnel.component.writer.style.adapter.StyleAdapter;
+import com.angrysurfer.shrapnel.component.writer.style.provider.ZebraStyleProvider;
+import com.angrysurfer.shrapnel.factory.IExportFactory;
 import com.angrysurfer.shrapnel.field.Field;
 import com.angrysurfer.shrapnel.field.FieldTypeEnum;
 import com.angrysurfer.shrapnel.field.IField;
@@ -22,12 +29,6 @@ import com.angrysurfer.shrapnel.field.IValueFormatter;
 import com.angrysurfer.shrapnel.filter.IDataFilter;
 import com.angrysurfer.shrapnel.property.IPropertyAccessor;
 import com.angrysurfer.shrapnel.writer.IDataWriter;
-import com.angrysurfer.shrapnel.Export;
-import static com.angrysurfer.shrapnel.component.writer.DataWriter.EMPTY_STRING;
-import com.angrysurfer.shrapnel.component.writer.style.FontSource;
-import com.angrysurfer.shrapnel.component.writer.style.adapter.StyleAdapter;
-import com.angrysurfer.shrapnel.component.writer.style.provider.ZebraStyleProvider;
-import com.angrysurfer.shrapnel.factory.IExportFactory;
 import com.itextpdf.kernel.colors.Color;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.font.PdfFont;

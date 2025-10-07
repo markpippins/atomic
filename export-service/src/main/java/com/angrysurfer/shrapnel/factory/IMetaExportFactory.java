@@ -1,8 +1,8 @@
 package com.angrysurfer.shrapnel.factory;
 
-import com.angrysurfer.shrapnel.service.Request;
-
 import java.util.List;
+
+import com.angrysurfer.shrapnel.service.Request;
 
 public interface IMetaExportFactory {
 

@@ -1,7 +1,8 @@
-package com.angrysurfer.shrapnel.export;
+package com.angrysurfer.shrapnel;
 
 import com.angrysurfer.shrapnel.field.Fields;
 import com.angrysurfer.shrapnel.field.IFields;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
