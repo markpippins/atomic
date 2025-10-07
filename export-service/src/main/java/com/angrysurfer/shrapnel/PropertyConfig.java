@@ -1,6 +1,6 @@
 package com.angrysurfer.shrapnel;
 
-import com.angrysurfer.shrapnel.export.util.FileUtil;
+import com.angrysurfer.shrapnel.util.FileUtil;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
