@@ -1,15 +1,21 @@
 package com.angrysurfer.shrapnel.component.property;
 
-import com.angrysurfer.shrapnel.exception.ShrapnelException;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.beanutils.PropertyUtils;
-
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.apache.commons.beanutils2.PropertyUtils;
+
+import com.angrysurfer.shrapnel.exception.ShrapnelException;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class PropertyUtilsPropertyAccessor implements IPropertyAccessor {
