@@ -19,6 +19,9 @@
 *.tar.gz
 *.rar
 
+.classpath
+.factorypath
+.project
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -159,3 +162,29 @@ file-service-api/.factorypath
 file-service-api/.classpath
 file-service/.classpath
 broker-gateway/target/broker-gateway-1.0.0-SNAPSHOT.jar.original
+shrapnel/target/maven-archiver/pom.properties
+shrapnel/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+shrapnel/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+export-service/target/classes/application.properties
+export-service/target/classes/shrapnel.properties
+export-service/target/classes/fonts/calibri.ttf
+export-service/target/classes/fonts/calibrib.ttf
+export-service/target/classes/fonts/calibrii.ttf
+export-service/target/classes/fonts/calibril.ttf
+export-service/target/classes/fonts/calibrili.ttf
+export-service/target/classes/fonts/calibriz.ttf
+export-service/target/classes/sql/get-forums.sql
+export-service/target/classes/sql/get-models.sql
+export-service/target/classes/sql/get-users.sql
+export-service/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+export-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+shrapnel/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+shrapnel/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+shrapnel-data/target/maven-archiver/pom.properties
+shrapnel-data/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+shrapnel-data/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+export-service/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+export-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+export-service/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+export-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+export-service/.classpath
