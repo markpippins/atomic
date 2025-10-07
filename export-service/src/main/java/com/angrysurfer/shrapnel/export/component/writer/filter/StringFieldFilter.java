@@ -1,10 +1,8 @@
-package com.angrysurfer.shrapnel.export.component.writer.filter;
+package com.angrysurfer.shrapnel.component.filter;
 
-import com.angrysurfer.shrapnel.export.component.field.FieldTypeEnum;
-import com.angrysurfer.shrapnel.export.component.field.IField;
-import com.angrysurfer.shrapnel.export.component.writer.DataWriter;
-import com.angrysurfer.shrapnel.export.component.writer.IDataWriter;
-import com.angrysurfer.shrapnel.export.component.property.IPropertyAccessor;
+import com.angrysurfer.shrapnel.component.field.IField;
+import com.angrysurfer.shrapnel.component.writer.IDataWriter;
+import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -47,7 +45,7 @@ public class StringFieldFilter implements IDataFilter {
                         propertyValue = accessor.getString(item, propertyName);
                 }
 
-                if ((Objects.isNull(propertyValue) && !asCriteriaString(criteria).equals(DataWriter.EMPTY_STRING)) ||
+                if ((Objects.isNull(propertyValue) && !asCriteriaString(criteria).equals("")) ||
                         !compare(propertyValue, criteria))
                     result[0] = false;
 

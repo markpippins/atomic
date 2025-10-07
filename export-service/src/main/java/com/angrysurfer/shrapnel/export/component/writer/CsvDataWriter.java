@@ -1,12 +1,13 @@
 package com.angrysurfer.shrapnel.export.component.writer;
 
-import com.angrysurfer.shrapnel.export.component.field.IField;
-import com.angrysurfer.shrapnel.export.service.exception.ExportRequestProcessingException;
+import com.angrysurfer.shrapnel.component.writer.IDataWriter;
+import com.angrysurfer.shrapnel.component.field.IField;
+import com.angrysurfer.shrapnel.exception.ShrapnelException;
 import com.angrysurfer.shrapnel.export.util.FileUtil;
-import com.angrysurfer.shrapnel.export.component.property.IPropertyAccessor;
-import com.angrysurfer.shrapnel.export.component.property.PropertyUtilsPropertyAccessor;
-import com.angrysurfer.shrapnel.export.component.writer.filter.DataFilters;
-import com.angrysurfer.shrapnel.export.component.writer.filter.IDataFilters;
+import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
+import com.angrysurfer.shrapnel.component.property.PropertyUtilsPropertyAccessor;
+import com.angrysurfer.shrapnel.component.filter.DataFilters;
+import com.angrysurfer.shrapnel.component.filter.IDataFilters;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -67,13 +68,13 @@ public class CsvDataWriter extends DataWriter implements IDataWriter {
                 try {
                     fileWriter.write(line.toString().concat("\n"));
                 } catch (IOException e) {
-                    throw new ExportRequestProcessingException(e.getMessage(), e);
+throw new ShrapnelException(e.getMessage(), e);
                 }
             });
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
-            throw new ExportRequestProcessingException(e.getMessage(), e);
+            throw new ShrapnelException(e.getMessage(), e);
         }
     }
 }

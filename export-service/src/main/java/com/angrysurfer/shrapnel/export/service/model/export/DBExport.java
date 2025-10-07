@@ -4,7 +4,7 @@ import com.angrysurfer.shrapnel.PropertyConfig;
 import com.angrysurfer.shrapnel.export.service.model.style.PdfPageSize;
 import com.angrysurfer.shrapnel.export.service.model.style.Style;
 import com.angrysurfer.shrapnel.export.service.model.style.StyleTypeEnum;
-import com.angrysurfer.shrapnel.export.component.field.IField;
+import com.angrysurfer.shrapnel.component.field.IField;
 import lombok.Getter;
 import lombok.Setter;
 

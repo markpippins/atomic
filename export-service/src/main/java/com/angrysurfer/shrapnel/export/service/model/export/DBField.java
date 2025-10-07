@@ -1,7 +1,7 @@
 package com.angrysurfer.shrapnel.export.service.model.export;
 
-import com.angrysurfer.shrapnel.export.component.field.FieldTypeEnum;
-import com.angrysurfer.shrapnel.export.component.field.IField;
+import com.angrysurfer.shrapnel.component.field.FieldTypeEnum;
+import com.angrysurfer.shrapnel.component.field.IField;
 import lombok.Getter;
 import lombok.Setter;
 

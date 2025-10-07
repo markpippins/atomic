@@ -2,7 +2,7 @@ package com.angrysurfer.shrapnel.export.util;
 
 import com.angrysurfer.shrapnel.export.IExport;
 import com.angrysurfer.shrapnel.export.component.writer.ExcelDataWriter;
-import com.angrysurfer.shrapnel.export.service.exception.ExportRequestProcessingException;
+import com.angrysurfer.shrapnel.exception.ShrapnelException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -52,7 +52,7 @@ public class ExcelUtil {
 			workbook.write(baos);
 			workbook.close();
 		} catch (IOException e) {
-			throw new ExportRequestProcessingException(e.getMessage(), e);
+			throw new ShrapnelException(e.getMessage(), e);
 		}
 		return baos;
 	}
@@ -65,9 +65,9 @@ public class ExcelUtil {
 			workbook.write(fos);
 			workbook.close();
 		} catch (FileNotFoundException e) {
-			throw new ExportRequestProcessingException(e.getMessage(), e);
+			throw new ShrapnelException(e.getMessage(), e);
 		} catch (IOException e) {
-			throw new ExportRequestProcessingException(e.getMessage(), e);
+			throw new ShrapnelException(e.getMessage(), e);
 		}
 
 		return outputFileName;

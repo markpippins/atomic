@@ -6,7 +6,7 @@ import com.angrysurfer.shrapnel.export.util.ExcelUtil;
 import com.angrysurfer.shrapnel.export.util.FileUtil;
 import com.angrysurfer.shrapnel.export.util.PdfUtil;
 import com.angrysurfer.shrapnel.export.IExport;
-import com.angrysurfer.shrapnel.export.service.exception.ExportRequestProcessingException;
+import com.angrysurfer.shrapnel.exception.ShrapnelException;
 import org.springframework.core.io.ByteArrayResource;
 
 import java.io.ByteArrayOutputStream;
@@ -103,7 +103,7 @@ public interface IExportsService {
 				       InvocationTargetException |
 				       InstantiationException |
 				       IllegalAccessException e) {
-			throw new ExportRequestProcessingException(e.getMessage(), e);
+			throw new ShrapnelException(e.getMessage(), e);
 		}
 		return export;
 	}

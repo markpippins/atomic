@@ -9,7 +9,7 @@ import java.util.Map;
 
 import com.angrysurfer.shrapnel.export.IExport;
 import com.angrysurfer.shrapnel.export.component.writer.PdfDataWriter;
-import com.angrysurfer.shrapnel.export.service.exception.ExportRequestProcessingException;
+import com.angrysurfer.shrapnel.exception.ShrapnelException;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfVersion;
@@ -50,7 +50,7 @@ public class PdfUtil {
             document.add(pdfRowWriter.getTable());
             document.close();
         } catch (IOException e) {
-            throw new ExportRequestProcessingException(e.getMessage(), e);
+            throw new ShrapnelException(e.getMessage(), e);
         }
         return outputFileName;
     }
@@ -64,7 +64,7 @@ public class PdfUtil {
 		            document.add(pdfRowWriter.getTable());
 		            document.close();
 		        } catch (FileNotFoundException e) {
-		            throw new ExportRequestProcessingException(e.getMessage(), e);
+		            throw new ShrapnelException(e.getMessage(), e);
 		        }		return outputFileName;
 	}
 

@@ -1,11 +1,12 @@
 package com.angrysurfer.shrapnel.export.component.writer;
 
-import com.angrysurfer.shrapnel.export.component.field.IField;
+import com.angrysurfer.shrapnel.component.writer.IDataWriter;
+import com.angrysurfer.shrapnel.component.field.IField;
 import com.angrysurfer.shrapnel.export.util.FileUtil;
-import com.angrysurfer.shrapnel.export.component.property.IPropertyAccessor;
-import com.angrysurfer.shrapnel.export.component.property.PropertyUtilsPropertyAccessor;
-import com.angrysurfer.shrapnel.export.component.writer.filter.DataFilters;
-import com.angrysurfer.shrapnel.export.component.writer.filter.IDataFilters;
+import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
+import com.angrysurfer.shrapnel.component.property.PropertyUtilsPropertyAccessor;
+import com.angrysurfer.shrapnel.component.filter.DataFilters;
+import com.angrysurfer.shrapnel.component.filter.IDataFilters;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;

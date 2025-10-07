@@ -1,5 +1,6 @@
 package com.angrysurfer.shrapnel.export.service.exception;
 
+import com.angrysurfer.shrapnel.exception.ShrapnelException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class ExportExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(sb.toString(), new HttpHeaders(), HttpStatus.BAD_REQUEST);
 	}
 
-	@ExceptionHandler({ ExportRequestProcessingException.class, ExportConfigurationException.class })
+	@ExceptionHandler({ ShrapnelException.class, ExportConfigurationException.class })
 	public ResponseEntity< String > handleRequestProcessingException(Exception e) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(e.getMessage());

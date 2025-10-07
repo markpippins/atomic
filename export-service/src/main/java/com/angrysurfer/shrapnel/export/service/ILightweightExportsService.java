@@ -1,6 +1,6 @@
 package com.angrysurfer.shrapnel.export.service;
 
-import com.angrysurfer.shrapnel.export.component.field.IField;
+import com.angrysurfer.shrapnel.component.field.IField;
 import com.angrysurfer.shrapnel.export.component.writer.ExcelDataWriter;
 import com.angrysurfer.shrapnel.export.component.writer.PdfDataWriter;
 

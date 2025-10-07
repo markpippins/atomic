@@ -1,10 +1,11 @@
 package com.angrysurfer.shrapnel.export.component.writer;
 
-import com.angrysurfer.shrapnel.export.component.IValueFormatter;
-import com.angrysurfer.shrapnel.export.component.field.IField;
-import com.angrysurfer.shrapnel.export.service.exception.ExportRequestProcessingException;
-import com.angrysurfer.shrapnel.export.component.writer.filter.DataFilters;
-import com.angrysurfer.shrapnel.export.component.writer.filter.IDataFilters;
+import com.angrysurfer.shrapnel.component.writer.IDataWriter;
+import com.angrysurfer.shrapnel.component.IValueFormatter;
+import com.angrysurfer.shrapnel.component.field.IField;
+import com.angrysurfer.shrapnel.exception.ShrapnelException;
+import com.angrysurfer.shrapnel.component.filter.DataFilters;
+import com.angrysurfer.shrapnel.component.filter.IDataFilters;
 import com.angrysurfer.shrapnel.export.component.writer.style.provider.CombinedStyleProvider;
 import com.angrysurfer.shrapnel.export.component.writer.style.provider.IExcelStyleProvider;
 import lombok.Getter;
@@ -136,7 +137,7 @@ public class ExcelDataWriter extends DataWriter implements IDataWriter {
             log.error(e.getMessage(), e);
             if (DEBUG)
                 writeError(e);
-            throw new ExportRequestProcessingException(e.getMessage(), e);
+            throw new ShrapnelException(e.getMessage(), e);
         }
     }
 

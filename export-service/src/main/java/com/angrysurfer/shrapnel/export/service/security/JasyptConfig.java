@@ -1,6 +1,6 @@
 package com.angrysurfer.shrapnel.export.service.security;
 
-import com.angrysurfer.shrapnel.export.service.exception.ExportRequestProcessingException;
+import com.angrysurfer.shrapnel.exception.ShrapnelException;
 import lombok.extern.slf4j.Slf4j;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
@@ -47,7 +47,7 @@ public class JasyptConfig {
 		}
 		catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new ExportRequestProcessingException(e.getMessage(), e);
+			throw new ShrapnelException(e.getMessage(), e);
 		}
 
 		try {

@@ -4,7 +4,7 @@ import com.angrysurfer.shrapnel.PropertyConfig;
 import com.angrysurfer.shrapnel.export.IExport;
 import com.angrysurfer.shrapnel.export.component.writer.CsvDataWriter;
 import com.angrysurfer.shrapnel.export.factory.IExportFactory;
-import com.angrysurfer.shrapnel.export.service.exception.ExportRequestProcessingException;
+import com.angrysurfer.shrapnel.exception.ShrapnelException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
 
@@ -45,7 +45,7 @@ public class FileUtil {
 			}
 
 		if (!safe)
-			throw new ExportRequestProcessingException(String.format("%s is in use by another process of there is a permissions error.", filename), thrown);
+			throw new ShrapnelException(String.format("%s is in use by another process of there is a permissions error.", filename), thrown);
 
 		return safe;
 	}
@@ -58,7 +58,7 @@ public class FileUtil {
 			result = new ByteArrayResource(Files.readAllBytes(path));
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
-			throw new ExportRequestProcessingException(e.getMessage(), e);
+			throw new ShrapnelException(e.getMessage(), e);
 		}
 		return result;
 	}
@@ -121,7 +121,7 @@ public class FileUtil {
 			properties.load(input);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new ExportRequestProcessingException(e.getMessage(), e);
+			throw new ShrapnelException(e.getMessage(), e);
 		}
 		return properties;
 	}
@@ -131,7 +131,7 @@ public class FileUtil {
 			return Files.readString(Path.of(PropertyConfig.getInstance().getProperty(PropertyConfig.SQL_FOLDER) + filename + ".sql"));
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
-			throw new ExportRequestProcessingException(e.getMessage(), e);
+			throw new ShrapnelException(e.getMessage(), e);
 		}
 	}
 
