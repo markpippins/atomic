@@ -3,7 +3,7 @@ package com.angrysurfer.shrapnel.export.service;
 import com.angrysurfer.shrapnel.export.util.ExcelUtil;
 import com.angrysurfer.shrapnel.export.util.FileUtil;
 import com.angrysurfer.shrapnel.export.util.PdfUtil;
-import com.angrysurfer.shrapnel.component.field.IField;
+import com.angrysurfer.shrapnel.field.IField;
 import com.angrysurfer.shrapnel.export.component.writer.CsvDataWriter;
 import com.angrysurfer.shrapnel.export.component.writer.ExcelDataWriter;
 import com.angrysurfer.shrapnel.export.component.writer.PdfDataWriter;

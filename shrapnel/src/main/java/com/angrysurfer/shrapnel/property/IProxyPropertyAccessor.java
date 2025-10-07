@@ -1,4 +1,4 @@
-package com.angrysurfer.shrapnel.component.property;
+package com.angrysurfer.shrapnel.property;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

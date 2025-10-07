@@ -1,4 +1,4 @@
-package com.angrysurfer.shrapnel.component.property;
+package com.angrysurfer.shrapnel.property;
 
 import lombok.extern.slf4j.Slf4j;
 

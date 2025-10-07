@@ -9,7 +9,7 @@ import com.angrysurfer.shrapnel.export.service.model.style.StyleType;
 import com.angrysurfer.shrapnel.export.service.model.style.StyleTypeEnum;
 import com.angrysurfer.shrapnel.export.service.repository.sqlgen.*;
 import com.angrysurfer.shrapnel.export.service.repository.style.StyleTypeRepository;
-import com.angrysurfer.shrapnel.component.field.FieldTypeEnum;
+import com.angrysurfer.shrapnel.field.FieldTypeEnum;
 import com.angrysurfer.shrapnel.export.service.model.sqlgen.JoinTypeEnum;
 import com.angrysurfer.shrapnel.export.service.model.sqlgen.JoinType;
 import com.angrysurfer.shrapnel.export.service.repository.export.DataSourceRepository;

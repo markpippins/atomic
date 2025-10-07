@@ -6,12 +6,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.angrysurfer.shrapnel.component.field.IField;
-import com.angrysurfer.shrapnel.component.filter.DataFilters;
-import com.angrysurfer.shrapnel.component.filter.IDataFilters;
-import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
-import com.angrysurfer.shrapnel.component.property.PropertyUtilsPropertyAccessor;
-import com.angrysurfer.shrapnel.component.writer.IDataWriter;
+import com.angrysurfer.shrapnel.field.IField;
+import com.angrysurfer.shrapnel.filter.DataFilters;
+import com.angrysurfer.shrapnel.filter.IDataFilters;
+import com.angrysurfer.shrapnel.property.IPropertyAccessor;
+import com.angrysurfer.shrapnel.property.PropertyUtilsPropertyAccessor;
+import com.angrysurfer.shrapnel.writer.IDataWriter;
 import com.angrysurfer.shrapnel.exception.ShrapnelException;
 import com.angrysurfer.shrapnel.export.util.FileUtil;
 

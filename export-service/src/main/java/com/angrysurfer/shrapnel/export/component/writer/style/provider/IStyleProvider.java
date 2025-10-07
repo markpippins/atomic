@@ -1,6 +1,6 @@
 package com.angrysurfer.shrapnel.export.component.writer.style.provider;
 
-import com.angrysurfer.shrapnel.component.field.IField;
+import com.angrysurfer.shrapnel.field.IField;
 import com.angrysurfer.shrapnel.export.component.writer.style.adapter.StyleAdapter;
 
 public interface IStyleProvider {

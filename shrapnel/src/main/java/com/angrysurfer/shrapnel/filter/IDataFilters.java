@@ -1,7 +1,7 @@
-package com.angrysurfer.shrapnel.component.filter;
+package com.angrysurfer.shrapnel.filter;
 
-import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
-import com.angrysurfer.shrapnel.component.writer.IDataWriter;
+import com.angrysurfer.shrapnel.property.IPropertyAccessor;
+import com.angrysurfer.shrapnel.writer.IDataWriter;
 
 import java.util.List;
 

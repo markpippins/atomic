@@ -1,7 +1,7 @@
 package com.angrysurfer.shrapnel.export.service.repository.mapping;
 
 import com.angrysurfer.shrapnel.export.service.model.export.DBExport;
-import com.angrysurfer.shrapnel.component.field.FieldTypeEnum;
+import com.angrysurfer.shrapnel.field.FieldTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;

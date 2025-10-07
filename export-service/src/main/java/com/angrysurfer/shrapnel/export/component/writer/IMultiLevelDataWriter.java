@@ -1,7 +1,7 @@
 package com.angrysurfer.shrapnel.export.component.writer;
 
-import com.angrysurfer.shrapnel.component.field.IField;
-import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
+import com.angrysurfer.shrapnel.field.IField;
+import com.angrysurfer.shrapnel.property.IPropertyAccessor;
 
 import java.util.List;
 

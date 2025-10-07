@@ -1,9 +1,9 @@
 package com.angrysurfer.shrapnel.export;
 
-import com.angrysurfer.shrapnel.component.field.IFields;
+import com.angrysurfer.shrapnel.field.IFields;
 import com.angrysurfer.shrapnel.export.component.writer.ExcelDataWriter;
 import com.angrysurfer.shrapnel.export.component.writer.PdfDataWriter;
-import com.angrysurfer.shrapnel.component.filter.IDataFilter;
+import com.angrysurfer.shrapnel.filter.IDataFilter;
 import com.itextpdf.kernel.geom.PageSize;
 
 import java.util.Map;

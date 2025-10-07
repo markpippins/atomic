@@ -1,4 +1,4 @@
-package com.angrysurfer.shrapnel.component.filter;
+package com.angrysurfer.shrapnel.filter;
 
 import java.util.ArrayList;
 

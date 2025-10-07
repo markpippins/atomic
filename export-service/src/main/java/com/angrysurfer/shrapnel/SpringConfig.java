@@ -12,7 +12,7 @@ import com.angrysurfer.shrapnel.export.service.repository.sqlgen.QueryRepository
 import com.angrysurfer.shrapnel.export.service.repository.sqlgen.TableRepository;
 import com.angrysurfer.shrapnel.export.service.repository.style.StyleRepository;
 import com.angrysurfer.shrapnel.export.service.repository.style.StyleTypeRepository;
-import com.angrysurfer.shrapnel.component.field.FieldTypeEnum;
+import com.angrysurfer.shrapnel.field.FieldTypeEnum;
 import com.angrysurfer.shrapnel.export.service.ComponentsService;
 import com.angrysurfer.shrapnel.export.service.model.export.DBDataSource;
 import com.angrysurfer.shrapnel.export.service.model.export.DBExport;

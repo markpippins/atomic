@@ -8,15 +8,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import com.angrysurfer.shrapnel.component.field.Field;
-import com.angrysurfer.shrapnel.component.field.FieldTypeEnum;
-import com.angrysurfer.shrapnel.component.field.IField;
-import com.angrysurfer.shrapnel.component.field.IValueCalculator;
-import com.angrysurfer.shrapnel.component.field.IValueFormatter;
-import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
-import com.angrysurfer.shrapnel.component.property.IProxyPropertyAccessor;
-import com.angrysurfer.shrapnel.component.property.PropertyUtilsPropertyAccessor;
-import com.angrysurfer.shrapnel.component.writer.IDataWriter;
+import com.angrysurfer.shrapnel.field.Field;
+import com.angrysurfer.shrapnel.field.FieldTypeEnum;
+import com.angrysurfer.shrapnel.field.IField;
+import com.angrysurfer.shrapnel.field.IValueCalculator;
+import com.angrysurfer.shrapnel.field.IValueFormatter;
+import com.angrysurfer.shrapnel.property.IPropertyAccessor;
+import com.angrysurfer.shrapnel.property.IProxyPropertyAccessor;
+import com.angrysurfer.shrapnel.property.PropertyUtilsPropertyAccessor;
+import com.angrysurfer.shrapnel.writer.IDataWriter;
 
 import lombok.Getter;
 import lombok.Setter;

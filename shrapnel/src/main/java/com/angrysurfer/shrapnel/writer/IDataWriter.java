@@ -1,12 +1,12 @@
-package com.angrysurfer.shrapnel.component.writer;
+package com.angrysurfer.shrapnel.writer;
 
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.angrysurfer.shrapnel.component.field.IField;
-import com.angrysurfer.shrapnel.component.field.IValueCalculator;
+import com.angrysurfer.shrapnel.field.IField;
+import com.angrysurfer.shrapnel.field.IValueCalculator;
 
 public interface IDataWriter {
 
