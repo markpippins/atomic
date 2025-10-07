@@ -1,7 +1,13 @@
 package com.angrysurfer.shrapnel.export.component.writer;
 
-import com.angrysurfer.shrapnel.component.IValueFormatter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 import com.angrysurfer.shrapnel.component.field.IField;
+import com.angrysurfer.shrapnel.component.field.IValueFormatter;
 import com.angrysurfer.shrapnel.component.filter.DataFilters;
 import com.angrysurfer.shrapnel.component.filter.IDataFilters;
 import com.angrysurfer.shrapnel.export.component.writer.style.provider.CombinedStyleProvider;
@@ -10,11 +16,10 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.UnitValue;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.*;
 
 @Slf4j
 @Getter

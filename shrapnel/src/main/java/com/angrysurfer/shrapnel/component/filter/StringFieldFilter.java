@@ -1,16 +1,17 @@
 package com.angrysurfer.shrapnel.component.filter;
 
-import com.angrysurfer.shrapnel.component.field.IField;
-import com.angrysurfer.shrapnel.component.writer.IDataWriter;
-import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+
+import com.angrysurfer.shrapnel.component.field.IField;
+import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
+import com.angrysurfer.shrapnel.component.writer.IDataWriter;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @Getter
 @Setter

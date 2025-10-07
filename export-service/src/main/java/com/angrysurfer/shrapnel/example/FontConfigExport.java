@@ -1,15 +1,29 @@
 package com.angrysurfer.shrapnel.example;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.springframework.stereotype.Component;
+
 import com.angrysurfer.shrapnel.PropertyConfig;
-import com.angrysurfer.shrapnel.export.Export;
-import com.angrysurfer.shrapnel.component.IValueCalculator;
-import com.angrysurfer.shrapnel.component.IValueFormatter;
 import com.angrysurfer.shrapnel.component.field.Field;
 import com.angrysurfer.shrapnel.component.field.FieldTypeEnum;
 import com.angrysurfer.shrapnel.component.field.IField;
+import com.angrysurfer.shrapnel.component.field.IValueCalculator;
+import com.angrysurfer.shrapnel.component.field.IValueFormatter;
+import com.angrysurfer.shrapnel.component.filter.IDataFilter;
 import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
 import com.angrysurfer.shrapnel.component.writer.IDataWriter;
-import com.angrysurfer.shrapnel.component.filter.IDataFilter;
+import com.angrysurfer.shrapnel.export.Export;
+import static com.angrysurfer.shrapnel.export.component.writer.DataWriter.EMPTY_STRING;
 import com.angrysurfer.shrapnel.export.component.writer.style.FontSource;
 import com.angrysurfer.shrapnel.export.component.writer.style.adapter.StyleAdapter;
 import com.angrysurfer.shrapnel.export.component.writer.style.provider.ZebraStyleProvider;
@@ -18,18 +32,10 @@ import com.itextpdf.kernel.colors.Color;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.geom.PageSize;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.springframework.stereotype.Component;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static com.angrysurfer.shrapnel.export.component.writer.DataWriter.EMPTY_STRING;
 
 @Getter
 @Setter

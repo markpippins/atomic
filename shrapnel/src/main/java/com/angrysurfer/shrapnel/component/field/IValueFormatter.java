@@ -1,6 +1,4 @@
-package com.angrysurfer.shrapnel.component;
-
-import com.angrysurfer.shrapnel.component.field.IField;
+package com.angrysurfer.shrapnel.component.field;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;

@@ -1,22 +1,23 @@
 package com.angrysurfer.shrapnel.export.component.writer;
 
-import com.angrysurfer.shrapnel.component.writer.IDataWriter;
-import com.angrysurfer.shrapnel.component.field.IField;
-import com.angrysurfer.shrapnel.exception.ShrapnelException;
-import com.angrysurfer.shrapnel.export.util.FileUtil;
-import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
-import com.angrysurfer.shrapnel.component.property.PropertyUtilsPropertyAccessor;
-import com.angrysurfer.shrapnel.component.filter.DataFilters;
-import com.angrysurfer.shrapnel.component.filter.IDataFilters;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import com.angrysurfer.shrapnel.component.field.IField;
+import com.angrysurfer.shrapnel.component.filter.DataFilters;
+import com.angrysurfer.shrapnel.component.filter.IDataFilters;
+import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
+import com.angrysurfer.shrapnel.component.property.PropertyUtilsPropertyAccessor;
+import com.angrysurfer.shrapnel.component.writer.IDataWriter;
+import com.angrysurfer.shrapnel.exception.ShrapnelException;
+import com.angrysurfer.shrapnel.export.util.FileUtil;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @Getter
 @Setter

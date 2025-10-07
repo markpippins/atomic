@@ -1,22 +1,23 @@
 package com.angrysurfer.shrapnel.export;
 
-import com.angrysurfer.shrapnel.component.IValueCalculator;
-import com.angrysurfer.shrapnel.component.IValueFormatter;
-import com.angrysurfer.shrapnel.component.field.IField;
-import com.angrysurfer.shrapnel.component.field.IFields;
-import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
-import com.angrysurfer.shrapnel.export.component.writer.ExcelDataWriter;
-import com.angrysurfer.shrapnel.export.component.writer.PdfDataWriter;
-import com.angrysurfer.shrapnel.component.filter.IDataFilter;
-import com.angrysurfer.shrapnel.component.filter.StringFieldFilter;
-import com.angrysurfer.shrapnel.export.component.writer.style.provider.CombinedStyleProvider;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import com.angrysurfer.shrapnel.component.field.IField;
+import com.angrysurfer.shrapnel.component.field.IFields;
+import com.angrysurfer.shrapnel.component.field.IValueCalculator;
+import com.angrysurfer.shrapnel.component.field.IValueFormatter;
+import com.angrysurfer.shrapnel.component.filter.IDataFilter;
+import com.angrysurfer.shrapnel.component.filter.StringFieldFilter;
+import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
+import com.angrysurfer.shrapnel.export.component.writer.ExcelDataWriter;
+import com.angrysurfer.shrapnel.export.component.writer.PdfDataWriter;
+import com.angrysurfer.shrapnel.export.component.writer.style.provider.CombinedStyleProvider;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Getter

@@ -1,14 +1,15 @@
 package com.angrysurfer.shrapnel.export.component.writer;
 
-import com.angrysurfer.shrapnel.component.IValueFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.angrysurfer.shrapnel.component.field.IField;
+import com.angrysurfer.shrapnel.component.field.IValueFormatter;
 import com.itextpdf.layout.element.Cell;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @Getter

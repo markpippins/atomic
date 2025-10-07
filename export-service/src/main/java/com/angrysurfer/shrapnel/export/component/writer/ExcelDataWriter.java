@@ -1,22 +1,28 @@
 package com.angrysurfer.shrapnel.export.component.writer;
 
-import com.angrysurfer.shrapnel.component.writer.IDataWriter;
-import com.angrysurfer.shrapnel.component.IValueFormatter;
-import com.angrysurfer.shrapnel.component.field.IField;
-import com.angrysurfer.shrapnel.exception.ShrapnelException;
-import com.angrysurfer.shrapnel.component.filter.DataFilters;
-import com.angrysurfer.shrapnel.component.filter.IDataFilters;
-import com.angrysurfer.shrapnel.export.component.writer.style.provider.CombinedStyleProvider;
-import com.angrysurfer.shrapnel.export.component.writer.style.provider.IExcelStyleProvider;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import java.util.*;
+import com.angrysurfer.shrapnel.component.field.IField;
+import com.angrysurfer.shrapnel.component.field.IValueFormatter;
+import com.angrysurfer.shrapnel.component.filter.DataFilters;
+import com.angrysurfer.shrapnel.component.filter.IDataFilters;
+import com.angrysurfer.shrapnel.component.writer.IDataWriter;
+import com.angrysurfer.shrapnel.exception.ShrapnelException;
+import com.angrysurfer.shrapnel.export.component.writer.style.provider.CombinedStyleProvider;
+import com.angrysurfer.shrapnel.export.component.writer.style.provider.IExcelStyleProvider;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Getter

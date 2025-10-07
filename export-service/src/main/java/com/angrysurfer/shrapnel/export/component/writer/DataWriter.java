@@ -1,21 +1,26 @@
 package com.angrysurfer.shrapnel.export.component.writer;
 
-import com.angrysurfer.shrapnel.component.writer.IDataWriter;
-import com.angrysurfer.shrapnel.component.IValueCalculator;
-import com.angrysurfer.shrapnel.component.IValueFormatter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+
 import com.angrysurfer.shrapnel.component.field.Field;
 import com.angrysurfer.shrapnel.component.field.FieldTypeEnum;
 import com.angrysurfer.shrapnel.component.field.IField;
+import com.angrysurfer.shrapnel.component.field.IValueCalculator;
+import com.angrysurfer.shrapnel.component.field.IValueFormatter;
 import com.angrysurfer.shrapnel.component.property.IPropertyAccessor;
 import com.angrysurfer.shrapnel.component.property.IProxyPropertyAccessor;
 import com.angrysurfer.shrapnel.component.property.PropertyUtilsPropertyAccessor;
+import com.angrysurfer.shrapnel.component.writer.IDataWriter;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.*;
 
 @Slf4j
 @Getter
