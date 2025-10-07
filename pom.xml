@@ -23,7 +23,6 @@
         <module>user-service</module>
         <module>upload-service</module>
         <module>vaadin-nucleus-client</module>
-        <module>shrapnel</module>
         <module>shrapnel-data</module>
     </modules>
     
