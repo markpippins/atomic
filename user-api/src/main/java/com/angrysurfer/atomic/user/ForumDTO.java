@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
+@Data
+@NoArgsConstructor
 public class ForumDTO implements Serializable {
 
     /**
@@ -18,32 +21,4 @@ public class ForumDTO implements Serializable {
     private String name;
 
     private Set<UserDTO> members = new HashSet<>();
-
-    public ForumDTO() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<UserDTO> getMembers() {
-        return members;
-    }
-
-    public void setMembers(Set<UserDTO> members) {
-        this.members = members;
-    }
-
 }

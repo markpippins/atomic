@@ -25,9 +25,7 @@
 		<tag />
 		<url />
 	</scm>
-	<properties>
-		<vaadin.version>24.4.4</vaadin.version>
-	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.vaadin</groupId>

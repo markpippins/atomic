@@ -15,11 +15,15 @@
         <module>broker-service-spi</module>
         <module>broker-service</module>
         <module>broker-gateway</module>
+        <module>file-service-api</module>
+        <module>file-service</module>
+        <module>export-service</module>
         <module>login-service</module>
         <module>user-api</module>
         <module>user-service</module>
         <module>upload-service</module>
         <module>vaadin-nucleus-client</module>
+        <module>shrapnel-data</module>
     </modules>
     
     <properties>
@@ -27,7 +31,14 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <spring.boot.version>3.3.5</spring.boot.version>
-        <lombok.version>1.18.36</lombok.version>
+        <lombok.version>1.18.38</lombok.version>
+        <commons-beanutils2.version>2.0.0-M2</commons-beanutils2.version>
+        <itext.version>8.0.4</itext.version>
+        <poi.version>5.4.1</poi.version>
+        <commons-validator.version>1.7</commons-validator.version>
+        <jasypt.version>3.0.5</jasypt.version>
+        <reactor.version>2024.0.6</reactor.version>
+        <vaadin.version>24.4.4</vaadin.version>
     </properties>
 
     <dependencyManagement>
@@ -40,6 +51,65 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-bom</artifactId>
+                <version>${reactor.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-beanutils2</artifactId>
+                <version>${commons-beanutils2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>kernel</artifactId>
+                <version>${itext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>io</artifactId>
+                <version>${itext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>layout</artifactId>
+                <version>${itext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>pdfa</artifactId>
+                <version>${itext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>font-asian</artifactId>
+                <version>${itext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>${commons-validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt.version}</version>
+            </dependency>
             <!-- Internal project modules -->
             <dependency>
                 <groupId>com.angrysurfer.atomic</groupId>
@@ -51,6 +121,21 @@
                 <artifactId>broker-service-spi</artifactId>
                 <version>${project.version}</version>
             </dependency>
+                    <dependency>
+            <groupId>com.angrysurfer.atomic</groupId>
+            <artifactId>file-service-api</artifactId>
+                <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.angrysurfer.atomic</groupId>
+            <artifactId>file-service</artifactId>
+                <version>${project.version}</version>
+        </dependency>
+                <dependency>
+            <groupId>com.angrysurfer.atomic</groupId>
+            <artifactId>export-service</artifactId>
+                <version>${project.version}</version>
+        </dependency>
             <dependency>
                 <groupId>com.angrysurfer.atomic</groupId>
                 <artifactId>user-api</artifactId>
@@ -74,6 +159,11 @@
             <dependency>
                 <groupId>com.angrysurfer.atomic</groupId>
                 <artifactId>upload-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.angrysurfer.atomic</groupId>
+                <artifactId>shrapnel</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- Lombok with version management -->
