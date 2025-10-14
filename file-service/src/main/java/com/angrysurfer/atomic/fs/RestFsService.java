@@ -61,4 +61,11 @@ public class RestFsService {
         return restFsClient.rename(alias, path, newName);
     }
 
+    @BrokerOperation("copy")
+    public Map<String, Object> copy(@BrokerParam("fromAlias") String fromAlias,
+            @BrokerParam("fromPath") List<String> fromPath, @BrokerParam("toAlias") String toAlias,
+            @BrokerParam("toPath") List<String> toPath) {
+        return restFsClient.copy(fromAlias, fromPath, toAlias, toPath);
+    }
+
 }

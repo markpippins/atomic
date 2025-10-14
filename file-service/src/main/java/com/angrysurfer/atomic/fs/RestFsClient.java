@@ -80,4 +80,11 @@ public class RestFsClient {
         req.setNewName(newName);
         return post(req, Map.class);
     }
+
+    public Map<String, Object> copy(String fromAlias, List<String> fromPath, String toAlias, List<String> toPath) {
+        FsRequest req = new FsRequest(fromAlias, fromPath, "copy");
+        req.setToAlias(toAlias);
+        req.setToPath(toPath);
+        return post(req, Map.class);
+    }
 }

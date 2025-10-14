@@ -11,6 +11,8 @@ public class FsRequest {
 
     private String alias;
     private List<String> path;
+    private String toAlias;
+    private List<String> toPath;
     private String operation;
     private String filename;
     private String newName;
@@ -59,6 +61,22 @@ public class FsRequest {
 
     public void setNewName(String newName) {
         this.newName = newName;
+    }
+
+    public String getToAlias() {
+        return toAlias;
+    }
+
+    public void setToAlias(String toAlias) {
+        this.toAlias = toAlias;
+    }
+
+    public List<String> getToPath() {
+        return toPath;
+    }
+
+    public void setToPath(List<String> toPath) {
+        this.toPath = toPath;
     }
 
 }
