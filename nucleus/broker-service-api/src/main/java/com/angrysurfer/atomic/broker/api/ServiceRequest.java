@@ -12,7 +12,6 @@ public class ServiceRequest implements Serializable {
     private Map<String, Object> params;
     private String requestId;
 
-    // TODO: Add support for encryption with jasypt
     private boolean encrypt = false;
 
     public ServiceRequest() {
@@ -39,5 +38,17 @@ public class ServiceRequest implements Serializable {
 
     public String getRequestId() {
         return requestId;
+    }
+
+    public boolean isEncrypt() {
+        return encrypt;
+    }
+
+    public void setEncrypt(boolean encrypt) {
+        this.encrypt = encrypt;
+    }
+
+    public void setParams(Map<String, Object> params) {
+        this.params = params;
     }
 }

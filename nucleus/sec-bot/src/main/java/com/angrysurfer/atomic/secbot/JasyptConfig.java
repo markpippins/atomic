@@ -1,21 +1,27 @@
-package com.angrysurfer.shrapnel.security;
+package com.angrysurfer.atomic.secbot;
 
-import com.angrysurfer.shrapnel.exception.ShrapnelException;
-import lombok.extern.slf4j.Slf4j;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Properties;
+
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.*;
-import java.util.Properties;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Configuration
 public class JasyptConfig {
 
+	// TODO: replace with AES-256-GCM
 	static String algorithm = "PBEWithMD5AndTripleDES";
+
 
 	public static void main(String[] args) {
 		PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
@@ -47,7 +53,7 @@ public class JasyptConfig {
 		}
 		catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new ShrapnelException(e.getMessage(), e);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 
 		try {
