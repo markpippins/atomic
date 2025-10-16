@@ -1,4 +1,4 @@
-package com.angrysurfer.atomic.fs;
+;
 
 import java.util.List;
 import java.util.Map;
@@ -78,6 +78,20 @@ public class ReactiveRestFsClient {
     public Mono<Map> rename(String alias, List<String> path, String newName) {
         FsRequest req = new FsRequest(alias, path, "rename");
         req.setNewName(newName);
+        return post(req, Map.class);
+    }
+
+    public Mono<Map> copy(String fromAlias, List<String> fromPath, String toAlias, List<String> toPath) {
+        FsRequest req = new FsRequest(fromAlias, fromPath, "copy");
+        req.setToAlias(toAlias);
+        req.setToPath(toPath);
+        return post(req, Map.class);
+    }
+
+    public Mono<Map> move(String fromAlias, List<String> fromPath, String toAlias, List<String> toPath) {
+        FsRequest req = new FsRequest(fromAlias, fromPath, "move");
+        req.setToAlias(toAlias);
+        req.setToPath(toPath);
         return post(req, Map.class);
     }
 }
