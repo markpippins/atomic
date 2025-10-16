@@ -12,6 +12,9 @@ public class ServiceRequest implements Serializable {
     private Map<String, Object> params;
     private String requestId;
 
+    // TODO: Add support for encryption with jasypt
+    private boolean encrypt = false;
+
     public ServiceRequest() {
     }
 

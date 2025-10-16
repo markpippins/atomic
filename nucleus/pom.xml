@@ -24,6 +24,7 @@
         <module>upload-service</module>
         <module>vaadin-nucleus-client</module>
         <module>shrapnel-data</module>
+        <module>sec-bot</module>
     </modules>
     
     <properties>
@@ -39,10 +40,16 @@
         <jasypt.version>3.0.5</jasypt.version>
         <reactor.version>2024.0.6</reactor.version>
         <vaadin.version>24.4.4</vaadin.version>
+        <springdoc.version>2.5.0</springdoc.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
             <!-- Spring Boot BOM -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

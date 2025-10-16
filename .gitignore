@@ -3289,3 +3289,6 @@ nucleus/vaadin-nucleus-client/target/surefire-reports/TEST-com.angrysurfer.admin
 nucleus/vaadin-nucleus-client/target/surefire-reports/TEST-com.angrysurfer.atomic.NucleusClientApplicationTests.xml
 nucleus/user-service/target/classes/application.properties
 nucleus/shrapnel-data/target/classes/application.properties
+nucleus/sec-bot/target/maven-archiver/pom.properties
+nucleus/sec-bot/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+nucleus/sec-bot/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
