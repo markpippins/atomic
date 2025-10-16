@@ -24,7 +24,7 @@
         <module>upload-service</module>
         <module>vaadin-nucleus-client</module>
         <module>shrapnel-data</module>
-        <module>sec-bot</module>
+        <module>broker-gateway-sec-bot</module>
     </modules>
     
     <properties>
