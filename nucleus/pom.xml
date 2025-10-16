@@ -131,21 +131,21 @@
                 <artifactId>broker-service-spi</artifactId>
                 <version>${project.version}</version>
             </dependency>
-                    <dependency>
-            <groupId>com.angrysurfer.atomic</groupId>
-            <artifactId>file-service-api</artifactId>
+            <dependency>
+                <groupId>com.angrysurfer.atomic</groupId>
+                <artifactId>file-service-api</artifactId>
                 <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.angrysurfer.atomic</groupId>
-            <artifactId>file-service</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.angrysurfer.atomic</groupId>
+                <artifactId>file-service</artifactId>
                 <version>${project.version}</version>
-        </dependency>
-                <dependency>
-            <groupId>com.angrysurfer.atomic</groupId>
-            <artifactId>export-service</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.angrysurfer.atomic</groupId>
+                <artifactId>export-service</artifactId>
                 <version>${project.version}</version>
-        </dependency>
+            </dependency>
             <dependency>
                 <groupId>com.angrysurfer.atomic</groupId>
                 <artifactId>user-api</artifactId>
@@ -154,7 +154,7 @@
             <dependency>
                 <groupId>com.angrysurfer.atomic</groupId>
                 <artifactId>login-service</artifactId>
-                <version>${project.version}</version>-SNAPSHOT</version>
+                <version>${project.version}-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.angrysurfer.atomic</groupId>

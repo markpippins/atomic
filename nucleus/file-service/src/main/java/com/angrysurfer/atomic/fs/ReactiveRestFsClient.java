@@ -1,4 +1,4 @@
-;
+package com.angrysurfer.atomic.fs;
 
 import java.util.List;
 import java.util.Map;
@@ -6,10 +6,10 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import reactor.core.publisher.Mono;
-
-import com.angrysurfer.atomic.fs.api.FsRequest;
 import com.angrysurfer.atomic.fs.api.FsListResponse;
+import com.angrysurfer.atomic.fs.api.FsRequest;
+
+import reactor.core.publisher.Mono;
 
 @Service("reactiveRestFsClient")
 public class ReactiveRestFsClient {

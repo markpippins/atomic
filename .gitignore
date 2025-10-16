@@ -3287,3 +3287,5 @@ nucleus/vaadin-nucleus-client/target/surefire-reports/com.angrysurfer.admin.Admi
 nucleus/vaadin-nucleus-client/target/surefire-reports/com.angrysurfer.atomic.NucleusClientApplicationTests.txt
 nucleus/vaadin-nucleus-client/target/surefire-reports/TEST-com.angrysurfer.admin.AdminApplicationTests.xml
 nucleus/vaadin-nucleus-client/target/surefire-reports/TEST-com.angrysurfer.atomic.NucleusClientApplicationTests.xml
+nucleus/user-service/target/classes/application.properties
+nucleus/shrapnel-data/target/classes/application.properties
