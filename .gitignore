@@ -3264,3 +3264,14 @@ nucleus/vaadin-nucleus-client/src/main/frontend/generated/vaadin-featureflags.js
 nucleus/vaadin-nucleus-client/src/main/frontend/generated/vaadin.ts
 web/angular-throttler-ai/.env
 python/fs-utils/__pycache__/main.cpython-312.pyc
+templates/angular-electron-can/.idx/dev.nix
+templates/angular-electron-can/.idx/mcp.json
+templates/angular-electron-can/.vscode/extensions.json
+templates/angular-electron-can/.vscode/launch.json
+templates/angular-electron-can/.vscode/settings.json
+templates/angular-electron-can/.vscode/tasks.json
+templates/angular-electron-can/.editorconfig
+templates/electron/angular/angular-electron-can/.vscode/extensions.json
+templates/electron/angular/angular-electron-can/.vscode/launch.json
+templates/electron/angular/angular-electron-can/.vscode/settings.json
+templates/electron/angular/angular-electron-can/.vscode/tasks.json
