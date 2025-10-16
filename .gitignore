@@ -3275,3 +3275,15 @@ templates/electron/angular/angular-electron-can/.vscode/extensions.json
 templates/electron/angular/angular-electron-can/.vscode/launch.json
 templates/electron/angular/angular-electron-can/.vscode/settings.json
 templates/electron/angular/angular-electron-can/.vscode/tasks.json
+nucleus/vaadin-nucleus-client/target/classes/application.properties
+nucleus/vaadin-nucleus-client/target/classes/themes/my-theme/styles.css
+nucleus/vaadin-nucleus-client/target/classes/themes/my-theme/theme.json
+nucleus/vaadin-nucleus-client/target/maven-archiver/pom.properties
+nucleus/vaadin-nucleus-client/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+nucleus/vaadin-nucleus-client/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+nucleus/vaadin-nucleus-client/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+nucleus/vaadin-nucleus-client/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+nucleus/vaadin-nucleus-client/target/surefire-reports/com.angrysurfer.admin.AdminApplicationTests.txt
+nucleus/vaadin-nucleus-client/target/surefire-reports/com.angrysurfer.atomic.NucleusClientApplicationTests.txt
+nucleus/vaadin-nucleus-client/target/surefire-reports/TEST-com.angrysurfer.admin.AdminApplicationTests.xml
+nucleus/vaadin-nucleus-client/target/surefire-reports/TEST-com.angrysurfer.atomic.NucleusClientApplicationTests.xml
