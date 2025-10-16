@@ -362,3 +362,4 @@ nucleus/vaadin-nucleus-client/src/main/frontend/generated/jar-resources/vaadin-t
 nucleus/vaadin-nucleus-client/mvnw
 nucleus/vaadin-nucleus-client/mvnw.cmd
 .gitignore
+js/mock-service-broker/package-lock.json
