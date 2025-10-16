@@ -83,6 +83,22 @@ Here is an example of how to call the `listFiles` operation on the `RestFsServic
 
 This request would be sent to the `/api/broker/submitRequest` endpoint of the broker gateway. The broker would then resolve the `restFsService` bean, find the `listFiles` method, and invoke it with the specified parameters. The result of the operation would be returned in a `ServiceResponse` object.
 
+Here is an example of how to call the `copy` operation on the `RestFsService`:
+
+```json
+{
+    "service": "restFsService",
+    "operation": "copy",
+    "params": {
+        "fromAlias": "my-alias",
+        "fromPath": ["/path/to/source/file"],
+        "toAlias": "my-alias",
+        "toPath": ["/path/to/destination/file"]
+    },
+    "requestId": "my-request-id"
+}
+```
+
 ### Calling the Broker from a Java Client
 
 The `RestFsClient` and `ReactiveRestFsClient` classes in the `file-service` module demonstrate how to call the broker from a Java client. The `RestFsClient` uses Spring's `RestTemplate` to send requests to the broker, while the `ReactiveRestFsClient` uses `WebClient`.
