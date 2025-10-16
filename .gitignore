@@ -197,3 +197,12 @@ shrapnel-data/target/maven-status/maven-compiler-plugin/testCompile/default-test
 vaadin-nucleus-client/target/classes/application.properties
 vaadin-nucleus-client/target/classes/themes/my-theme/styles.css
 vaadin-nucleus-client/target/classes/themes/my-theme/theme.json
+vaadin-nucleus-client/target/maven-archiver/pom.properties
+vaadin-nucleus-client/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+vaadin-nucleus-client/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+vaadin-nucleus-client/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+vaadin-nucleus-client/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+vaadin-nucleus-client/target/surefire-reports/com.angrysurfer.admin.AdminApplicationTests.txt
+vaadin-nucleus-client/target/surefire-reports/com.angrysurfer.atomic.NucleusClientApplicationTests.txt
+vaadin-nucleus-client/target/surefire-reports/TEST-com.angrysurfer.admin.AdminApplicationTests.xml
+vaadin-nucleus-client/target/surefire-reports/TEST-com.angrysurfer.atomic.NucleusClientApplicationTests.xml
