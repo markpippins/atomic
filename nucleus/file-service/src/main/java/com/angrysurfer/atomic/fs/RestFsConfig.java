@@ -8,7 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class RestFsConfig {
 
-    @Value("${restfs.api.url:http://localhost:8000/fs}")
+    @Value("${restfs.api.url}")
     private String fsApiUrl;
 
     @Bean

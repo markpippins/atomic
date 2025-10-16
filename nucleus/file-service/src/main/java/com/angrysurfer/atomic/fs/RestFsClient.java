@@ -19,7 +19,7 @@ public class RestFsClient {
 
     private final RestTemplate restTemplate;
 
-    @Value("${restfs.api.url:http://localhost:8000/fs}")
+    @Value("${restfs.api.url}")
     private String apiUrl;
 
     public RestFsClient(RestTemplate restTemplate) {
@@ -83,6 +83,13 @@ public class RestFsClient {
 
     public Map<String, Object> copy(String fromAlias, List<String> fromPath, String toAlias, List<String> toPath) {
         FsRequest req = new FsRequest(fromAlias, fromPath, "copy");
+        req.setToAlias(toAlias);
+        req.setToPath(toPath);
+        return post(req, Map.class);
+    }
+
+    public Map<String, Object> move(String fromAlias, List<String> fromPath, String toAlias, List<String> toPath) {
+        FsRequest req = new FsRequest(fromAlias, fromPath, "move");
         req.setToAlias(toAlias);
         req.setToPath(toPath);
         return post(req, Map.class);
