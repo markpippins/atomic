@@ -194,3 +194,6 @@ export-service/target/maven-status/maven-compiler-plugin/testCompile/default-tes
 shrapnel-data/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 shrapnel-data/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
 .vscode/.copilot-plugin
+vaadin-nucleus-client/target/classes/application.properties
+vaadin-nucleus-client/target/classes/themes/my-theme/styles.css
+vaadin-nucleus-client/target/classes/themes/my-theme/theme.json
