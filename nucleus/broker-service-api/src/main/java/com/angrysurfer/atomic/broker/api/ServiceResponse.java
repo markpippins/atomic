@@ -23,6 +23,8 @@ public class ServiceResponse<T> implements Serializable {
 
     private String operation;
 
+    private boolean encrypt = false;
+
     public ServiceResponse() {
     }
 
@@ -118,5 +120,13 @@ public class ServiceResponse<T> implements Serializable {
 
     public void setOperation(String operation) {
         this.operation = operation;
+    }
+
+    public boolean isEncrypt() {
+        return encrypt;
+    }
+
+    public void setEncrypt(boolean encrypt) {
+        this.encrypt = encrypt;
     }
 }

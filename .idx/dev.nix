@@ -10,7 +10,14 @@
     pkgs.python3
     pkgs.nodejs
     pkgs.maven
+    pkgs.docker
   ];
+
+  # Enable Docker and MySQL services
+  services.docker.enable = true;
+  # services.mysql.enable = true;
+  # services.mysql.initialRootPassword = "supersecret";
+  #docker run --name my-mysql -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d mysql:8.0   
 
   # Sets environment variables in the workspace
   env = {};
@@ -46,8 +53,8 @@
       };
       # Runs when the workspace is (re)started
       onStart = {
-        # Example: start a background task to watch and re-build backend code
-        # watch-backend = "npm run watch-backend";
+        # Clean up mysql data to ensure a clean start
+        cleanup-mysql = "sudo rm -rf /var/lib/mysql";
       };
     };
   };

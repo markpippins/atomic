@@ -17,13 +17,14 @@
         <module>broker-gateway</module>
         <module>file-service-api</module>
         <module>file-service</module>
-        <module>export-service</module>
+        <!-- <module>export-service</module> -->
         <module>login-service</module>
         <module>user-api</module>
         <module>user-service</module>
-        <module>upload-service</module>
-        <module>vaadin-nucleus-client</module>
+        <!-- <module>upload-service</module> -->
+        <!-- <module>vaadin-nucleus-client</module> -->
         <module>shrapnel-data</module>
+        <module>broker-gateway-sec-bot</module>
     </modules>
     
     <properties>
@@ -39,10 +40,16 @@
         <jasypt.version>3.0.5</jasypt.version>
         <reactor.version>2024.0.6</reactor.version>
         <vaadin.version>24.4.4</vaadin.version>
+        <springdoc.version>2.5.0</springdoc.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
             <!-- Spring Boot BOM -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -131,21 +138,21 @@
                 <artifactId>broker-service-spi</artifactId>
                 <version>${project.version}</version>
             </dependency>
-                    <dependency>
-            <groupId>com.angrysurfer.atomic</groupId>
-            <artifactId>file-service-api</artifactId>
+            <dependency>
+                <groupId>com.angrysurfer.atomic</groupId>
+                <artifactId>file-service-api</artifactId>
                 <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.angrysurfer.atomic</groupId>
-            <artifactId>file-service</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.angrysurfer.atomic</groupId>
+                <artifactId>file-service</artifactId>
                 <version>${project.version}</version>
-        </dependency>
-                <dependency>
-            <groupId>com.angrysurfer.atomic</groupId>
-            <artifactId>export-service</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.angrysurfer.atomic</groupId>
+                <artifactId>export-service</artifactId>
                 <version>${project.version}</version>
-        </dependency>
+            </dependency>
             <dependency>
                 <groupId>com.angrysurfer.atomic</groupId>
                 <artifactId>user-api</artifactId>
@@ -154,7 +161,7 @@
             <dependency>
                 <groupId>com.angrysurfer.atomic</groupId>
                 <artifactId>login-service</artifactId>
-                <version>${project.version}</version>-SNAPSHOT</version>
+                <version>${project.version}-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.angrysurfer.atomic</groupId>
