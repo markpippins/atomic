@@ -99,6 +99,24 @@ Here is an example of how to call the `copy` operation on the `RestFsService`:
 }
 ```
 
+### Example: Login Service Integration
+
+The `login-service` integrates with the broker and calls operations on the `user-access-service`. When a login request is made, the `loginService` calls user-related operations from `user-access-service`:
+
+```json
+{
+    "service": "loginService",
+    "operation": "login",
+    "params": {
+        "alias": "user-alias",
+        "identifier": "user-password"
+    },
+    "requestId": "my-request-id"
+}
+```
+
+The login service uses the UserService from `user-access-service` which manages users in MongoDB with a dual ID system (Long ID for client compatibility and String mongoId for database storage).
+
 ### Calling the Broker from a Java Client
 
 The `RestFsClient` and `ReactiveRestFsClient` classes in the `file-service` module demonstrate how to call the broker from a Java client. The `RestFsClient` uses Spring's `RestTemplate` to send requests to the broker, while the `ReactiveRestFsClient` uses `WebClient`.
@@ -111,3 +129,11 @@ FsListResponse response = client.listFiles("my-alias", List.of("/path/to/directo
 ```
 
 This code creates a `RestFsClient`, which sends a `ServiceRequest` to the broker and returns the `FsListResponse` from the `ServiceResponse`.
+
+## Database Architecture
+
+The system features a mixed database architecture:
+
+- **MongoDB Services**: `user-service`, `user-access-service`, `broker-gateway`, and others use MongoDB for document-based storage
+- **JPA Services**: Services with actual JPA entities continue to use JPA with MySQL
+- **Configuration**: Some services previously configured for JPA have had those configurations commented out since they don't contain JPA entities

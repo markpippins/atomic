@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # Databases
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: userdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  mongodb:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  # Spring Boot Services
+  broker-gateway:
+    build: ./spring/broker-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - file-system-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  user-access-service:
+    build: ./spring/user-access-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/userdb
+
+  login-service:
+    build: ./spring/login-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - user-access-service
+
+  user-service:
+    build: ./spring/user-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - mongodb
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/userdb
+
+  # Node.js Internal Services
+  file-system-server:
+    build: ./node/file-system-server
+    ports:
+      - "3001:3001"
+
+  # Web Applications
+  nextjs-api-tester:
+    build: ./web/nextjs-api-tester
+    ports:
+      - "3000:3000"
+    depends_on:
+      - broker-gateway
+
+  nextjs-cool-people:
+    build: ./web/nextjs-cool-people
+    ports:
+      - "3002:3002"
+    depends_on:
+      - broker-gateway
+
+volumes:
+  mysql_data:
+  mongo_data:

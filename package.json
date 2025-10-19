@@ -1,0 +1,18 @@
+{
+  "name": "enterprise-sandbox",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "foreman start",
+    "start:db": "concurrently \"npm run start:mysql\" \"npm run start:mongodb\"",
+    "start:mysql": "./start-mysql.sh",
+    "start:mongodb": "./mongodb-docker-start.bat",
+    "start:services": "foreman start -f Procfile",
+    "install:all": "npm run install:web && npm run install:node",
+    "install:web": "cd web/nextjs-api-tester && npm install && cd ../nextjs-cool-people && npm install",
+    "install:node": "cd node/file-system-server && npm install"
+  },
+  "devDependencies": {
+    "foreman": "^3.0.1",
+    "concurrently": "^8.2.2"
+  }
+}
