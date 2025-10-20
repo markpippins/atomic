@@ -25,10 +25,10 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - mysql
+      - mongodb
       - file-system-server
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/broker-gateway
 
   user-access-service:
     build: ./spring/user-access-service
@@ -37,8 +37,9 @@ services:
     depends_on:
       - mysql
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/userdb
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/user_service?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=rootpass
 
   login-service:
     build: ./spring/login-service
@@ -54,26 +55,28 @@ services:
     depends_on:
       - mongodb
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/userdb
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/user-service
 
   # Node.js Internal Services
   file-system-server:
     build: ./node/file-system-server
     ports:
-      - "3001:3001"
+      - "4040:4040"
+    environment:
+      - FS_SERVER_PORT=4040
 
   # Web Applications
   nextjs-api-tester:
     build: ./web/nextjs-api-tester
     ports:
-      - "3000:3000"
+      - "9012:9012"
     depends_on:
       - broker-gateway
 
   nextjs-cool-people:
     build: ./web/nextjs-cool-people
     ports:
-      - "3002:3002"
+      - "9002:9002"
     depends_on:
       - broker-gateway
 
