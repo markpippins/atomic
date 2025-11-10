@@ -4,7 +4,7 @@ A comprehensive Spring Boot microservices platform featuring broker-based servic
 
 ## Overview
 
-The Atomic platform consists of multiple interconnected services designed to provide a scalable, distributed system. The architecture includes:
+The Atomic platform consists of multiple interconnected services designed to provide a scalable, distributed system built on **Spring Boot 3.5.0** with Java 21. The architecture includes:
 
 - **Broker Service**: Central hub for request routing and service orchestration
 - **User Management**: Dual-architecture user services (user-service for MongoDB, user-access-service for legacy compatibility)
