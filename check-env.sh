@@ -26,7 +26,7 @@ check_env_var() {
 echo ""
 echo "Core Service Configuration:"
 echo "============================"
-check_env_var "PORT"
+check_env_var "BROKER_PROXY_PORT"
 check_env_var "HOST"
 check_env_var "BROKER_GATEWAY_URL"
 

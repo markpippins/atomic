@@ -9,7 +9,7 @@ The Atomic project consists of multiple services (Node.js, Spring Boot, Next.js,
 ## Environment Variables by Service
 
 ### Node.js Services
-- **broker-service-proxy**: Uses `PORT`, `HOST`, `BROKER_GATEWAY_URL`
+- **broker-service-proxy**: Uses `BROKER_PROXY_PORT`, `HOST`, `BROKER_GATEWAY_URL`
 - **image-server**: Uses `IMAGE_SERVER_PORT`, `IMAGE_ROOT_DIR`
 - **google/gapi-search-serv**: Uses `SEARCH_SERVER_PORT`, `GOOGLE_API_KEY`, `SEARCH_ENGINE_ID`
 - **file-system-server**: Uses `FS_SERVER_PORT`, `FS_ROOT_DIR`

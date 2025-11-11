@@ -32,13 +32,13 @@
       enable = true;
       previews = {
         # web = {
-        #   # Example: run "npm run dev" with PORT set to IDX's defined port for previews,
+        #   # Example: run "npm run dev" with BROKER_PROXY_PORT set to IDX's defined port for previews,
         #   # and show it in IDX's web preview panel
         #   command = ["npm" "run" "dev"];
         #   manager = "web";
         #   env = {
         #     # Environment variables to set for your server
-        #     PORT = "$PORT";
+        #     BROKER_PROXY_PORT = "$PORT";
         #   };
         # };
       };
