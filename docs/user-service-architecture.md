@@ -108,7 +108,7 @@ The service layer manages the dual ID system:
 ### MongoDB Setup
 Both services connect to MongoDB with similar configurations:
 ```
-spring.data.mongodb.uri=mongodb://mongoUser:somePassword@localhost:27017/user-service?authSource=admin
+spring.data.mongodb.uri=mongodb://mongoUser:somePassword@localhost:27017/userservice?authSource=admin
 ```
 
 ### Docker Command

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Databases
   mysql:
@@ -14,6 +12,9 @@ services:
 
   mongodb:
     image: mongo:7
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongoUser
+      MONGO_INITDB_ROOT_PASSWORD: somePassword
     ports:
       - "27017:27017"
     volumes:
@@ -28,7 +29,7 @@ services:
       - mongodb
       - file-system-server
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/broker-gateway
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/brokergateway
 
   user-access-service:
     build: ./spring/user-access-service
@@ -55,7 +56,7 @@ services:
     depends_on:
       - mongodb
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/user-service
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/userservice
 
   # Node.js Internal Services
   file-system-server:
