@@ -55,6 +55,29 @@ The platform implements a unique dual user service architecture:
 - Maintains compatibility with existing web clients expecting Long IDs
 - Features `ValidUser` model with both `id` (Long for clients) and `mongoId` (String for storage)
 
+### Security Architecture
+
+The platform implements token-based authentication across services:
+
+#### Authentication Flow
+
+1. **login-service**: Authenticates users against user-access-service and generates UUID tokens
+2. **Token Validation**: Other services (like file-service) validate tokens with login-service
+3. **Access Control**: Token validation ensures users can only access their own resources
+
+#### Current Token-Based Integrations
+
+- **file-service**: Now requires tokens for all file operations instead of direct alias access
+- **Cross-Service Security**: All file operations validated against user's authenticated identity
+- **Session Management**: Tokens can be invalidated on logout
+
+#### Security Benefits
+
+- **User Isolation**: Users can only access their own files/folders
+- **Reduced Attack Surface**: No direct alias exposure in file operations
+- **Centralized Validation**: All authentication handled by login-service
+- **Audit Trail**: All operations tied to authenticated sessions
+
 ## Running the Platform
 
 ### Quick Start with Docker Compose (Recommended)
