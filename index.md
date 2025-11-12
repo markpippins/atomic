@@ -52,6 +52,11 @@ Welcome to the documentation index for the Atomic project. This file provides or
 - [File Service](spring/file-service/README.md) - File management service
 - [File Service API](spring/file-service-api/README.md) - API for file service
 
+### Authentication & Security Documentation
+- [Token-Based Authentication Integration](docs/token-auth-integration.md) - Documentation for token-based authentication between file-service and login-service
+- [User Authentication Flow](docs/user-auth-flow.md) - Complete user authentication flow documentation
+- [Broker Security Patterns](docs/broker-security.md) - Security patterns for broker-based services
+
 ### Broker Services
 - [Broker Service](spring/broker-service/README.md) - Main broker service
 - [Broker Service API](spring/broker-service-api/README.md) - API for broker service

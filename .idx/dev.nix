@@ -16,8 +16,8 @@
   # Enable Docker and MySQL services
   services.docker.enable = true;
   # services.mysql.enable = true;
-  # services.mysql.initialRootPassword = "supersecret";
-  #docker run --name my-mysql -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d mysql:8.0   
+  # services.mysql.initialRootPassword = "rootpass";
+  #docker run --name my-mysql -e MYSQL_ROOT_PASSWORD=rootpass -p 3306:3306 -d mysql:8.0   
 
   # Sets environment variables in the workspace
   env = {};
