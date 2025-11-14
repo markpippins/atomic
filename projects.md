@@ -46,6 +46,12 @@ This document provides an inventory of all projects within the Atomic Platform c
   - **Startup**: `./mvnw spring-boot:run -Dspring-boot.run.arguments="--server.port=8083"`
   - **Dependencies**: MongoDB
 
+- **note-service**
+  - **Function**: User notes management with MongoDB persistence and token-based authentication
+  - **Tech**: Spring Boot, MongoDB, broker-service integration
+  - **Startup**: Integrated as component in broker-gateway
+  - **Dependencies**: MongoDB, login-service (for token validation via broker), broker-service
+
 #### Additional Services
 - **broker-service**
   - **Function**: Broker service with MongoDB configuration
@@ -95,6 +101,14 @@ This document provides an inventory of all projects within the Atomic Platform c
   - **Function**: Client library for broker communication
   - **Tech**: TypeScript/JavaScript
   - **Files**: broker-client.ts, fs-client.ts, image-client.ts
+
+- **broker-service-proxy**
+  - **Function**: Proxy service that forwards requests to the broker gateway
+  - **Port**: 3333 (configurable via BROKER_PROXY_PORT)
+  - **Tech**: TypeScript/Express
+  - **Files**: src/server.ts, src/controllers/BrokerProxyController.ts
+  - **Startup**: npm run dev or npm start
+  - **Dependencies**: broker-gateway
 
 - **file-system-server**
   - **Function**: File system server implementation

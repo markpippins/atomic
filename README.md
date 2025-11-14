@@ -21,6 +21,7 @@ The following services now use MongoDB for data persistence:
 
 - `user-service`: Primary user management with social features
 - `user-access-service`: User management with dual ID system (Long ID for client compatibility, String mongoId for storage)
+- `note-service`: User notes management with token-based authentication
 - `broker-gateway`: Uses MongoDB for some configurations
 - `shrapnel-data`: Data management with MongoDB
 
@@ -55,6 +56,28 @@ The platform implements a unique dual user service architecture:
 - Maintains compatibility with existing web clients expecting Long IDs
 - Features `ValidUser` model with both `id` (Long for clients) and `mongoId` (String for storage)
 
+### New Services and Features
+
+#### Note Service (`note-service`)
+
+- **Purpose**: User notes management with MongoDB persistence
+- **Authentication**: Uses token-based authentication via the broker system
+- **Integration**: Full broker system integration with operations for get, save, and delete notes
+- **Architecture**: Follows the same token validation pattern as other services, communicating with login-service via broker
+
+#### Broker Service Proxy (`node/broker-service-proxy`)
+
+- **Purpose**: TypeScript-based proxy server that forwards requests to the broker gateway
+- **Location**: `/node/broker-service-proxy`
+- **Function**: Acts as an intermediary between clients and the broker gateway
+- **Features**: Transparent proxying, health checks, configurable endpoints
+
+#### CORS Configuration Updates
+
+- **Purpose**: Fixed CORS issues across the platform
+- **Location**: `spring/broker-gateway/CorsFilter.java`, `CorsConfig.java`
+- **Features**: High-priority servlet filter, proper credential handling, explicit method declarations
+
 ### Security Architecture
 
 The platform implements token-based authentication across services:
@@ -62,20 +85,21 @@ The platform implements token-based authentication across services:
 #### Authentication Flow
 
 1. **login-service**: Authenticates users against user-access-service and generates UUID tokens
-2. **Token Validation**: Other services (like file-service) validate tokens with login-service
+2. **Token Validation**: Other services (like file-service, note-service) validate tokens with login-service
 3. **Access Control**: Token validation ensures users can only access their own resources
 
 #### Current Token-Based Integrations
 
-- **file-service**: Now requires tokens for all file operations instead of direct alias access
-- **Cross-Service Security**: All file operations validated against user's authenticated identity
+- **file-service**: Requires tokens for all file operations instead of direct alias access
+- **note-service**: Validates user tokens for note operations
+- **Cross-Service Security**: All file and note operations validated against user's authenticated identity
 - **Session Management**: Tokens can be invalidated on logout
 
 #### Security Benefits
 
-- **User Isolation**: Users can only access their own files/folders
-- **Reduced Attack Surface**: No direct alias exposure in file operations
-- **Centralized Validation**: All authentication handled by login-service
+- **User Isolation**: Users can only access their own files/folders/notes
+- **Reduced Attack Surface**: No direct alias exposure in operations
+- **Centralized Validation**: All authentication handled by login-service via broker
 - **Audit Trail**: All operations tied to authenticated sessions
 
 ## Running the Platform

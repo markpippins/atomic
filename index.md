@@ -47,6 +47,7 @@ Welcome to the documentation index for the Atomic project. This file provides or
 - [User API](spring/user-api/README.md) - API for user management
 - [User Access Service](spring/user-access-service/README.md) - Access control service
 - [Login Service](spring/login-service/README.md) - Authentication service
+- [Note Service](spring/note-service/README.md) - Notes management service with MongoDB persistence and token-based authentication
 - [Upload Service](spring/upload-service/README.md) - File upload service
 - [Export Service](spring/export-service/README.md) - Data export service
 - [File Service](spring/file-service/README.md) - File management service
