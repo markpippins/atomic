@@ -17,6 +17,19 @@ This document provides an inventory of all projects within the Atomic Platform c
 **Technology**: Java 21, Spring Boot 3.3.5, Maven
 **Build**: `mvn clean compile`
 
+### Quarkus Services (Java/Jakarta EE) - `/quarkus`
+**Directory**: `/quarkus`
+**Technology**: Java 21, Quarkus 3.15.1, Maven
+**Build**: `mvn clean compile`
+
+- **broker-gateway-quarkus**
+  - **Function**: Alternative implementation of broker-gateway using Quarkus framework
+  - **Port**: 8090
+  - **Tech**: Quarkus, RESTEasy Reactive, MongoDB
+  - **Startup**: `./mvnw compile quarkus:dev` or `java -jar target/*-runner.jar`
+  - **Dependencies**: MongoDB, external services (user-service, login-service, file-service, search-service)
+  - **Description**: Provides identical functionality to broker-gateway but with improved performance and lower resource consumption
+
 #### Core Services
 - **broker-gateway** 
   - **Function**: Main API entry point, service orchestration

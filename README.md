@@ -72,6 +72,15 @@ The platform implements a unique dual user service architecture:
 - **Function**: Acts as an intermediary between clients and the broker gateway
 - **Features**: Transparent proxying, health checks, configurable endpoints
 
+#### Quarkus-based Broker Gateway (`quarkus/broker-gateway-quarkus`)
+
+- **Purpose**: Alternative implementation of the broker-gateway using Quarkus framework
+- **Technology**: Java 21, Quarkus 3.15.1, RESTEasy Reactive
+- **Port**: 8090 (by default)
+- **Features**: Identical routing and service orchestration functionality to Spring Boot version
+- **Benefits**: Improved startup time, lower memory footprint, potential for native compilation
+- **Architecture**: Fully compatible with existing Atomic platform services and clients
+
 #### CORS Configuration Updates
 
 - **Purpose**: Fixed CORS issues across the platform
@@ -128,6 +137,10 @@ This will start all services with proper networking and dependencies.
 - **login-service**: `http://localhost:8082` - Authentication service
 - **user-service**: `http://localhost:8083` - Primary user management (MongoDB)
 
+#### Quarkus Services
+
+- **broker-gateway-quarkus**: `http://localhost:8090` - Alternative broker gateway using Quarkus framework
+
 #### Node.js Internal Services
 
 - **file-system-server**: `http://localhost:4040` - Proxy file system service
@@ -162,6 +175,9 @@ cd spring/broker-gateway && ./mvnw spring-boot:run
 cd spring/user-access-service && ./mvnw spring-boot:run -Dspring-boot.run.arguments="--server.port=8081"
 cd spring/login-service && ./mvnw spring-boot:run -Dspring-boot.run.arguments="--server.port=8082"
 cd spring/user-service && ./mvnw spring-boot:run -Dspring-boot.run.arguments="--server.port=8083"
+
+# Quarkus service
+cd quarkus/broker-gateway-quarkus && ./mvnw compile quarkus:dev
 
 # Node.js services
 cd node/file-system-server && npm start
