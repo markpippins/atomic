@@ -89,20 +89,29 @@ The platform implements a unique dual user service architecture:
 
 ### Security Architecture
 
-The platform implements token-based authentication across services:
+The platform implements token-based authentication across services with a focus on broker-driven communication:
 
 #### Authentication Flow
 
-1. **login-service**: Authenticates users against user-access-service and generates UUID tokens
-2. **Token Validation**: Other services (like file-service, note-service) validate tokens with login-service
+1. **login-service**: Authenticates users against user-access-service through the broker service and generates UUID tokens
+2. **Token Validation**: Other services (like file-service, note-service) validate tokens with login-service via broker communication
 3. **Access Control**: Token validation ensures users can only access their own resources
+4. **Service Decoupling**: All inter-service communication now occurs through the broker service to improve modularity and maintainability
 
 #### Current Token-Based Integrations
 
-- **file-service**: Requires tokens for all file operations instead of direct alias access
-- **note-service**: Validates user tokens for note operations
+- **file-service**: Requires tokens for all file operations instead of direct alias access, communicates with login-service via broker
+- **note-service**: Validates user tokens for note operations through the broker
+- **login-service**: Formerly had direct dependency on user-access-service, now uses broker service for user validation (refactored for better decoupling)
 - **Cross-Service Security**: All file and note operations validated against user's authenticated identity
 - **Session Management**: Tokens can be invalidated on logout
+
+#### Broker Service Integration Pattern
+
+Many services now communicate internally through the broker service rather than direct HTTP calls:
+- Services register with the broker and use ServiceRequest/ServiceResponse patterns for communication
+- This provides better service discovery, load balancing, and fault tolerance
+- The broker acts as a central orchestration point for all internal service communications
 
 #### Security Benefits
 

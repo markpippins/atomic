@@ -48,9 +48,10 @@ This document provides an inventory of all projects within the Atomic Platform c
 - **login-service**
   - **Function**: Authentication and session management
   - **Port**: 8082
-  - **Tech**: Spring Boot
+  - **Tech**: Spring Boot, broker-service integration
   - **Startup**: `./mvnw spring-boot:run -Dspring-boot.run.arguments="--server.port=8082"`
-  - **Dependencies**: user-access-service
+  - **Dependencies**: broker-service, user-access-service (communicates via broker)
+  - **Description**: Now uses broker-service for all communication with user-access-service instead of direct dependency, improving service decoupling and maintainability
 
 - **user-service**
   - **Function**: Primary user management with social features
@@ -67,9 +68,10 @@ This document provides an inventory of all projects within the Atomic Platform c
 
 #### Additional Services
 - **broker-service**
-  - **Function**: Broker service with MongoDB configuration
+  - **Function**: Central broker service for service orchestration and communication
   - **Tech**: Spring Boot, MongoDB
   - **Startup**: `./mvnw spring-boot:run`
+  - **Description**: Orchestrates communication between services using ServiceRequest/ServiceResponse pattern; login-service now uses this for user validation instead of direct dependency on user-access-service
 
 - **file-service**
   - **Function**: File handling services with MongoDB
