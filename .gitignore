@@ -28222,3 +28222,8 @@ node_modules/dotenv/lib/main.d.ts
 node_modules/dotenv/lib/main.js
 why/package-lock.json
 why/package.json
+.obsidian/app.json
+.obsidian/appearance.json
+.obsidian/core-plugins.json
+.obsidian/graph.json
+.obsidian/workspace.json
