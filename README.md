@@ -89,14 +89,15 @@ The platform implements a unique dual user service architecture:
 
 ### Security Architecture
 
-The platform implements token-based authentication across services with a focus on broker-driven communication:
+The platform implements token-based authentication across services with a focus on broker-driven communication and shared state management:
 
 #### Authentication Flow
 
 1. **login-service**: Authenticates users against user-access-service through the broker service and generates UUID tokens
-2. **Token Validation**: Other services (like file-service, note-service) validate tokens with login-service via broker communication
-3. **Access Control**: Token validation ensures users can only access their own resources
-4. **Service Decoupling**: All inter-service communication now occurs through the broker service to improve modularity and maintainability
+2. **Token Storage**: Validated token-user mappings stored in Redis for shared state across service instances
+3. **Token Validation**: Other services (like file-service, note-service) validate tokens with login-service via broker communication
+4. **Access Control**: Token validation ensures users can only access their own resources
+5. **Service Decoupling**: All inter-service communication now occurs through the broker service to improve modularity and maintainability
 
 #### Current Token-Based Integrations
 
@@ -138,6 +139,7 @@ This will start all services with proper networking and dependencies.
 
 - **MySQL**: `localhost:3306` (user: root, password: rootpass)
 - **MongoDB**: `localhost:27017`
+- **Redis**: `localhost:6379` (for session management and caching)
 
 #### Spring Boot Services
 
@@ -172,6 +174,10 @@ mongodb-docker-start.bat
 
 # MongoDB (Linux/Mac)
 ./mongodb-docker-start.sh
+
+# Redis (for session management)
+./start-redis.sh  # Linux/Mac
+./start-redis.ps1  # Windows PowerShell
 ```
 
 ### Manual Service Startup

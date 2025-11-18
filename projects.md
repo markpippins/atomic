@@ -48,10 +48,10 @@ This document provides an inventory of all projects within the Atomic Platform c
 - **login-service**
   - **Function**: Authentication and session management
   - **Port**: 8082
-  - **Tech**: Spring Boot, broker-service integration
+  - **Tech**: Spring Boot, Redis, broker-service integration
   - **Startup**: `./mvnw spring-boot:run -Dspring-boot.run.arguments="--server.port=8082"`
-  - **Dependencies**: broker-service, user-access-service (communicates via broker)
-  - **Description**: Now uses broker-service for all communication with user-access-service instead of direct dependency, improving service decoupling and maintainability
+  - **Dependencies**: Redis, broker-service, user-access-service (communicates via broker)
+  - **Description**: Stores active session tokens and user mappings in Redis for shared state across multiple service instances; uses broker-service for all communication with user-access-service instead of direct dependency, improving service decoupling and maintainability
 
 - **user-service**
   - **Function**: Primary user management with social features
@@ -239,7 +239,8 @@ This document provides an inventory of all projects within the Atomic Platform c
 ## Database Services
 - **MySQL**: Port 3306 (for user-access-service, shrapnel-data, etc.)
 - **MongoDB**: Port 27017 (for user-service, broker-service, etc.)
-- **Database startup**: Use `./mongodb-docker-start.bat` or `./start-mysql.sh`
+- **Redis**: Port 6379 (for login-service session management)
+- **Database startup**: Use `./mongodb-docker-start.bat`, `./start-mysql.sh`, or `./scripts/start-redis.sh`
 
 ## Orchestration
 - **Docker Compose**: `docker-compose.yml` orchestrates all services

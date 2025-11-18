@@ -2,7 +2,7 @@
 
 # Script to fix line endings in .env files that may have Windows-style line endings
 
-find . -name ".env*" -type f -exec bash -c '
+find ../ -name ".env*" -type f -exec bash -c '
   for file do
     if file --mime-type "$file" | grep -q "charset=unknown"; then
       echo "Fixing line endings in $file"
