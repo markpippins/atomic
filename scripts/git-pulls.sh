@@ -1,14 +1,15 @@
 #!/bin/bash
 
+cd ..
 git pull
 
 pushd desktop
 git pull
 popd
 
-pushd moleculer 
-git pull 
-popd
+# pushd moleculer 
+# git pull 
+# popd
 
 pushd node 
 git pull 
