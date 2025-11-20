@@ -58,7 +58,20 @@ services:
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/userservice
 
-  # Node.js Internal Services
+  # Node.js Services
+  moleculer-search:
+    build: ./node/moleculer-search
+    ports:
+      - "4050:4050"
+    depends_on:
+      - broker-gateway
+    environment:
+      - SERVICE_REGISTRY_URL=http://broker-gateway:8080/api/broker
+      - SERVICE_HOST=moleculer-search
+      - SERVICE_PORT=4050
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - GOOGLE_SEARCH_ENGINE_ID=${GOOGLE_SEARCH_ENGINE_ID}
+
   file-system-server:
     build: ./node/file-system-server
     ports:

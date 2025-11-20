@@ -24,7 +24,7 @@ This document provides an inventory of all projects within the Atomic Platform c
 
 - **broker-gateway-quarkus**
   - **Function**: Alternative implementation of broker-gateway using Quarkus framework
-  - **Port**: 8090
+  - **Port**: 8190
   - **Tech**: Quarkus, RESTEasy Reactive, MongoDB
   - **Startup**: `./mvnw compile quarkus:dev` or `java -jar target/*-runner.jar`
   - **Dependencies**: MongoDB, external services (user-service, login-service, file-service, search-service)

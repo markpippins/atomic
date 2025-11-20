@@ -76,7 +76,7 @@ The platform implements a unique dual user service architecture:
 
 - **Purpose**: Alternative implementation of the broker-gateway using Quarkus framework
 - **Technology**: Java 21, Quarkus 3.15.1, RESTEasy Reactive
-- **Port**: 8090 (by default)
+- **Port**: 8190 (by default)
 - **Features**: Identical routing and service orchestration functionality to Spring Boot version
 - **Benefits**: Improved startup time, lower memory footprint, potential for native compilation
 - **Architecture**: Fully compatible with existing Atomic platform services and clients
@@ -120,6 +120,40 @@ Many services now communicate internally through the broker service rather than 
 - **Centralized Validation**: All authentication handled by login-service via broker
 - **Audit Trail**: All operations tied to authenticated sessions
 
+## Service Architecture
+
+### Core Services
+
+```
+Angular Client → Broker Gateway (8080) → [Service Registry Component]
+                       ↓                           ↓
+                Internal Services          External Services
+                ├── File System (4040)     ├── Moleculer Search (4050)
+                ├── User Access (8081)     └── Future services...
+                ├── Login (8082)
+                └── User Service (8083)
+```
+
+### External Service Registration via Broker Protocol
+
+The platform supports **dynamic service registration** for polyglot microservices using the standard broker protocol:
+
+1. **Service Registry**: Integrated into broker-gateway as a `@BrokerOperation` service
+2. **Registration Protocol**: External services register using `ServiceRequest` format:
+   ```json
+   {
+     "service": "serviceRegistry",
+     "operation": "register",
+     "params": {
+       "registration": { ... }
+     }
+   }
+   ```
+3. **Auto-Registration**: External services (like Moleculer) register on startup via broker-gateway
+4. **Unified Entry Point**: All traffic flows through broker-gateway - no separate registry service needed
+
+This pattern maintains architectural consistency - service-registry follows the same `@BrokerOperation` pattern as all other services.
+
 ## Running the Platform
 
 ### Quick Start with Docker Compose (Recommended)
@@ -141,18 +175,15 @@ This will start all services with proper networking and dependencies.
 
 #### Spring Boot Services
 
-- **broker-gateway**: `http://localhost:8080` - Main API gateway and entry point
+- **broker-gateway**: `http://localhost:8080` - Main API gateway with integrated service registry
 - **user-access-service**: `http://localhost:8081` - Legacy-compatible user management (MySQL)
 - **login-service**: `http://localhost:8082` - Authentication service
 - **user-service**: `http://localhost:8083` - Primary user management (MongoDB)
 
-#### Quarkus Services
-
-- **broker-gateway-quarkus**: `http://localhost:8090` - Alternative broker gateway using Quarkus framework
-
-#### Node.js Internal Services
+#### Node.js Services
 
 - **file-system-server**: `http://localhost:4040` - Proxy file system service
+- **moleculer-search**: `http://localhost:4050` - Moleculer-based search service (Google, Gemini, Unsplash)
 
 #### Web Applications
 
