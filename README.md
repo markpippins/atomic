@@ -123,37 +123,52 @@ Many services now communicate internally through the broker service rather than 
 
 ## Service Architecture
 
-### Core Services
+### Three-Layer Architecture
 
 ```
-Angular Client → Broker Gateway (8080) → [Service Registry Component]
-                       ↓                           ↓
-                Internal Services          External Services
-                ├── File System (4040)     ├── Moleculer Search (4050)
-                ├── User Access (8081)     └── Future services...
-                ├── Login (8082)
-                └── User Service (8083)
+┌─────────────────────────────────────────────────────────┐
+│              Angular Admin Console (9000)                │
+│                  (Management UI)                         │
+└────────────────────┬────────────────────────────────────┘
+                     │
+                     ▼
+            ┌────────────────┐
+            │  Host Server   │ ← Control Plane (Port 8085)
+            │   (H2 DB)      │   - Service registry
+            └────────┬───────┘   - Service catalog
+                     │           - Configuration mgmt
+                     │ query
+                     ▼
+            ┌────────────────┐
+            │ Broker Gateway │ ← Data Plane (Port 8080)
+            │                │   - Request routing
+            └────────┬───────┘   - Load balancing
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+    Internal Services    External Services
+    ├── File System      ├── Moleculer Search (4050)
+    ├── User Access      └── Future services...
+    ├── Login
+    └── User Service
 ```
 
-### External Service Registration via Broker Protocol
+### External Service Registration
 
-The platform supports **dynamic service registration** for polyglot microservices using the standard broker protocol:
+The platform supports **dynamic service registration** for polyglot microservices:
 
-1. **Service Registry**: Integrated into broker-gateway as a `@BrokerOperation` service
-2. **Registration Protocol**: External services register using `ServiceRequest` format:
-   ```json
-   {
-     "service": "serviceRegistry",
-     "operation": "register",
-     "params": {
-       "registration": { ... }
-     }
-   }
-   ```
-3. **Auto-Registration**: External services (like Moleculer) register on startup via broker-gateway
-4. **Unified Entry Point**: All traffic flows through broker-gateway - no separate registry service needed
+1. **Host Server**: Primary service registry with persistent storage (H2)
+2. **Registration**: External services register via REST API at `POST /api/registry/register`
+3. **Discovery**: Broker-gateway queries host-server to route requests
+4. **Admin UI**: Real-time visibility into registered services
 
-This pattern maintains architectural consistency - service-registry follows the same `@BrokerOperation` pattern as all other services.
+**Registration Flow**:
+```
+Moleculer Service → Host Server (register) → Persistent DB
+Broker Gateway → Host Server (query) → Route to service
+```
+
+This architecture separates concerns: host-server manages the service catalog (control plane), while broker-gateway handles request routing (data plane).
 
 ## Running the Platform
 
@@ -177,7 +192,8 @@ This will start all services with proper networking and dependencies.
 
 #### Spring Boot Services
 
-- **broker-gateway**: `http://localhost:8080` - Main API gateway with integrated service registry
+- **host-server**: `http://localhost:8085` - Service registry and management (H2)
+- **broker-gateway**: `http://localhost:8080` - Main API gateway and request router
 - **user-access-service**: `http://localhost:8081` - Legacy-compatible user management (MySQL)
 - **login-service**: `http://localhost:8082` - Authentication service
 - **user-service**: `http://localhost:8083` - Primary user management (MongoDB)

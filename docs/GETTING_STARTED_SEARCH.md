@@ -23,16 +23,25 @@ SERVICE_PORT=4050
 SERVICE_HOST=localhost
 ```
 
-### Step 2: Start the Broker Gateway
+### Step 2: Start the Host Server
+
+```bash
+cd spring/host-server
+./mvnw spring-boot:run
+```
+
+The host-server (service registry) will start on port 8085.
+
+### Step 3: Start the Broker Gateway
 
 ```bash
 cd spring/broker-gateway
 ./mvnw spring-boot:run
 ```
 
-The broker-gateway (with integrated service-registry) will start on port 8080.
+The broker-gateway will start on port 8080.
 
-### Step 3: Start the Moleculer Search Service
+### Step 4: Start the Moleculer Search Service
 
 ```bash
 cd node/moleculer-search
@@ -42,40 +51,22 @@ npm run dev
 
 The service will:
 - Start on port 4050
-- Automatically register with broker-gateway using the broker protocol
-- Send periodic heartbeats
+- Automatically register with host-server via REST API
+- Send periodic heartbeats (every 30s)
 
-### Step 4: Verify Registration
+### Step 5: Verify Registration
 
-Check that the service registered successfully via the broker:
+Check that the service registered successfully with host-server:
 
 ```bash
-curl -X POST http://localhost:8080/api/broker/submitRequest \
-  -H "Content-Type: application/json" \
-  -d '{
-    "service": "serviceRegistry",
-    "operation": "getAllServices",
-    "params": {}
-  }'
+curl http://localhost:8085/api/registry/services
 ```
 
-You should see:
+You should see the googleSearchService in the list with status ACTIVE.
 
-```json
-{
-  "data": [
-    {
-      "serviceName": "googleSearchService",
-      "operations": ["simpleSearch"],
-      "endpoint": "http://localhost:4050",
-      "healthCheck": "http://localhost:4050/api/health",
-      "status": "HEALTHY"
-    }
-  ]
-}
-```
 
-### Step 5: Test the Search Service Directly
+
+### Step 6: Test the Search Service Directly
 
 ```bash
 curl -X POST http://localhost:4050/api/search/simple \
@@ -83,7 +74,7 @@ curl -X POST http://localhost:4050/api/search/simple \
   -d '{"query": "moleculer microservices"}'
 ```
 
-### Step 6: Test Through the Broker
+### Step 7: Test Through the Broker
 
 Now test the search through the broker gateway (this is how the Angular client will use it):
 
@@ -105,9 +96,12 @@ curl -X POST http://localhost:8080/api/broker/submitRequest \
 ```
 Angular Client
     ↓
-Broker Gateway (8080) - includes service-registry component
-    ↓ (queries internal registry)
+Broker Gateway (8080)
+    ↓ (queries host-server)
     ↓ "Which service handles 'simpleSearch'?"
+    ↓
+Host Server (8085) - Service Registry
+    ↓ (returns endpoint)
     ↓
 Moleculer Search (4050) - Executes search
     ↓
@@ -123,7 +117,7 @@ Check the Moleculer logs for registration errors:
 Failed to register with Spring service registry: connect ECONNREFUSED
 ```
 
-**Solution**: Make sure broker-gateway is running on port 8080.
+**Solution**: Make sure host-server is running on port 8085.
 
 ### Google API Errors
 
@@ -168,12 +162,12 @@ export GOOGLE_API_KEY=your_key
 export GOOGLE_SEARCH_ENGINE_ID=your_id
 
 # Start all services
-docker-compose up broker-gateway moleculer-search
+docker-compose up host-server broker-gateway moleculer-search
 ```
 
 ## Development Tips
 
 - Use `npm run dev` for hot-reload during development
-- Check service registry via broker: POST to `/api/broker/submitRequest` with `service: "serviceRegistry", operation: "getAllServices"`
+- Check service registry: `curl http://localhost:8085/api/registry/services`
 - Monitor Moleculer logs for service communication
 - Use Moleculer REPL for debugging: `npm run cli`

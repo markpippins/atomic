@@ -58,15 +58,38 @@ services:
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/userservice
 
+  host-server:
+    build: ./spring/host-server
+    ports:
+      - "8085:8085"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:hostdb
+      - BROKER_GATEWAY_URL=http://broker-gateway:8080
+
+  # Helidon Services
+  satellite:
+    build: ./helidon/satellite
+    ports:
+      - "8086:8080"
+    depends_on:
+      - host-server
+    environment:
+      - host.server.url=http://host-server:8085
+      - service.name=satellite
+      - service.host=satellite
+      - registration.enabled=true
+      - heartbeat.interval.seconds=30
+      - server.port=8080
+
   # Node.js Services
   moleculer-search:
     build: ./node/moleculer-search
     ports:
       - "4050:4050"
     depends_on:
-      - broker-gateway
+      - host-server
     environment:
-      - SERVICE_REGISTRY_URL=http://broker-gateway:8080/api/broker
+      - SERVICE_REGISTRY_URL=http://host-server:8085/api/registry
       - SERVICE_HOST=moleculer-search
       - SERVICE_PORT=4050
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
