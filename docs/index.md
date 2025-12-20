@@ -70,8 +70,8 @@ Welcome to the comprehensive documentation for the Atomic Platform. This manual 
 ## Part III: Alternative JVM Implementations
 
 ### Quarkus Services
-- [Broker Gateway Quarkus](broker-gateway-quarkus.md) - Quarkus implementation of broker gateway
-- [Host Server Integration](broker-gateway-quarkus-host-integration.md) - Polyglot service registration example
+- [Broker Gateway Quarkus](broker-gateway.md) - Quarkus implementation of broker gateway
+- [Host Server Integration](broker-gateway-host-integration.md) - Polyglot service registration example
 
 ### Helidon Services
 - [Helidon Services Overview](helidon-services-overview.md) - Overview of Helidon-based services

@@ -22,7 +22,7 @@ This document provides an inventory of all projects within the Atomic Platform c
 **Technology**: Java 21, Quarkus 3.15.1, Maven
 **Build**: `mvn clean compile`
 
-- **broker-gateway-quarkus**
+- **broker-gateway**
   - **Function**: Alternative implementation of broker-gateway using Quarkus framework
   - **Port**: 8190
   - **Tech**: Quarkus, RESTEasy Reactive, MongoDB

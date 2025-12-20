@@ -72,7 +72,7 @@ The platform implements a unique dual user service architecture:
 - **Function**: Acts as an intermediary between clients and the broker gateway
 - **Features**: Transparent proxying, health checks, configurable endpoints
 
-#### Quarkus-based Broker Gateway (`quarkus/broker-gateway-quarkus`)
+#### Quarkus-based Broker Gateway (`quarkus/broker-gateway`)
 
 - **Purpose**: Alternative implementation of the broker-gateway using Quarkus framework
 - **Technology**: Java 21, Quarkus 3.15.1, RESTEasy Reactive
@@ -239,7 +239,7 @@ cd spring/login-service && ./mvnw spring-boot:run -Dspring-boot.run.arguments="-
 cd spring/user-service && ./mvnw spring-boot:run -Dspring-boot.run.arguments="--server.port=8083"
 
 # Quarkus service
-cd quarkus/broker-gateway-quarkus && ./mvnw compile quarkus:dev
+cd quarkus/broker-gateway && ./mvnw compile quarkus:dev
 
 # Node.js services
 cd node/file-system-server && npm start

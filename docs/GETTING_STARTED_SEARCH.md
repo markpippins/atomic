@@ -16,8 +16,8 @@ This guide will help you set up and test the Google Simple Search integration.
 Edit `node/moleculer-search/.env`:
 
 ```bash
-GOOGLE_API_KEY=your_actual_api_key_here
-GOOGLE_SEARCH_ENGINE_ID=your_search_engine_id_here
+GOOGLE_API_KEY=AIzaSyAfVHkNv8-YVyz1eSitseZLTHcXW4NTyI4
+GOOGLE_SEARCH_ENGINE_ID=e44fd2743cc9e49c8
 SERVICE_REGISTRY_URL=http://localhost:8090/api/registry
 SERVICE_PORT=4050
 SERVICE_HOST=localhost

@@ -13,7 +13,7 @@ The Atomic Platform demonstrates a **polyglot service mesh** where services buil
 - **login-service** (Port 8082) - Authentication
 
 ### Quarkus Services
-- **broker-gateway-quarkus** (Port 8090) - Alternative gateway
+- **broker-gateway** (Port 8090) - Alternative gateway
   - Fast startup (~1 second)
   - Low memory (~50-100 MB)
   - Native compilation capable
@@ -162,7 +162,7 @@ Choose the best framework for each service:
 | Service | Framework | Language | Startup | Memory | Native |
 |---------|-----------|----------|---------|--------|--------|
 | broker-gateway | Spring Boot | Java | ~3s | 200MB | No |
-| broker-gateway-quarkus | Quarkus | Java | ~1s | 50MB | Yes |
+| broker-gateway | Quarkus | Java | ~1s | 50MB | Yes |
 | moleculer-search | Moleculer | Node.js | ~2s | 80MB | No |
 | fs-crawler-adapter | FastAPI | Python | ~1s | 40MB | No |
 
@@ -203,7 +203,7 @@ All participate in the same service mesh!
 
 ## See Also
 
-- [Quarkus Integration](../quarkus/broker-gateway-quarkus/HOST_SERVER_INTEGRATION.md)
+- [Quarkus Integration](../quarkus/broker-gateway/HOST_SERVER_INTEGRATION.md)
 - [Moleculer Integration](../node/moleculer-search/README.md)
 - [Python Adapter Pattern](REST_API_ADAPTER_PATTERN.md)
 - [Host Server Documentation](../spring/host-server/README.md)
