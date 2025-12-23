@@ -70,7 +70,7 @@ services:
   satellite:
     build: ./helidon/satellite
     ports:
-      - "8086:8080"
+      - "9093:9093"
     depends_on:
       - host-server
     environment:
@@ -79,7 +79,7 @@ services:
       - service.host=satellite
       - registration.enabled=true
       - heartbeat.interval.seconds=30
-      - server.port=8080
+      - server.port=9093
 
   # Node.js Services
   moleculer-search:
