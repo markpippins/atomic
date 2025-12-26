@@ -69,8 +69,8 @@ Welcome to the documentation index for the Atomic project. This file provides or
 
 ## Quarkus Projects
 
-- [Broker Gateway Quarkus](quarkus/broker-gateway-quarkus/README.md) - Quarkus implementation of broker gateway
-- [Host Server Integration](quarkus/broker-gateway-quarkus/HOST_SERVER_INTEGRATION.md) - Polyglot service registration example
+- [Broker Gateway Quarkus](quarkus/broker-gateway/README.md) - Quarkus implementation of broker gateway
+- [Host Server Integration](quarkus/broker-gateway/HOST_SERVER_INTEGRATION.md) - Polyglot service registration example
 
 ## Spring Boot Projects
 
