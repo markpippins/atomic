@@ -208,6 +208,24 @@ This will start all services with proper networking and dependencies.
 - **nextjs-api-tester**: `http://localhost:9012` - API testing interface
 - **nextjs-cool-people**: `http://localhost:9002` - User interface application
 
+#### Angular Applications
+
+- **atomic-admin**: `http://localhost:4200` - Atomic admin console
+- **cool-people-admin**: `http://localhost:4201` - Cool people admin console
+- **nexus**: `http://localhost:3001` - Nexus application
+- **throttler**: `http://localhost:9007` - Throttler application
+- **web-poc host-server-admin**: `http://localhost:3002` - Host server admin console
+- **web-poc projman-ui**: `http://localhost:3029` - Project management UI
+- **web-poc throttler-alt**: `http://localhost:3003` - Alternative throttler application
+- **web-poc throttler-og**: `http://localhost:9008` - Original throttler application
+
+#### React Applications
+
+- **web host-server-admin**: `http://localhost:5173` - Host server admin (Vite)
+- **web-poc cripto-api-tester**: `http://localhost:5174` - Crypto API tester (Vite)
+- **web-poc google-cloud-search-assistant**: `http://localhost:5175` - Google Cloud search assistant (Vite)
+- **web-poc google-custom-search-app**: `http://localhost:5176` - Google custom search app (Vite)
+
 ### Manual Database Setup
 
 If not using Docker Compose, start databases manually:

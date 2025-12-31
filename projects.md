@@ -155,39 +155,126 @@ This document provides an inventory of all projects within the Atomic Platform c
 ### Web Applications - `/web`
 **Directory**: `/web`
 
-- **google-cloud-search-assistant**
-  - **Function**: Google Cloud Search assistant application
-  - **Tech**: Web application
+#### Angular Applications
+- **atomic-admin**
+  - **Function**: Atomic admin console
+  - **Port**: 4200
+  - **Tech**: Angular, TypeScript
+  - **Startup**: `npm run dev`
+  - **Dependencies**: None
 
-- **google-custom-search-app**
-  - **Function**: Google Custom Search application
-  - **Tech**: Web application
+- **cool-people-admin**
+  - **Function**: Cool people admin console
+  - **Port**: 4201
+  - **Tech**: Angular, TypeScript
+  - **Startup**: `npm run dev`
+  - **Dependencies**: None
 
+- **nexus**
+  - **Function**: Nexus application
+  - **Port**: 3001
+  - **Tech**: Angular, TypeScript
+  - **Startup**: `npm run dev`
+  - **Dependencies**: None
+
+- **throttler**
+  - **Function**: Throttler application
+  - **Port**: 9007
+  - **Tech**: Angular, TypeScript
+  - **Startup**: `npm run dev`
+  - **Dependencies**: None
+
+#### Next.js Applications
 - **nextjs-api-tester**
   - **Function**: Next.js API testing application
-  - **Port**: 3000 (when running via docker-compose)
+  - **Port**: 9012
   - **Tech**: Next.js 15.3.3, React, TypeScript, Tailwind CSS
-  - **Startup**: `npm run dev` or `docker-compose up`
+  - **Startup**: `npm run dev`
   - **Dependencies**: broker-gateway
 
 - **nextjs-cool-people**
   - **Function**: Next.js application for "cool people"
-  - **Port**: 3002 (when running via docker-compose)
+  - **Port**: 9002
   - **Tech**: Next.js, React, TypeScript, Tailwind CSS
-  - **Startup**: `npm run dev -- --port 3002`
+  - **Startup**: `npm run dev`
   - **Dependencies**: broker-gateway
 
-- **nextjs-log-watch**
-  - **Function**: Log monitoring application using Next.js
-  - **Tech**: Next.js, React, TypeScript
+#### React Applications
+- **host-server-admin**
+  - **Function**: Host server admin console
+  - **Port**: 5173
+  - **Tech**: React, TypeScript, Vite
+  - **Startup**: `npm run dev`
+  - **Dependencies**: None
 
-- **react-cripto-api-tester**
-  - **Function**: React application for crypto API testing
-  - **Tech**: React, TypeScript
+### Web Applications - `/web-poc`
+**Directory**: `/web-poc`
 
-- **static**
-  - **Function**: Static web content
-  - **Tech**: HTML, CSS, JavaScript
+#### Angular Applications
+- **host-server-admin**
+  - **Function**: Host server admin console
+  - **Port**: 3002
+  - **Tech**: Angular, TypeScript
+  - **Startup**: `npm run dev`
+  - **Dependencies**: None
+
+- **projman-ui**
+  - **Function**: Project management UI
+  - **Port**: 3029
+  - **Tech**: Angular, TypeScript
+  - **Startup**: `npm run dev`
+  - **Dependencies**: None
+
+- **throttler/alt**
+  - **Function**: Alternative throttler application
+  - **Port**: 3003
+  - **Tech**: Angular, TypeScript
+  - **Startup**: `npm run dev`
+  - **Dependencies**: None
+
+- **throttler/og**
+  - **Function**: Original throttler application
+  - **Port**: 9008
+  - **Tech**: Angular, TypeScript
+  - **Startup**: `npm run dev`
+  - **Dependencies**: None
+
+#### Next.js Applications
+- **log-watch**
+  - **Function**: Log monitoring application
+  - **Port**: 9005
+  - **Tech**: Next.js, React, TypeScript, Tailwind CSS
+  - **Startup**: `npm run dev`
+  - **Dependencies**: broker-gateway
+
+- **reqflex**
+  - **Function**: Request flexibility testing application
+  - **Port**: 9003
+  - **Tech**: Next.js, React, TypeScript, Tailwind CSS
+  - **Startup**: `npm run dev`
+  - **Dependencies**: broker-gateway
+
+#### React Applications
+- **cripto-api-tester**
+  - **Function**: Crypto API tester application
+  - **Port**: 5174
+  - **Tech**: React, TypeScript, Vite
+  - **Startup**: `npm run dev`
+  - **Dependencies**: None
+
+- **google-cloud-search-assistant**
+  - **Function**: Google Cloud Search assistant application
+  - **Port**: 5175
+  - **Tech**: React, TypeScript, Vite
+  - **Startup**: `npm run dev`
+  - **Dependencies**: None
+
+- **google-custom-search-app**
+  - **Function**: Google Custom Search application
+  - **Port**: 5176
+  - **Tech**: React, TypeScript, Vite
+  - **Startup**: `npm run dev`
+  - **Dependencies**: None
 
 ### Desktop Applications - `/desktop`
 **Directory**: `/desktop`
