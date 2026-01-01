@@ -33,7 +33,7 @@ Welcome to the documentation index for the Atomic project. This file provides or
 - [Angular Atomic Admin](web/angular-atomic-admin/README.md) - Admin dashboard for managing Servers and Services
 - [Angular Cool People Admin](web/angular-cool-people-admin/README.md) - Admin dashboard for Cool People
 - [Admin Backend Requirements](web/angular-cool-people-admin/backend-requirements.md) - Backend requirements for Admin and Next.js apps
-- [Angular Throttler](web/angular-throttler/README.md) - Angular throttler application
+- [Angular Nexus](web/angular/nexus/README.md) - Angular nexus application
 
 ### Other Web Applications
 - [PowerShell Web Tool](web/pwsh/README.md) - PowerShell utilities for web
@@ -130,7 +130,7 @@ Welcome to the documentation index for the Atomic project. This file provides or
 ### Core Guides
 - [Getting Started with Search](docs/GETTING_STARTED_SEARCH.md)
 - [Service Registry Architecture](docs/SERVICE_REGISTRY_ARCHITECTURE.md)
-- [Angular Throttler Setup](docs/angular-throttler-setup.md)
+- [Angular Nexus Setup](docs/nexus-setup.md)
 - [CORS Troubleshooting](docs/cors-troubleshooting.md)
 - [Environment Management](docs/env-management.md)
 - [Health Checks](docs/health-checks.md)

@@ -286,8 +286,8 @@ This document provides an inventory of all projects within the Atomic Platform c
   - **Startup**: `bun run dev`
   - **Type**: Cross-platform desktop application
 
-- **angular-throttler**
-  - **Function**: Angular-based throttler application
+- **angular-nexus**
+  - **Function**: Angular-based nexus application
   - **Tech**: Angular
 
 ### Python Services - `/python`

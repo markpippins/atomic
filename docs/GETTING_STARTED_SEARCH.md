@@ -148,7 +148,7 @@ Should return:
 ## Next Steps
 
 1. **Add More Search Providers**: Create `gemini-search.service.ts` or `unsplash-search.service.ts`
-2. **Update Angular Client**: Modify `web/angular-throttler` to use the new search service
+2. **Update Angular Client**: Modify `web/angular/nexus` to use the new search service
 3. **Add Caching**: Implement Redis caching in the search service
 4. **Add Rate Limiting**: Protect the Google API quota
 

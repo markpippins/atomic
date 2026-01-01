@@ -105,7 +105,7 @@ Welcome to the comprehensive documentation for the Atomic Platform. This manual 
 - [Angular Atomic Admin](angular-atomic-admin.md) - Admin dashboard for managing servers and services
 - [Angular Cool People Admin](angular-cool-people-admin.md) - Admin dashboard for Cool People
 - [Angular Cool People Backend Requirements](angular-cool-people-backend-requirements.md) - Backend requirements
-- [Angular Throttler](angular-throttler.md) - Angular throttler application
+- [Angular Nexus](angular-nexus.md) - Angular nexus application
 
 ### Next.js Applications
 - [Next.js API Tester](nextjs-api-tester.md) - API testing utility
@@ -127,7 +127,7 @@ Welcome to the comprehensive documentation for the Atomic Platform. This manual 
 ### Configuration & Setup
 - [Environment Management](env-management.md) - Environment configuration guide
 - [Spring Profiles Guide](spring-profiles-guide.md) - Spring Boot profiles documentation
-- [Angular Throttler Setup](angular-throttler-setup.md) - Setup guide for Angular Throttler
+- [Angular Nexus Setup](nexus-setup.md) - Setup guide for Angular Nexus
 
 ### Troubleshooting
 - [CORS Troubleshooting](cors-troubleshooting.md) - CORS configuration and troubleshooting

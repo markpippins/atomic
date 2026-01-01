@@ -28,9 +28,9 @@ git pull
 pushd vaadin-client && git pull && popd
 popd
 
-pushd web 
+pushd web
 git pull
-pushd angular-throttler && git pull && popd
+pushd angular/nexus && git pull && popd
 popd
 
 
