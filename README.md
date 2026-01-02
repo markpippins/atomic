@@ -73,11 +73,14 @@ The platform implements a unique dual user service architecture:
 - **Features**: Transparent proxying, health checks, configurable endpoints
 
 #### Quarkus-based Broker Gateway (`quarkus/broker-gateway`)
-
 - **Purpose**: Alternative implementation of the broker-gateway using Quarkus framework
 - **Technology**: Java 21, Quarkus 3.15.1, RESTEasy Reactive
 - **Port**: 8190 (by default)
 - **Features**: Identical routing and service orchestration functionality to Spring Boot version
+- 
+- ## Multi-Language SDKs
+- [Broker SDK Implementation Complete](atomic/CLIENT_LIBRARY_IMPLEMENTATION.md) - **NEW:** Lightweight client libraries for Python, Node.js, and Go services to interact with the broker gateway
+- [Broker SDK Overview](atomic/BROKER_SDK_README.md) - Complete SDK documentation and usage examples
 - **Benefits**: Improved startup time, lower memory footprint, potential for native compilation
 - **Architecture**: Fully compatible with existing Atomic platform services and clients
 

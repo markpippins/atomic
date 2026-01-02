@@ -34,10 +34,12 @@ Welcome to the documentation index for the Atomic project. This file provides or
 - [Angular Cool People Admin](web/angular-cool-people-admin/README.md) - Admin dashboard for Cool People
 - [Admin Backend Requirements](web/angular-cool-people-admin/backend-requirements.md) - Backend requirements for Admin and Next.js apps
 - [Angular Nexus](web/angular/nexus/README.md) - Angular nexus application
-
-### Other Web Applications
 - [PowerShell Web Tool](web/pwsh/README.md) - PowerShell utilities for web
 - [Bash Web Utilities](web/bash/README.md) - Bash utilities for web
+- 
+- ## Multi-Language SDKs
+- [Broker SDK Implementation Complete](atomic/CLIENT_LIBRARY_IMPLEMENTATION.md) - **Lightweight client libraries for Python, Node.js, and Go services** to interact with the broker gateway
+- [Broker SDK Overview](atomic/BROKER_SDK_README.md) - Complete SDK documentation and usage examples
 
 ### Web POC (Proof of Concept)
 - [Next.js Log Watch POC](web-poc/nextjs-log-watch/README.md) - Real-time log monitoring application proof of concept
