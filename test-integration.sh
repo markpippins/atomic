@@ -47,12 +47,12 @@ echo ""
 echo "🔗 API Connectivity Test:"
 echo "Testing Node.js backend endpoints..."
 
-API_BASE="http://localhost:3001/api"
+API_BASE="http://localhost:6001/api"
 ENDPOINTS=("health" "languages" "categories" "vendors" "services" "servers")
 
 for endpoint in "${ENDPOINTS[@]}"; do
     if [ "$endpoint" = "health" ]; then
-        URL="http://localhost:3001/health"
+        URL="http://localhost:6001/health"
     else
         URL="$API_BASE/$endpoint"
     fi
@@ -67,7 +67,7 @@ done
 echo ""
 echo "📝 Integration Instructions:"
 echo "1. Make sure MySQL is running with credentials: root/rootpass"
-echo "2. Make sure Node.js backend is running on http://localhost:3001"
+echo "2. Make sure Node.js backend is running on http://localhost:6001"
 echo "3. Start Angular development server:"
 echo "   cd web-poc/angular/services-console"
 echo "   npm install"
