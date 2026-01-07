@@ -7,8 +7,10 @@ services:
       MYSQL_DATABASE: userdb
     ports:
       - "3306:3306"
+    command: --init-file /data/application/init.sql
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./init-mysql.sql:/data/application/init.sql
 
   mongodb:
     image: mongo:7
@@ -62,8 +64,12 @@ services:
     build: ./spring/host-server
     ports:
       - "8085:8085"
+    depends_on:
+      - mysql
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:h2:mem:hostdb
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/services_console?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=rootpass
       - BROKER_GATEWAY_URL=http://broker-gateway:8080
 
   # Helidon Services
