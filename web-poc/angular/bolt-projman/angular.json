@@ -30,14 +30,21 @@
             "index": "src/index.html",
             "browser": "src/main.ts",
             "outputPath": "dist/demo",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "scripts": [],
-            "styles": ["src/global_styles.css"],
+            "styles": [
+              "src/global_styles.css"
+            ],
             "tsConfig": "tsconfig.app.json"
           }
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "port": 3062
+          },
           "configurations": {
             "development": {
               "buildTarget": "demo:build:development"

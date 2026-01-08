@@ -7,7 +7,7 @@ import { Requirement, CreateRequirementDto, UpdateRequirementDto, SubItem } from
   providedIn: 'root'
 })
 export class RequirementsApiService {
-  private apiUrl = 'http://localhost:8080/api';
+  private apiUrl = 'http://localhost:8073';
 
   constructor(private http: HttpClient) {}
 

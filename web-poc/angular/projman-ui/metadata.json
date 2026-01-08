@@ -1,5 +1,0 @@
-{
-  "name": "Gemini Angular Starter",
-  "description": "A modern, zoneless Angular application configured with Tailwind CSS and the Google GenAI SDK. Serves as a robust starter template replacing ReactJS requests with the required Angular architecture.",
-  "requestFramePermissions": []
-}
