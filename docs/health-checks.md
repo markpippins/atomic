@@ -129,7 +129,7 @@ broker-gateway: ✅ UP [Circuit: CLOSED]
 ### Manual Testing
 ```bash
 # Test image server health
-curl http://localhost:8081/health
+curl http://localhost:9081/health
 
 # Test file system server health
 curl http://localhost:4040/health
@@ -148,7 +148,7 @@ These health check endpoints can be used with:
 ### Example Nginx Configuration
 ```nginx
 upstream image_servers {
-    server localhost:8081 max_fails=3 fail_timeout=30s;
+    server localhost:9081 max_fails=3 fail_timeout=30s;
     # Add more servers as needed
 }
 

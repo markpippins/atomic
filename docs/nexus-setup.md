@@ -29,7 +29,7 @@ The Nexus app needs to be configured with the correct broker URL to connect to t
    Name: Selenium Broker
    Broker URL: http://selenium:8080
    (or use IP: http://<selenium-ip>:8080)
-   Image URL: http://172.16.30.57:8081
+   Image URL: http://172.16.30.57:9081
    Auto Connect: ✓ (optional)
    ```
 

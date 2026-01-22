@@ -1,103 +1,184 @@
 # Atomic Platform
 
-A comprehensive Spring Boot microservices platform featuring broker-based service architecture, user management, and data services.
+A comprehensive polyglot microservices platform featuring broker-based service architecture, service mesh management, and distributed service discovery.
 
 ## Overview
 
-The Atomic platform consists of multiple interconnected services designed to provide a scalable, distributed system built on **Spring Boot 3.5.0** with Java 21. The architecture includes:
+The Atomic platform is a production-ready distributed system supporting multiple programming languages and frameworks. Built on **Spring Boot 3.5.0** with Java 21, it provides:
 
-- **Broker Service**: Central hub for request routing and service orchestration
-- **User Management**: Dual-architecture user services (user-service for MongoDB, user-access-service for legacy compatibility)
-- **Data Services**: Various specialized services for file handling, content management, and more
-- **Authentication**: Secure login and session management
+- **✅ Service Mesh Management**: Real-time service discovery and visualization via Nexus UI
+- **✅ Broker Gateway**: Central hub for request routing and service orchestration  
+- **✅ Host-Server Registry**: Persistent service registry with MySQL/H2 storage
+- **✅ Polyglot SDKs**: Production-ready client libraries (Python, Node.js, Go)
+- **✅ Broker Gateway Proxy**: Advanced reverse proxy with rate limiting and logging
+- **✅ User Management**: Dual-architecture user services with MongoDB persistence
+- **✅ External Service Integration**: Seamless integration of services across frameworks
 
 ## Architecture
 
-### Service Types
+### **Three-Layer Service Mesh Architecture**
 
-#### MongoDB-Based Services
+```
+┌─────────────────┐     ┌─────────────────────────────┐     ┌──────────────────┐
+│  Clients        │────▶│  Broker Gateway Proxy       │────▶│  Broker Gateway  │
+│  (Nexus UI,     │     │  (AdonisJS - Port 8080)     │     │  (Spring Boot)   │
+│   SDKs, etc.)   │     │  - Rate Limiting            │     │  Port 8081       │
+└─────────────────┘     │  - Request Logging          │     └──────────────────┘
+                        │  - Host Registration        │              │
+                        └─────────────────────────────┘              │
+                                  │                                  │
+                                  ▼                                  │
+                        ┌─────────────────┐                         │
+                        │  Host-Server    │◀────────────────────────┘
+                        │  (Registry)     │
+                        │  Port 8085      │
+                        └─────────────────┘
+                                  │
+                                  ▼
+                        ┌─────────────────────────────────────────────┐
+                        │           Polyglot Services                 │
+                        │  ┌─────────┐ ┌─────────┐ ┌─────────────┐   │
+                        │  │ Spring  │ │ Quarkus │ │   Helidon   │   │
+                        │  │  Boot   │ │         │ │             │   │
+                        │  └─────────┘ └─────────┘ └─────────────┘   │
+                        │  ┌─────────┐ ┌─────────┐ ┌─────────────┐   │
+                        │  │ Node.js │ │   Go    │ │   Python    │   │
+                        │  │         │ │         │ │             │   │
+                        │  └─────────┘ └─────────┘ └─────────────┘   │
+                        └─────────────────────────────────────────────┘
+```
 
-The following services now use MongoDB for data persistence:
+### **Core Components**
 
-- `user-service`: Primary user management with social features
-- `user-access-service`: User management with dual ID system (Long ID for client compatibility, String mongoId for storage)
-- `note-service`: User notes management with token-based authentication
-- `broker-gateway`: Uses MongoDB for some configurations
-- `shrapnel-data`: Data management with MongoDB
+#### 1. **Host-Server** (Port 8085) - ✅ Production Ready
+**Service Registry & Management**
+- Persistent service registry (MySQL/H2)
+- Framework management (Spring Boot, Quarkus, Helidon, Node.js, Go, Python)
+- Service discovery via operation-based lookup
+- Deployment tracking across servers
+- Configuration management per environment
+- Real-time service health monitoring
 
-#### Non-JPA Services (JPA configuration commented out)
+#### 2. **Broker Gateway** (Port 8081) - ✅ Production Ready  
+**Request Routing & Service Orchestration**
+- ServiceRequest/ServiceResponse protocol
+- Automatic service discovery and routing
+- External service proxy with fallback mechanisms
+- Health check aggregation
+- Load balancing and circuit breaker patterns
 
-The following services previously had JPA configurations but these have been commented out as they don't contain JPA entities:
+#### 3. **Broker Gateway Proxy** (Port 8080) - ✅ Production Ready
+**Advanced Reverse Proxy (AdonisJS)**
+- Public-facing entry point for all client requests
+- Rate limiting and request logging
+- Auto-registration with host-server
+- Heartbeat mechanism (30-second intervals)
+- Graceful shutdown with deregistration
+- Request context headers for tracing
 
-- `broker-service`: Now uses MongoDB configurations instead of JPA
-- `file-service`: Now uses MongoDB configurations instead of JPA
-- `upload-service`: Now uses MongoDB configurations instead of JPA
+#### 4. **Nexus Service Mesh UI** - ✅ Production Ready
+**Real-time Service Management Console**
+- Service mesh visualization (default view)
+- Framework-grouped service listing
+- Dependency graph visualization
+- Service operations (restart, logs, health checks)
+- Real-time status updates
+- Dual-pane interface for resource comparison
 
-#### JPA-Based Services (Still use JPA)
+### **Service Discovery Flow**
 
-These services continue to use JPA with MySQL since they have JPA entities:
+```
+1. Service Registration → Host-Server (/api/registry/register)
+2. Client Request → Broker Proxy (Port 8080)
+3. Service Discovery → Host-Server (operation-based lookup)
+4. Request Routing → Broker Gateway → Target Service
+5. Response Chain → Target Service → Broker Gateway → Proxy → Client
+6. Health Monitoring → Continuous heartbeat and status updates
+```
 
-- `shrapnel-data`: Full JPA implementation with entity models and repositories
-- Some API services that haven't been converted
+## 📊 Platform Status & Evolution
 
-### Dual User Architecture
+### Current Platform Maturity
 
-The platform implements a unique dual user service architecture:
+The Atomic Platform has evolved from a file-explorer-based tool to a **comprehensive service mesh management platform** with advanced discovery, monitoring, and operational capabilities.
 
-#### user-service
+### Recent Major Achievements
 
-- Primary user management service using MongoDB
-- Handles social features (posts, comments, reactions, forums)
-- Uses native MongoDB document approach
+#### **Application Separation** ✅ **COMPLETED**
+- **Nexus**: Service Mesh Management Console (default view)
+- **Throttler**: Search & Discovery Engine
+- Clean separation of concerns between service management and search capabilities
 
-#### user-access-service
+#### **Service Discovery System** ✅ **PRODUCTION READY**
+- **ServiceDiscoveryClient**: Host-server integration for service lookup
+- **ExternalServiceInvoker**: Dynamic external service invocation  
+- **BrokerAutoRegistration**: Annotation-based service exposure
+- **Fallback Mechanism**: Local → External service resolution
+- **Unified Interface**: Same API for local and external services
 
-- Legacy compatibility service using MongoDB with dual ID system
-- Maintains compatibility with existing web clients expecting Long IDs
-- Features `ValidUser` model with both `id` (Long for clients) and `mongoId` (String for storage)
+#### **Polyglot Service Integration** ✅ **FULLY OPERATIONAL**
+Support for multiple programming languages and frameworks:
+- **Java**: Spring Boot 3.5.0, Quarkus 3.15.1, Helidon MP
+- **Node.js**: Express, NestJS, AdonisJS, Moleculer
+- **Python**: FastAPI, Django, Flask
+- **Go**: Standard library, Gin framework
+- **Operation-based routing** across all frameworks
 
-### New Services and Features
+#### **Service Mesh UI** ✅ **DEFAULT NEXUS VIEW**
+- **ServiceMeshComponent**: Full service mesh visualization
+- **ServiceTreeComponent**: Framework-grouped service listing
+- **ServiceGraphComponent**: Dependency visualization
+- **Real-time Updates**: Polling and reactive state management
+- **Service Operations**: Restart, logs, health checks
 
-#### Note Service (`note-service`)
+## ✅ Production-Ready Features
 
-- **Purpose**: User notes management with MongoDB persistence
-- **Authentication**: Uses token-based authentication via the broker system
-- **Integration**: Full broker system integration with operations for get, save, and delete notes
-- **Architecture**: Follows the same token validation pattern as other services, communicating with login-service via broker
+### **Polyglot SDK Support**
+**Complete client libraries for multiple languages:**
 
-#### Broker Service Proxy (`node/broker-service-proxy`)
+- **Python SDK** (`python/broker-client/`) - Service discovery, operation invocation, health checking
+- **Node.js SDK** (`node/broker-client/`) - Full feature parity with Python SDK  
+- **Go SDK** (`go/broker-client/`) - Standard library implementation, no external dependencies
 
-- **Purpose**: TypeScript-based proxy server that forwards requests to the broker gateway
-- **Location**: `/node/broker-service-proxy`
-- **Function**: Acts as an intermediary between clients and the broker gateway
-- **Features**: Transparent proxying, health checks, configurable endpoints
+**Usage Example (Python)**:
+```python
+from atomic_broker_sdk import create_client, ServiceDetails
 
-#### Quarkus-based Broker Gateway (`quarkus/broker-gateway`)
-- **Purpose**: Alternative implementation of the broker-gateway using Quarkus framework
-- **Technology**: Java 21, Quarkus 3.15.1, RESTEasy Reactive
-- **Port**: 8190 (by default)
-- **Features**: Identical routing and service orchestration functionality to Spring Boot version
-- 
-- ## Multi-Language SDKs
-- [Broker SDK Implementation Complete](atomic/CLIENT_LIBRARY_IMPLEMENTATION.md) - **NEW:** Lightweight client libraries for Python, Node.js, and Go services to interact with the broker gateway
-- [Broker SDK Overview](atomic/BROKER_SDK_README.md) - Complete SDK documentation and usage examples
-- **Benefits**: Improved startup time, lower memory footprint, potential for native compilation
-- **Architecture**: Fully compatible with existing Atomic platform services and clients
+client = create_client(gateway_url="http://localhost:8080")
+response = client.invoke_operation("getUserRegistrationForToken", {"token": "sample-token"})
+```
 
-#### CORS Configuration Updates
+### **Supported Frameworks**
+**Production-ready integrations:**
 
-- **Purpose**: Fixed CORS issues across the platform
-- **Location**: `spring/broker-gateway/CorsFilter.java`, `CorsConfig.java`
-- **Features**: High-priority servlet filter, proper credential handling, explicit method declarations
+- **Java**: Spring Boot 3.5.0, Quarkus 3.15.1, Helidon MP
+- **Node.js**: Express, NestJS, AdonisJS, Moleculer  
+- **Python**: FastAPI, Django, Flask
+- **Go**: Standard library, Gin framework
+- **Others**: .NET Core, Rust (planned)
 
-### Security Architecture
+### **Service Registration & Discovery**
+**Automatic service integration:**
 
-The platform implements token-based authentication across services with a focus on broker-driven communication and shared state management:
+```bash
+# Services auto-register on startup
+POST /api/registry/register
+{
+  "serviceName": "my-microservice",
+  "endpoint": "http://localhost:3001", 
+  "framework": "FastAPI",
+  "operations": ["getUserData", "updateProfile"],
+  "metadata": { "version": "1.0.0" }
+}
+```
 
-#### Authentication Flow
-
-1. **login-service**: Authenticates users against user-access-service through the broker service and generates UUID tokens
-2. **Token Storage**: Validated token-user mappings stored in Redis for shared state across service instances
+### **Real-time Service Mesh**
+**Nexus UI provides:**
+- Live service status monitoring
+- Dependency graph visualization
+- Service operations (restart, logs, health)
+- Framework-grouped service listing
+- Performance metrics and alerts
 3. **Token Validation**: Other services (like file-service, note-service) validate tokens with login-service via broker communication
 4. **Access Control**: Token validation ensures users can only access their own resources
 5. **Service Decoupling**: All inter-service communication now occurs through the broker service to improve modularity and maintainability
