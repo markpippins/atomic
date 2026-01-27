@@ -36892,3 +36892,14 @@ web-poc/angular/host-server-admin/.angular/cache/21.0.4/app/vite/deps/package.js
 web-poc/angular/host-server-admin/.angular/cache/21.0.4/app/.tsbuildinfo
 web-poc/angular/bolt-projman/.bolt/config.json
 web-poc/angular/bolt-projman/package-lock.json
+.qwen/settings.json
+.idea/atomic.iml
+.idea/data_source_mapping.xml
+.idea/dataSources.xml
+.idea/modules.xml
+.idea/vcs.xml
+docs/.obsidian/app.json
+docs/.obsidian/appearance.json
+docs/.obsidian/core-plugins.json
+docs/.obsidian/workspace.json
+web-poc/nextjs/log-watch/temp.txt
