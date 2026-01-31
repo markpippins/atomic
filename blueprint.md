@@ -45,6 +45,13 @@ Nexus is an Angular-based administrative interface for the Atomic platform. It p
   - Toolbar and Detail Pane visibility logic updated to be cleaner on the Home screen.
   - Default view mode set to 'file-explorer'.
 
+### Backend (Host Server)
+- **Data Initialization**:
+  - Implemented automatic population of Operating Systems and Servers from JSON configuration.
+  - Added `operating-systems.json` with standard OS definitions.
+  - Updated `servers.json` with Ansible inventory (Vanadium, Iridium, etc.).
+  - Enhanced `OperatingSystem` entity with `description` and `family` fields.
+
 ## Planned Future Work
 - Enable deep navigation into "Service Registries" profiles to view their Platform Management nodes contextually.
 - enhance "Users" browsing capabilities.
