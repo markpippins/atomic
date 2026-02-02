@@ -72,7 +72,7 @@ Welcome to the documentation index for the Atomic project. This file provides or
 ## Quarkus Projects
 
 - [Broker Gateway Quarkus](quarkus/broker-gateway/README.md) - Quarkus implementation of broker gateway
-- [Host Server Integration](quarkus/broker-gateway/HOST_SERVER_INTEGRATION.md) - Polyglot service registration example
+- [Service Registry Integration](quarkus/broker-gateway/HOST_SERVER_INTEGRATION.md) - Polyglot service registration example
 
 ## Spring Boot Projects
 
@@ -105,7 +105,7 @@ Welcome to the documentation index for the Atomic project. This file provides or
 - [Shrapnel Data](spring/shrapnel-data/README.md) - Data management service
 
 ### Management & Operations
-- [Host Server](spring/host-server/README.md) - Comprehensive server/service/configuration management system
+- [Service Registry](spring/host-server/README.md) - Comprehensive server/service/configuration management system
 - [API Examples](spring/host-server/API_EXAMPLES.md) - Practical API usage examples with curl and PowerShell
 - [Architecture](spring/host-server/ARCHITECTURE.md) - Detailed architecture and design patterns
 - [Diagrams](spring/host-server/DIAGRAMS.md) - Visual representations of data model and flows
